@@ -1,3 +1,5 @@
 = title "Courses"
 
-p courses list
+ul
+  - @courses.each do |course|
+    li = course.name
