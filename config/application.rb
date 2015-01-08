@@ -33,7 +33,11 @@ module Iaac
 
 
     config.generators do |g|
+      g.helper false
+      g.assets false
       g.test_framework :rspec,
+        helper: false,
+        assets: false,
         fixtures: true,
         view_specs: false,
         helper_specs: false,
