@@ -1,0 +1,18 @@
+= title "Report Card"
+
+- if @warning
+  span.warning One or more of your grades below is INCOMPLETE. You must urgently contact the course tutor(s) to finalize your submission. Otherwise you will be not accredited.
+
+table
+  thead
+    tr
+      th Course/Module
+      th colspan=2 Grade
+      th
+  tbody
+    - @courses.each do |course|
+      tr
+        th = link_to course, course
+        td = course.grade || "-"
+        td = Grade.human_grade_for course.grade
+        td = course.grade_notes
