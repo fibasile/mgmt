@@ -1,18 +1,37 @@
-= title "Report Card"
+= title "#{current_user}'s Report Card"
 
 - if @warning
-  span.warning One or more of your grades below is INCOMPLETE. You must urgently contact the course tutor(s) to finalize your submission. Otherwise you will be not accredited.
+  span.warning
+    p One or more of your grades below is INCOMPLETE. You must urgently contact the course tutor(s) to finalize your submission. Otherwise you will be not accredited.
+
+h2 1st Semester Grades
 
 table
   thead
     tr
-      th Course/Module
-      th colspan=2 Grade
+      th.course Course/Module
+      th.grade colspan=2 Grade
       th
   tbody
     - @courses.each do |course|
-      tr
-        th = link_to course, course
-        td = course.grade || "-"
-        td = Grade.human_grade_for course.grade
-        td = course.grade_notes
+      tr class=Grade.human_grade_for(course.grade).downcase
+        th.course = link_to course, course
+        td.grade = course.formatted_grade
+        td.human-grade = Grade.human_grade_for(course.grade)
+        td.notes = simple_format course.grade_notes
+
+h2 2nd Semester Research Line
+
+p Places are limited for each topic, so selections are based on the order of your preferences and your academic performance in the first semester.
+
+table
+  thead
+    tr
+      th Studio
+      th Seminar 1
+      th Seminar 2
+  tbody
+    tr
+      td = Course::STUDIOS[ current_user.studio ]
+      td = Course::SEMINARS[ current_user.seminar_1 ]
+      td = Course::SEMINARS[ current_user.seminar_2 ]

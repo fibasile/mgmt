@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150111162212) do
+ActiveRecord::Schema.define(version: 20150111225050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,16 +48,16 @@ ActiveRecord::Schema.define(version: 20150111162212) do
   end
 
   create_table "grades", force: :cascade do |t|
-    t.integer  "course_id",     null: false
-    t.integer  "gradee_id",     null: false
+    t.integer  "course_id",                             null: false
+    t.integer  "gradee_id",                             null: false
     t.integer  "grader_id"
-    t.integer  "value"
+    t.decimal  "value",         precision: 6, scale: 2
     t.text     "public_notes"
     t.text     "private_notes"
     t.datetime "approved_at"
     t.datetime "viewed_at"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   add_index "grades", ["course_id", "gradee_id"], name: "index_grades_on_course_id_and_gradee_id", unique: true, using: :btree
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20150111162212) do
     t.string   "gender"
     t.date     "dob"
     t.hstore   "meta"
+    t.hstore   "temp_data"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

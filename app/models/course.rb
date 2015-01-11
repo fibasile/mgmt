@@ -1,6 +1,23 @@
 class Course < ActiveRecord::Base
+
+  SEMINARS = {
+    "DAT" => "Data Informed Structures",
+    "ENC" => "Encrypted Rome",
+    "ENV" => "Environmental Analysis",
+    "KNO" => "Knowledge City",
+    "PHY" => "Physical Computing",
+    "ROB" => "Robotic Workshop"
+  }
+
+  STUDIOS = {
+    "RS1" => "RS I - Intelligent Cities",
+    "RS2" => "RS II - Self-Sufficient Buildings",
+    "RS3" => "RS III - Digital Matter",
+    "RS4" => "RS IV - Advanced Interaction",
+    "RS5" => "RS V - Design with Nature"
+  }
   
-  validates_presence_of :name
+  validates :name, presence: true, uniqueness: true
 
   has_many :course_tutors
   has_many :course_students
@@ -13,4 +30,9 @@ class Course < ActiveRecord::Base
   def to_s
     name
   end
+
+  def formatted_grade
+    grade.present? ? sprintf('%.2f', grade) : '-'
+  end
+
 end

@@ -11,8 +11,10 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require normalize-rails
  *= require_self
  */
+
 
 body {
   font-family: Helvetica, Arial;
@@ -20,13 +22,26 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+header {
+  display: block;
+  height: 35px;
+  line-height: 35px;
+  margin: 20px 0 40px;
+  overflow: hidden;
+}
+
 .warning {
   border-radius: 4px;
-  background: red;
+  background: #FC575E;
+  font-weight: bold;
   color: #FFF;
-  padding: 10px 20px;
+  padding: 0 20px;
   margin-bottom: 1em;
   display: inline-block;
+}
+
+h1 {
+  margin-bottom: 1em;
 }
 
 a {
@@ -39,38 +54,21 @@ a {
   box-sizing: border-box;
 }
 
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-tbody tr:nth-child(even)  td, tbody tr:nth-child(even)  th { background-color: #eee; }
-
-@media screen and (max-width: 640px) {
-  thead {
-    display: none;
-  }
-  th, td {
-    display: block;
-    width: 100%;
-  }
-  th a {
-    font-weight: bold;
-  }
-}
-
-th,td {
-  text-align: left;
-  padding: 5px 10px;
-}
-
-thead th {
-  text-align: left;
-  border-bottom: 1px solid #ccc;
-}
-
-
 .container {
   max-width: 960px;
-  margin: 0 auto;
+  margin: 0 auto 50px;
+  padding: 0 10px;
+}
+
+.user-nav {
+  float: right;
+}
+
+@media print {
+  .user-nav { display: none; }
+}
+
+p { 
+    line-height: 1.2em;
+    font-size: 0.9em;
 }

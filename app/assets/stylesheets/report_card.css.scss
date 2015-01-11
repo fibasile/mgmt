@@ -1,0 +1,68 @@
+table {
+  border-collapse: collapse;
+  width: 95%;
+  margin: 0 auto 2em;
+  // border: 1px solid #ddd;
+
+  tbody tr:nth-child(odd) {
+    td,th { background-color: #f8f8f8; }
+  }
+
+  tbody {
+    width: 180px;
+  }
+
+  th.course {
+    width: 170px;
+  }
+
+  td.grade {
+    width: 20px;
+    font-weight: bold;
+  }
+
+  thead {
+    th {
+      text-align: left;
+      border-bottom: 1px solid #eee;
+      font-size: 0.9em;
+    }
+    th.grade {
+      width: 300px;
+    }
+  }
+
+  th,td {
+    text-align: left;
+    padding: 10px 10px;
+  }
+
+  @media screen and (max-width: 640px) {
+    thead {
+      display: none;
+    }
+    th, td {
+      display: block;
+      width: 100% !important;
+    }
+    th a {
+      font-weight: bold;
+    }
+  }
+
+  p {
+    margin: 0.5em 0;
+    // font-style: italic;
+  }
+
+  tr.pass, td.high-pass, td.low-pass {
+    .human-grade { color: #66CC99; }
+    .notes {
+      color: #888;
+    }
+  }
+  tr.incomplete, td.fail {
+    &, * { color: #FC575E; }
+  }
+
+}

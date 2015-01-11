@@ -1,19 +1,21 @@
 doctype html
 html
   head
-    title = content_for?(:title) ? "#{yield(:title)}  | IAAC" : "IAAC"
+    title = raw(content_for?(:title) ? "#{yield(:title)}  | IAAC" : "IAAC")
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body
     .container
       header
+        = image_tag "http://mgmt.iaac.net/assets/logo-iaac-6f09ea88f11971f61d768ed2c68b8178.png", style: 'height: 35px;'
         - if user_signed_in?
-          = current_user
-          = link_to('Logout', destroy_user_session_path, method: 'delete')
+          / = current_user
+          .user-nav= link_to('Logout', destroy_user_session_path, method: 'delete')
         - else
-          = link_to "Sign up", new_user_session_path
-          = link_to "Log in", new_user_session_path
+          .user-nav
+            = link_to "Sign up", new_user_session_path
+            = link_to "Log in", new_user_session_path
       #main
         - flash.each do |key, msg|
           = content_tag :div, msg, id: key

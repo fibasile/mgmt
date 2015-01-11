@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  # :confirmable, :lockable, :timeoutable and :omniauthable  :registerable,
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
   has_many :given_grades, foreign_key: :grader_id, class_name: "Grade"
   has_many :received_grades, foreign_key: :gradee_id, class_name: "Grade"
@@ -11,6 +10,11 @@ class User < ActiveRecord::Base
   has_many :course_tutors
   has_many :courses_studied, class_name: "Course", through: :course_students, source: :course
   has_many :courses_taught, class_name: "Course", through: :course_tutors, source: :course
+
+  store_accessor :temp_data,
+    :studio,
+    :seminar_1,
+    :seminar_2
 
   validates_presence_of :first_name, :last_name
 
@@ -23,7 +27,11 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    email
+    name
+  end
+
+  def name
+    [first_name, last_name].reject(&:blank?).join(' ')
   end
 
 end

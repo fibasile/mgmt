@@ -27,4 +27,8 @@ RSpec.describe User, :type => :model do
     expect(course.grade_notes).to eq('hello')
   end
 
+  it "has to_s" do
+    expect( User.new(first_name: 'Homer', last_name: 'Simpson').to_s ).to eq('Homer Simpson')
+  end
+
 end
