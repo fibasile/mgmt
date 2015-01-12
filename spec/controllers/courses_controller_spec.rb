@@ -21,11 +21,11 @@ RSpec.describe CoursesController, :type => :controller do
 
   end
 
-  context "as a user" do
+  pending "as a user" do
 
     before(:each) { session[:user_id] = create(:user).id }
 
-    it "index - assigns @courses & renders index" do
+    pending "index - assigns @courses & renders index" do
       get :index
       expect(assigns(:courses)).to eq([course])
       expect(response).to render_template("index")

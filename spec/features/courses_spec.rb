@@ -7,6 +7,7 @@ feature Course do
 
   scenario "links to individual couse from course list" do
     course
+    user.update_attribute(:invitation_code, nil)
     login user
     visit courses_path
     expect(page).to have_title("Courses")

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 
+  before_action :authenticate_user!, only: :update
   skip_before_filter :check_invitation, only: [:invite, :update]
 
   def invite
