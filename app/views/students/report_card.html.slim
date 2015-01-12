@@ -42,6 +42,8 @@ table
   tbody
     tr
       td = Course::STUDIOS[ current_user.studio ]
-      td  Group #{current_user.oblig_seminar[1]}
+      td
+        - if current_user.oblig_seminar
+          span Group #{current_user.oblig_seminar[1]}
       td = Course::SEMINARS[ current_user.seminar_1 ]
       td = Course::SEMINARS[ current_user.seminar_2 ]
