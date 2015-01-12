@@ -28,7 +28,7 @@ gem "normalize-rails"
 gem "autoprefixer-rails"
 gem 'unicorn'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -51,17 +51,17 @@ end
 
 
 gem 'figaro'
-gem 'pundit'
 gem 'slim-rails'
 gem 'responders'
-gem 'devise'
-gem 'workflow'
+# gem 'pundit'
+# gem 'workflow'
 
 group :test do
   gem 'ffaker'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
+  gem 'simplecov', require: false
 end
 
 group :development do
@@ -76,5 +76,3 @@ group :development, :test do
   gem 'shoulda-matchers', require: false
   gem 'guard-rspec'
 end
-
-gem 'simplecov', :require => false, :group => :test

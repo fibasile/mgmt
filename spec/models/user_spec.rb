@@ -11,14 +11,14 @@ RSpec.describe User, :type => :model do
   it { is_expected.to validate_presence_of :first_name }
   it { is_expected.to validate_presence_of :last_name }
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
 
   it "has courses_with_grades" do
-    a = FactoryGirl.create(:course)
-    b = FactoryGirl.create(:course)
+    a = create(:course)
+    b = create(:course)
 
     user.courses_studied << a
-    grade = FactoryGirl.create(:grade, value: 50, public_notes: 'hello', gradee: user, course: a)
+    grade = create(:grade, value: 50, public_notes: 'hello', gradee: user, course: a)
 
     course = user.courses_with_grades.first
     expect(user.courses_with_grades.size).to eq(1)

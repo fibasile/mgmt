@@ -10,9 +10,9 @@ html
     .container
       header
         = image_tag "http://i.imgur.com/iCkavn0.png", style: 'height: 35px;'
-        - if user_signed_in?
+        - if current_user
           / = current_user
-          .user-nav= link_to('Logout', destroy_user_session_path, method: 'delete')
+          .user-nav= link_to 'Logout', logout_path
         - else
           .user-nav
             = link_to "Sign up", new_user_session_path

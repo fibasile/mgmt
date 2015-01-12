@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   resources :courses
-  devise_for :users
+
+  # get 'signup', to: 'users#new', as: 'signup'
+  get 'login', to: 'sessions#new', as: 'login'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+
+  # resources :users
+  resources :sessions
+
   get 'report_card', to: 'students#report_card'
   root to: 'students#report_card'
 end

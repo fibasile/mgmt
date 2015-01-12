@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe CoursesController, :type => :controller do
 
-  let!(:course) { FactoryGirl.create(:course) }
-  let(:user) { FactoryGirl.create(:user) }
+  let!(:course) { create(:course) }
+  let(:user) { create(:user) }
 
   pending "as a guest" do
 
@@ -23,7 +23,7 @@ RSpec.describe CoursesController, :type => :controller do
 
   context "as a user" do
 
-    before(:each) { sign_in(user) }
+    before(:each) { session[:user_id] = create(:user).id }
 
     it "index - assigns @courses & renders index" do
       get :index
