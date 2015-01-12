@@ -24,7 +24,7 @@ table
         th.course
           = link_to course, course
           .subtitle= course.subtitle
-        td.grade.grades = course.formatted_grade
+        td.grade.grades = Grade.formatted_value(course.grade)
         td.human-grade.grades = Grade.human_grade_for(course.grade)
         td.notes = simple_format course.grade_notes
 

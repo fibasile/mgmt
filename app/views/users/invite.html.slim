@@ -1,0 +1,27 @@
+= title "Update Settings"
+
+= simple_form_for current_user, html: { role: 'form' } do |f|
+
+  fieldset
+    legend Your Details
+    = f.input :first_name
+    = f.input :last_name
+  fieldset
+    legend Login Information
+    = f.input :email, label: '@iaac.net Email Address'
+
+    = f.input :password
+    = f.input :password_confirmation
+  fieldset
+    legend Extra Information
+    = f.input :country_code, label: 'Country'
+    / = f.input :description, placeholder: 'A brief description about yourself...'
+    = f.input :dob, label: 'Date of Birth', as: :date, start_year: 2000, end_year: 1940, include_blank: true, order: [:day, :month, :year]
+    .radio-buttons
+      = f.input :gender, as: :select, collection: [['Female', 'F'], ['Male', 'M']]
+  / fieldset
+  /   legend Photo
+  /   = image_tag @user.photo, id: 'photo-preview', style: 'max-height: 100px'
+  /   = f.input_field :photo, type: 'filepicker', data: { fp_apikey: 'AKgBepWaKTqCgyJQbKgyaz' }, onchange: "document.getElementById('photo-preview').src = event.fpfile.url"
+
+  = f.submit "Update my details", class: 'button'

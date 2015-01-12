@@ -11,12 +11,15 @@ class User < ActiveRecord::Base
   has_many :courses_studied, class_name: "Course", through: :course_students, source: :course
   has_many :courses_taught, class_name: "Course", through: :course_tutors, source: :course
 
+  before_create { generate_token(:invitation_code) }
+
   store_accessor :temp_data,
     :studio,
     :seminar_1,
     :seminar_2
 
-  validates_presence_of :first_name, :last_name
+  validates_presence_of :first_name, :last_name, :email
+  validates :password, :password_confirmation, presence: true, length: {minimum: 6}, if: :invitation_code?
 
   def courses_with_grades
     courses_studied
@@ -32,6 +35,12 @@ class User < ActiveRecord::Base
 
   def name
     [first_name, last_name].reject(&:blank?).join(' ')
+  end
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64.gsub(/[^0-9a-zA-Z]/i, '')
+    end while User.exists?(column => self[column])
   end
 
 end

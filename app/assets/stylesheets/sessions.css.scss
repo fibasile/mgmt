@@ -12,6 +12,9 @@ body#sessions {
   padding: 35px 28px 30px;
 
 
+  input {
+    margin-bottom: 20px !important;
+  }
 
   #alert {
     padding: 10px;
@@ -44,7 +47,7 @@ input {
   padding: 8px;
   display: block;
   width: 100%;
-  margin-bottom: 20px !important;
+  color: #444;
 }
 
 input[type=submit] {

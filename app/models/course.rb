@@ -33,8 +33,4 @@ class Course < ActiveRecord::Base
     name
   end
 
-  def formatted_grade
-    grade.present? ? sprintf('%.2f', grade) : '-'
-  end
-
 end

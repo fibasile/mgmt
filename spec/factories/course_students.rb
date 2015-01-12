@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :course_student do
-    user nil
-course nil
+    association :user
+    association :course
   end
 
 end

@@ -22,6 +22,25 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+fieldset {
+  margin-bottom: 2em;
+  padding: 1em;
+  border-color: #EEE;
+  legend {
+    font-weight: bold;
+  }
+}
+
+.input {
+  margin-bottom: 1em;
+  label {
+    padding-right: 20px;
+  }
+  span.radio {
+    display: inline-block;
+  }
+}
+
 header {
   display: block;
   height: 35px;
@@ -44,6 +63,18 @@ header {
   /*padding: 0 20px;*/
   margin-bottom: 1em;
   display: inline-block;
+}
+
+.field_with_errors {
+  .error {
+    display: block;
+    padding: 5px;
+    background: #FC575E;
+    color: #FFF;
+    font-size: 0.9em;
+    border-radius: 0 0 2px 2px;
+    font-weight: bold;
+  }
 }
 
 h1 {

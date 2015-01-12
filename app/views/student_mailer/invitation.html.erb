@@ -1,0 +1,5 @@
+<p><%= @user.first_name %>,</p>
+
+<p>You have been invited to join the IAAC system, please visit the link below.</p>
+
+<p><%= link_to invite_url(invitation_code: @user.invitation_code), invite_url(invitation_code: @user.invitation_code) %></p>
