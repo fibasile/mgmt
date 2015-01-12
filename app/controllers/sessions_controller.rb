@@ -7,6 +7,9 @@ class SessionsController < ApplicationController
     user = User.where(email: params[:email]).first
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
+
+      user.update_attributes(sign_in_count: user.sign_in_count + 1, last_sign_in_at: Time.now)
+
       redirect_to root_url#, notice: "Logged in!"
     else
       flash.now.alert = "Invalid email or password"
