@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email
   validates :password, :password_confirmation, presence: true, length: {minimum: 6}, if: :invitation_code?
 
+  validates_format_of :email, :with => /\A\S+@iaac\.net\z/, :message => "you must use your @iaac.net email address"
+
   before_save :clean_email
 
   def clean_email
