@@ -6,7 +6,8 @@ class Course < ActiveRecord::Base
     "ENV" => "Environmental Analysis",
     "KNO" => "Knowledge City",
     "PHY" => "Physical Computing",
-    "ROB" => "Robotic Workshop"
+    "ROB" => "Robotic Workshop",
+    "N/A" => "-"
   }
 
   STUDIOS = {
@@ -14,7 +15,8 @@ class Course < ActiveRecord::Base
     "RS2" => "RS II - Self-Sufficient Buildings",
     "RS3" => "RS III - Digital Matter",
     "RS4" => "RS IV - Advanced Interaction",
-    "RS5" => "RS V - Design with Nature"
+    "RS5" => "RS V - Design with Nature",
+    "N/A" => "-"
   }
   
   validates :name, presence: true, uniqueness: true

@@ -15,9 +15,11 @@ table
   tbody
     - @courses.each do |course|
       tr class=Grade.human_grade_for(course.grade).downcase
-        th.course = link_to course, course
-        td.grade = course.formatted_grade
-        td.human-grade = Grade.human_grade_for(course.grade)
+        th.course
+          = link_to course, course
+          .subtitle= course.subtitle
+        td.grade.grades = course.formatted_grade
+        td.human-grade.grades = Grade.human_grade_for(course.grade)
         td.notes = simple_format course.grade_notes
 
 h2 2nd Semester Research Line

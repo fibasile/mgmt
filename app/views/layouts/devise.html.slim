@@ -1,1 +1,13 @@
-== yield
+doctype html
+html
+  head
+    title = raw(content_for?(:title) ? "#{yield(:title)}  | IAAC" : "IAAC MGMT")
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body#sessions
+    #sessions-box
+      = image_tag "http://mgmt.iaac.net/assets/logo-iaac-6f09ea88f11971f61d768ed2c68b8178.png", style: 'width: 100%;'
+      - flash.each do |key, msg|
+        = content_tag :div, msg, id: key
+      == yield

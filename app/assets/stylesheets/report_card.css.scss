@@ -1,8 +1,14 @@
 table {
   border-collapse: collapse;
   width: 95%;
-  margin: 0 auto 2em;
+  margin: 1em auto 2em;
   // border: 1px solid #ddd;
+
+  .subtitle {
+    margin-top: 5px;
+    font-size: 0.8em;
+    font-weight: normal;
+  }
 
   tbody tr:nth-child(odd) {
     td,th { background-color: #f8f8f8; }
@@ -56,7 +62,7 @@ table {
   }
 
   tr.pass, td.high-pass, td.low-pass {
-    .human-grade { color: #66CC99; }
+    .grades { color: #66CC99; }
     .notes {
       color: #888;
     }

@@ -30,7 +30,7 @@ header {
   overflow: hidden;
 }
 
-.warning {
+#error_explanation, .warning {
   border-radius: 4px;
   background: #FC575E;
   font-weight: bold;
@@ -71,4 +71,13 @@ a {
 p { 
     line-height: 1.2em;
     font-size: 0.9em;
+}
+
+
+html {
+  min-height: 100%;
+}
+
+body {
+  height: 100%;
 }
