@@ -62,13 +62,13 @@ table {
   }
 
   tr.pass, td.high-pass, td.low-pass {
-    .grades { color: #66CC99; }
+    .grades { color: #333C10; }
     .notes {
       color: #888;
     }
   }
   tr.incomplete, td.fail {
-    &, * { color: #FC575E; }
+    &, * { color: #96151B; }
   }
 
 }

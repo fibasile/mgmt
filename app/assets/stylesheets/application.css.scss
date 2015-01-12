@@ -31,11 +31,17 @@ header {
 }
 
 #error_explanation, .warning {
-  border-radius: 4px;
-  background: #FC575E;
-  font-weight: bold;
-  color: #FFF;
-  padding: 0 20px;
+  p {
+    margin: 0;
+  }
+    padding: 20px;
+    background: #FBE3E4;
+    color: #96151B;
+    font-weight: bold;
+  /*border-radius: 4px;*/
+  /*background: #FC575E;*/
+  /*color: #FFF;*/
+  /*padding: 0 20px;*/
   margin-bottom: 1em;
   display: inline-block;
 }
