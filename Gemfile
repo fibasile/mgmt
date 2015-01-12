@@ -2,6 +2,7 @@ ruby '2.2.0'
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'jquery-turbolinks'
 gem 'rails', '4.2.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
