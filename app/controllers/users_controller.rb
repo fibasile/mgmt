@@ -1,12 +1,14 @@
 class UsersController < ApplicationController
 
+  skip_before_filter :check_invitation, only: [:invite, :update]
+
   def invite
     session[:user_id] = nil
     if @user = User.where(invitation_code: params[:invitation_code]).first
       session[:user_id] = @user.id
       render :invite
     else
-      render text: 'User not found'
+      render text: "User not found. Have you already completed the invitation request?"
     end
   end
 

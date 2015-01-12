@@ -1,0 +1,47 @@
+= title "All Report Cards"
+
+- User.all.each do |user|
+  hr
+  h1= user
+  - @courses = user.courses_with_grades
+  - if @courses.detect{|c| (c.grade || 0).between?(4,4.9999) }
+    span.warning
+      p One or more of your grades below is INCOMPLETE. You must urgently contact the course tutor(s) to finalize your submission. Otherwise you will be not accredited.
+
+  h2 1st Semester Grades
+
+  table
+    thead
+      tr
+        th.course Course/Module
+        th.grade colspan=2 Grade
+        th
+    tbody
+      - @courses.each do |course|
+        tr class=Grade.human_grade_for(course.grade).downcase
+          th.course
+            = link_to course, course
+            .subtitle= course.subtitle
+          td.grade.grades = Grade.formatted_value(course.grade)
+          td.human-grade.grades = Grade.human_grade_for(course.grade)
+          td.notes = simple_format course.grade_notes
+
+  h2 2nd Semester Research Line
+
+  p Places are limited for each topic, so selections are based on the order of your preferences and your academic performance in the first semester.
+
+  table
+    thead
+      tr
+        th Studio
+        th Designing Associativity Seminar
+        th Elective Seminar 1
+        th Elective Seminar 2
+    tbody
+      tr
+        td = Course::STUDIOS[ user.studio ]
+        td
+          - if user.send(:oblig_seminar).present?
+            span Group #{user.oblig_seminar[1]}
+        td = Course::SEMINARS[ user.seminar_1 ]
+        td = Course::SEMINARS[ user.seminar_2 ]

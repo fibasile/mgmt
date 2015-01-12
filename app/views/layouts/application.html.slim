@@ -15,8 +15,8 @@ html
           .user-nav= link_to 'Logout', logout_path
         - else
           .user-nav
-            = link_to "Sign up", new_user_session_path
-            = link_to "Log in", new_user_session_path
+            / = link_to "Sign up", new_session_path
+            = link_to "Log in", new_session_path
       #main
         - flash.each do |key, msg|
           = content_tag :div, msg, id: key

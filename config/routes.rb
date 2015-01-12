@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  get 'report_card', to: 'students#report_card'
+  get 'all', to: 'students#all_report_cards'
+  
   resources :courses
-
   # get 'signup', to: 'users#new', as: 'signup'
   resources :users
   get 'login', to: 'sessions#new', as: 'login'
@@ -10,6 +12,6 @@ Rails.application.routes.draw do
   # resources :users
   resources :sessions
 
-  get 'report_card', to: 'students#report_card'
+
   root to: 'students#report_card'
 end
