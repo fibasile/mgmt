@@ -66,4 +66,36 @@ namespace :import do
     end
   end
 
+  task :distribution => :environment do
+    User.update_all(temp_data: nil)
+    CSV.foreach("distribution.csv").drop(2).each do |row|
+      begin
+        user = User.where(first_name: row[0].strip, last_name: row[1].strip).first
+        user.studio = row[7]
+        user.oblig_seminar = row[14]
+        user.seminar_1 = row[15]
+        user.seminar_2 = row[16]
+        user.save!
+      rescue Exception => e
+        raise e, row
+      end
+    end
+  end
+
+  task :users => :environment do
+    CSV.foreach("users.csv").drop(1).each do |row|
+      begin
+        user = User.find(row[0])
+        user.country_code = row[1]
+        user.photo = row[2]
+        user.gender = row[3]
+        user.dob = row[4]
+        # user.mach_id = row[5]
+        user.save!
+      rescue Exception => e
+        p row
+      end
+    end
+  end
+
 end

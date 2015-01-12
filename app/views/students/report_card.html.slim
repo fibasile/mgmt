@@ -36,10 +36,12 @@ table
   thead
     tr
       th Studio
-      th Seminar 1
-      th Seminar 2
+      th Designing Associativity Seminar
+      th Elective Seminar 1
+      th Elective Seminar 2
   tbody
     tr
       td = Course::STUDIOS[ current_user.studio ]
+      td  Group #{current_user.oblig_seminar[1]}
       td = Course::SEMINARS[ current_user.seminar_1 ]
       td = Course::SEMINARS[ current_user.seminar_2 ]

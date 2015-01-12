@@ -17,6 +17,10 @@ class Grade < ActiveRecord::Base
     val ? HUMAN_GRADE[val.floor] : "NOT GRADED"    
   end
 
+  def to_s
+    Grade.formatted_value value
+  end
+
   def self.formatted_value val=nil
     val ? sprintf('%.2f', val) : "-"
   end

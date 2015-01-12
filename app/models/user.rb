@@ -16,10 +16,17 @@ class User < ActiveRecord::Base
   store_accessor :temp_data,
     :studio,
     :seminar_1,
-    :seminar_2
+    :seminar_2,
+    :oblig_seminar
 
   validates_presence_of :first_name, :last_name, :email
   validates :password, :password_confirmation, presence: true, length: {minimum: 6}, if: :invitation_code?
+
+  before_save :clean_email
+
+  def clean_email
+    self.email = email.downcase.strip
+  end
 
   def courses_with_grades
     courses_studied

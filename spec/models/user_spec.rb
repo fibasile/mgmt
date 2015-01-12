@@ -31,4 +31,8 @@ RSpec.describe User, :type => :model do
     expect( User.new(first_name: 'Homer', last_name: 'Simpson').to_s ).to eq('Homer Simpson')
   end
 
+  it "cleans email" do
+    expect(FactoryGirl.create(:user, email: ' SILLY@email.com').email).to eq('silly@email.com')
+  end
+
 end

@@ -49,9 +49,7 @@ group :development, :test do
   gem 'spring'
 end
 
-
-
-
+gem 'roadie-rails'
 gem 'figaro'
 gem 'slim-rails'
 gem 'responders'
@@ -64,7 +62,6 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'simplecov', require: false
-  gem 'database_cleaner'
   gem 'zonebie'
 end
 
