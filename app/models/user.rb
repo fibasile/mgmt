@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable  :registerable, :rememberable
-  devise :database_authenticatable, :recoverable, :trackable, :validatable
+  devise :database_authenticatable, :recoverable, :trackable, :validatable, :registerable
 
   has_many :given_grades, foreign_key: :grader_id, class_name: "Grade"
   has_many :received_grades, foreign_key: :gradee_id, class_name: "Grade"

@@ -6,6 +6,8 @@
 /   - @courses = user.courses_with_grades
 /   - if @courses.detect{|c| (c.grade || 0).between?(4,4.9999) }
 
+= link_to "Settings", edit_user_registration_path
+
 - if @warning
   span.warning
     p One or more of your grades below is INCOMPLETE. You must urgently contact the course tutor(s) to finalize your submission. Otherwise you will be not accredited.
