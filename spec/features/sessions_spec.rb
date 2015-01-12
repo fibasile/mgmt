@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "Sessions" do
 
-  let(:user) { create(:user, email: 'homer@springfieldnuclear.com') }
+  let(:user) { create(:user, email: 'homer@iaac.net') }
 
   scenario "logging in" do
     user
@@ -22,7 +22,7 @@ feature "Sessions" do
 
   scenario "logging in with ugly email" do
     visit login_path
-    fill_in "Email", with: ' HOMER@springfieldnuclear.com  '
+    fill_in "Email", with: ' HOMER@iaac.net  '
     fill_in "Password", with: user.password
     click_button "Log in"
     expect(page).to have_link("Logout")

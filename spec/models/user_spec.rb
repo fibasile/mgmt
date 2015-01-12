@@ -13,6 +13,14 @@ RSpec.describe User, :type => :model do
 
   let(:user) { create(:user) }
 
+  it "requires iaac.net email" do
+    expect(build_stubbed(:user, email: 'notiaac@bitsushi.com').valid?).to be_falsey
+    expect(build_stubbed(:user, email: ' invalid@iaac.com ').valid?).to be_falsey
+    expect(build_stubbed(:user, email: 'john@@iaac.net').valid?).to be_falsey
+    expect(build_stubbed(:user, email: 'john@iaac.net.').valid?).to be_falsey
+    expect(build_stubbed(:user, email: 'john@iaac.net').valid?).to be_truthy
+  end
+
   it "has courses_with_grades" do
     a = create(:course)
     b = create(:course)
@@ -32,7 +40,7 @@ RSpec.describe User, :type => :model do
   end
 
   it "cleans email" do
-    expect(FactoryGirl.create(:user, email: ' SILLY@email.com').email).to eq('silly@email.com')
+    expect(FactoryGirl.create(:user, email: ' SILLY@IAAC.net').email).to eq('silly@iaac.net')
   end
 
 end
