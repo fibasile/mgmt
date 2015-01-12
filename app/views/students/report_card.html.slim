@@ -43,7 +43,7 @@ table
     tr
       td = Course::STUDIOS[ current_user.studio ]
       td
-        - if current_user.oblig_seminar
+        - if current_user.send(:oblig_seminar).present?
           span Group #{current_user.oblig_seminar[1]}
       td = Course::SEMINARS[ current_user.seminar_1 ]
       td = Course::SEMINARS[ current_user.seminar_2 ]
