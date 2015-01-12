@@ -1,6 +1,6 @@
 = title "All Report Cards"
 
-- User.all.each do |user|
+- User.all.order(:last_name).each do |user|
   hr
   h1= user
   - @courses = user.courses_with_grades
