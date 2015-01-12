@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem "normalize-rails"
-gem 'puma'
+
 gem 'unicorn'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -56,20 +56,20 @@ gem 'slim-rails'
 gem 'responders'
 gem 'devise'
 gem 'workflow'
- 
+
 group :test do
   gem 'ffaker'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
 end
- 
+
 group :development do
   gem 'quiet_assets'
   gem 'spring-commands-rspec'
   gem 'letter_opener'
 end
- 
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
