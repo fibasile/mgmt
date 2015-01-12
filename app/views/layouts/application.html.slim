@@ -9,7 +9,7 @@ html
   body
     .container
       header
-        = image_tag "http://mgmt.iaac.net/assets/logo-iaac-6f09ea88f11971f61d768ed2c68b8178.png", style: 'height: 35px;'
+        = image_tag "http://i.imgur.com/iCkavn0.png", style: 'height: 35px;'
         - if user_signed_in?
           / = current_user
           .user-nav= link_to('Logout', destroy_user_session_path, method: 'delete')

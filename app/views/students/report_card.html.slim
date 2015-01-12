@@ -1,5 +1,11 @@
 = title "#{current_user}'s Report Card"
 
+/ - User.all.each do |user|
+/   hr
+/   h1= user
+/   - @courses = user.courses_with_grades
+/   - if @courses.detect{|c| (c.grade || 0).between?(4,4.9999) }
+
 - if @warning
   span.warning
     p One or more of your grades below is INCOMPLETE. You must urgently contact the course tutor(s) to finalize your submission. Otherwise you will be not accredited.
