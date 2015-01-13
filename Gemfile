@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'jquery-turbolinks'
 gem 'rails', '4.2.0'
 gem 'errorapp_notifier'
+gem 'mailgun_rails'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets

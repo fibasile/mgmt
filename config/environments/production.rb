@@ -77,16 +77,22 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              ENV['smtp_address'],
-    port:                 587,
-    domain:               ENV['smtp_domain'],
-    user_name:            ENV['smtp_username'],
-    password:             ENV['smtp_password'],
-    authentication:       'plain',
-    enable_starttls_auto: true
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV['mailgun_api_key'],
+    domain: ENV['mailgun_domain']
   }
+
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   address:              ENV['smtp_address'],
+  #   port:                 587,
+  #   domain:               ENV['smtp_domain'],
+  #   user_name:            ENV['smtp_username'],
+  #   password:             ENV['smtp_password'],
+  #   authentication:       'plain',
+  #   enable_starttls_auto: true
+  # }
   config.action_mailer.default_url_options = { host: 'mgmt.iaac.net' }
 
 end
