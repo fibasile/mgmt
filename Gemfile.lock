@@ -152,12 +152,16 @@ GEM
     lumberjack (1.0.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    mailgun_rails (0.6.5)
+      rails (>= 3.2.13)
+      rest-client (>= 1.6.7)
     method_source (0.8.2)
     mime-types (2.4.3)
     mini_portile (0.6.2)
     minitest (5.5.0)
     multi_json (1.10.1)
     nenv (0.1.1)
+    netrc (0.10.2)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     normalize-rails (3.0.1)
@@ -208,6 +212,9 @@ GEM
     rdoc (4.2.0)
     responders (2.0.2)
       railties (>= 4.2.0.alpha, < 5)
+    rest-client (1.7.2)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     roadie (3.0.2)
       css_parser (~> 1.3.4)
       nokogiri (~> 1.6.0)
@@ -332,6 +339,7 @@ DEPENDENCIES
   jquery-turbolinks
   launchy
   letter_opener
+  mailgun_rails
   normalize-rails
   pg
   quiet_assets
