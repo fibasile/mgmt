@@ -35,11 +35,14 @@ RSpec.configure do |config|
   config.include Features::SessionHelpers, type: :feature
   config.include FactoryGirl::Syntax::Methods
 
+  config.include(MailerMacros)
+
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
   end
 
   config.before(:each) do
+    reset_email
     DatabaseCleaner.strategy = :transaction
   end
 
