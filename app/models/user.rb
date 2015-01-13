@@ -46,6 +46,14 @@ class User < ActiveRecord::Base
     [first_name, last_name].reject(&:blank?).join(' ')
   end
 
+  def send_password_reset
+    generate_token(:password_reset_token)
+    update_attribute :password_reset_sent_at, Time.zone.now
+    UserMailer.password_reset(self).deliver_now
+  end
+
+private
+
   def generate_token(column)
     begin
       self[column] = SecureRandom.urlsafe_base64.gsub(/[^0-9a-zA-Z]/i, '')

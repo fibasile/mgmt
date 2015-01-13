@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150112092355) do
+ActiveRecord::Schema.define(version: 20150113111741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 20150112092355) do
   add_index "grades", ["grader_id"], name: "index_grades_on_grader_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",           default: "", null: false
-    t.integer  "sign_in_count",   default: 0,  null: false
+    t.string   "email",                  default: "", null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "last_sign_in_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 20150112092355) do
     t.hstore   "temp_data"
     t.string   "password_digest"
     t.string   "invitation_code"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

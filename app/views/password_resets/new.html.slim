@@ -1,0 +1,11 @@
+= title "Reset Password"
+
+= form_tag password_resets_path, method: :post do
+
+  .field.input
+    = label_tag :email, "Your @iaac.net Email"
+    = email_field_tag :email, params[:email], placeholder: 'me@iaac.net'
+
+  .actions= submit_tag "Reset Password"
+
+= link_to "Log in", login_path

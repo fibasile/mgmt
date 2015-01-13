@@ -12,11 +12,11 @@ html
         = image_tag "http://i.imgur.com/iCkavn0.png", style: 'height: 35px;'
         - if current_user
           / = current_user
-          .user-nav= link_to 'Logout', logout_path
+          .user-nav= link_to 'Logout', logout_path, rel: 'nofollow'
         - else
           .user-nav
             / = link_to "Sign up", new_session_path
-            = link_to "Log in", new_session_path
+            = link_to "Log in", new_session_path, rel: 'nofollow'
       #main
         - flash.each do |key, msg|
           = content_tag :div, msg, id: key
