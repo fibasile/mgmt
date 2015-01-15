@@ -1,2 +1,2 @@
 jQuery ->
-  $('#notice').delay(2000).fadeOut()
+  $('#notice').delay(4000).fadeOut()

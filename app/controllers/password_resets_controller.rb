@@ -15,7 +15,12 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
-    @user = User.find_by!(password_reset_token: params[:id])
+    begin
+      @user = User.find_by(password_reset_token: params[:id])
+    rescue
+      session[:user_id] = nil
+      redirect_to login_url, notice: "User not found. Try resetting your password again?"
+    end
   end
 
   def update
