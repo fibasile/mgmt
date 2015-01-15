@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'password_resets/new'
 
   get 'report_card', to: 'students#report_card'
-  get 'all', to: 'students#all_report_cards'
+  # get 'all', to: 'students#all_report_cards'
   
   resources :courses
   resources :password_resets

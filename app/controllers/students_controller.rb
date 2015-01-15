@@ -1,11 +1,6 @@
 class StudentsController < ApplicationController
   
-  before_action :authenticate_user!, except: [:all_report_cards]
-  http_basic_authenticate_with name: "iaac", password: "checking things...", only: :all_report_cards
-  skip_before_filter :check_invitation, only: :all_report_cards
-
-  def all_report_cards
-  end
+  before_action :authenticate_user!
 
   def report_card
     @courses = current_user.courses_with_grades
