@@ -52,6 +52,14 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver_now
   end
 
+  def invite
+    sign_in_count = 0
+    last_sign_in_at = nil
+    generate_token(:invitation_code)
+    user.save(validate: false)
+    StudentMailer.invitation(id).deliver_now
+  end
+
 private
 
   def generate_token(column)
