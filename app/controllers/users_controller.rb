@@ -9,7 +9,8 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       render :invite
     else
-      render text: "User not found. Have you already completed the invitation request?"
+      session[:user_id] = nil
+      redirect_to login_url, notice: "User not found. Have you already completed the invitation request?"
     end
   end
 

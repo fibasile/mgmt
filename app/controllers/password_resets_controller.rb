@@ -8,7 +8,7 @@ class PasswordResetsController < ApplicationController
       user.send_password_reset
       redirect_to login_url, notice: "Email sent with password reset instructions."
     else
-      flash[:notice] = "User not found"
+      flash.now[:notice] = "User not found"
       render :new
     end
     
