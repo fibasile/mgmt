@@ -57,8 +57,8 @@ class User < ActiveRecord::Base
   end
 
   def invite
-    sign_in_count = 0
-    last_sign_in_at = nil
+    self.sign_in_count = 0
+    self.last_sign_in_at = nil
     generate_token(:invitation_code)
     save(validate: false)
     StudentMailer.invitation(id).deliver_now

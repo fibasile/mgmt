@@ -7,8 +7,13 @@ RSpec.describe Grade, :type => :model do
 
   it { is_expected.to validate_presence_of :course }
   it { is_expected.to validate_presence_of :gradee }
-  skip { is_expected.to validate_uniqueness_of(:gradee_id).scoped_to(:course_id) }
 
+  it "has unique grade/course" do
+    grade = create(:grade)
+    expect {
+      create(:grade, course: grade.course, gradee: grade.gradee)
+    }.to raise_error(ActiveRecord::RecordInvalid)
+  end
 
   it "has human grades" do
     expect(Grade.new(value: nil).human_grade).to eq("NOT GRADED")

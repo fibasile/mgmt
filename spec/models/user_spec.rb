@@ -18,6 +18,26 @@ RSpec.describe User, :type => :model do
     expect(build_stubbed(:user, country_code: nil).country).to be_blank
   end
 
+  def invite
+    sign_in_count = 0
+    last_sign_in_at = nil
+    generate_token(:invitation_code)
+    save(validate: false)
+    StudentMailer.invitation(id).deliver_now
+  end
+
+
+  it "has invite" do
+    user = create(:user, sign_in_count: 3, last_sign_in_at: Time.now)
+    user.invite
+    user.reload
+    expect(user.sign_in_count).to eq(0)
+    expect(user.last_sign_in_at).to be_nil
+    expect(user.invitation_code).to be_present
+    expect(last_email.to).to eq([user.email])
+    expect(last_email.subject).to match("Your Grades")
+  end
+
   it "requires iaac.net email" do
     expect(build_stubbed(:user, email: 'notiaac@bitsushi.com').valid?).to be_falsey
     expect(build_stubbed(:user, email: ' invalid@iaac.com ').valid?).to be_falsey
