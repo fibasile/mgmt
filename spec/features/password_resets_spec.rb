@@ -47,8 +47,8 @@ describe "PasswordResets" do
   end
 
   it "raises record not found when password token is invalid" do
-    expect {
-      visit edit_password_reset_path("invalid")
-    }.to raise_exception(ActiveRecord::RecordNotFound)
+    visit edit_password_reset_path("invalid")
+    expect(page).to have_content("User not found")
+    expect(current_path).to eq(login_path)
   end
 end

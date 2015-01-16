@@ -13,6 +13,11 @@ RSpec.describe User, :type => :model do
 
   let(:user) { create(:user) }
 
+  it "has country" do
+    expect(build_stubbed(:user, country_code: 'FR').country).to eq("France")
+    expect(build_stubbed(:user, country_code: nil).country).to be_blank
+  end
+
   it "requires iaac.net email" do
     expect(build_stubbed(:user, email: 'notiaac@bitsushi.com').valid?).to be_falsey
     expect(build_stubbed(:user, email: ' invalid@iaac.com ').valid?).to be_falsey

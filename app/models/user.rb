@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
     self.email = email.downcase.strip
   end
 
+  def country
+    country_code.present? ? Country[country_code].to_s : ""
+  end
+
   def courses_with_grades
     courses_studied
       .joins('LEFT OUTER JOIN grades ON grades.course_id = courses.id')
