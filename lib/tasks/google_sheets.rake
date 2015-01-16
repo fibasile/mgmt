@@ -21,11 +21,10 @@ namespace :google_sheets do
     if ENV['AUTH_CODE'].present?
       auth.code = ENV['AUTH_CODE']
       auth.fetch_access_token!
-      access_token = auth.fetch_access_token
+      access_token = auth.access_token
     else
       access_token = ENV['ACCESS_TOKEN']
     end
-
     p access_token
     session = GoogleDrive.login_with_oauth(access_token)
     ws = session.spreadsheet_by_key(ENV['google_drive_spreadsheet_key']).worksheets[0]
@@ -38,8 +37,10 @@ namespace :google_sheets do
     ws[1,6] = "country"
     ws[1,7] = "studio"
     ws[1,8] = "oblig seminar"
-    ws[1,9] = "seminar 1"
-    ws[1,10] = "seminar 2"
+      Course::SEMINARS.keys.each_with_index do |key, index|
+        index = index + 9
+        ws[1,index] = Course::SEMINARS[key]
+      end
 
     User.all.each_with_index do |user, i|
       i += 2
@@ -51,8 +52,11 @@ namespace :google_sheets do
       ws[i,6] =  user.country
       ws[i,7] =  Course::STUDIOS[user.studio]
       ws[i,8] =  user.oblig_seminar
-      ws[i,9] =  Course::SEMINARS[user.seminar_1]
-      ws[i,10] = Course::SEMINARS[user.seminar_2]
+      Course::SEMINARS.keys.each_with_index do |key, index|
+        index = index + 9
+        ws[i,index] = [user.seminar_1, user.seminar_2].include?(key) ? "TRUE" : nil
+      end
+      
     end
 
     ws.save()
