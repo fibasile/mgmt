@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style type="text/css">
+  * {
+    box-sizing: border-box;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    text-decoration: none;
+  }
+  html, body {
+    color: black;
+    background: none;
+    font-family: Helvetica;
+  }
+  body {
+    padding: 0 20px;
+    font-size: 12px;
+    -webkit-print-color-adjust: exact;
+    line-height: 1.4em;
+  }
+  .signature .author {
+    font-size: 12px;
+  }
+  .date {
+    text-align: right;
+    margin-bottom: 2em;
+  }
+  p.underline {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    text-decoration: underline;
+  }
+  .signature {
+    padding-top: 70px;
+  }
+  .signature p, .signature a {
+    font-size: 11px;
+    margin: 0;
+  }
+  footer, header {
+    line-height: 1.1em;
+    display: block;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    left: 0;
+  }
+  footer {
+    bottom: 0;
+  }
+  footer p {
+    margin-bottom: 0.2em;
+    font-size: 0.85em;
+  }
+  header {
+    top: 0;
+  }
+  #body {
+    margin-top: 130px;
+  }
+  p {
+    margin-bottom: 1em;
+  }
+  table.grades {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  table {
+    border-collapse: collapse;
+  }
+  header {
+    overflow: hidden;
+  }
+  .logo {
+    display: inline-block;
+    float: left;
+    width: 50%;
+  }
+  .logo img {
+    max-width: 100%;
+  }
+  thead th, tfoot th {
+    background: #D9D9D9 !important;
+  }
+  table.results th {
+    text-align: left !important;
+    font-weight: normal;
+  }
+  td, th {
+    padding: 2px 2px 4px;
+  }
+  table.results td {
+    padding-left: 20px !important;
+    text-align: right;
+  }
+  table.results tfoot th {
+    border-top: 1px solid #AAA;
+    padding-top: 4px;
+    text-align: right !important;
+  }
+
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><%= image_tag "http://i.imgur.com/iCkavn0.png" %></div>
+  <div class="logo"><%= image_tag "http://i.imgur.com/Mt79HRh.png" %></div>
+</header>
+<div id="body">
+  
+  <p class="date">Barcelona, <%= Time.now.stamp("January 12, 2019") %></p>
+
+  <p>To whom it may concern,</p>
+
+  <p>IAAC Institut d’Arquitectura Avançada de Catalunya in Barcelona certifies that the student <%= @student %>, has successfully finished the first term of MAA01 Master in Advanced Architecture program, that takes place from October 2014 to June 2015, and accomplished the following grades:</p>
+
+  <h2>TERM 1</h2>
+
+  <table class="results">
+    <tbody>
+      <% current_user.courses_with_grades.each do |course| %>
+        <tr>
+          <th><%= course %> - <%= course.subtitle %></th>
+          <td><%= Grade.formatted_value course.grade %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>  
+        <th>Weighted Average</th>
+        <th>-</th>
+      </tr>
+    </tfoot>
+  </table>
+
+  <p class="underline">The grading system ranges from 1 to 10:</p>
+  <table>
+    <tr><td>0 – 4.9</td><td>Fail</td></tr>
+    <tr><td>5.0 – 6.9</td><td>Pass</td></tr>
+    <tr><td>7.0 – 8.9</td><td>Good</td></tr>
+    <tr><td>9.0 – 10</td><td>Excellent/Distinction</td></tr>
+  </table>
+
+  <p class="underline">The grading system is based on:</p>
+  <p>
+  I. Attendance<br/>
+  II. Effort/Commitment<br/>
+  III. Discussion/Participation<br/>
+  IV. Final Outcome/achievement (depending on seminar’s requirements)<br/>
+  V. Blog Posts (depending on seminar’s requirements)<br/>
+  VI. Public Presentation<br/>
+  </p>
+
+  <p>For more information you can always visit the website <a href="http://www.iaac.net">www.iaac.net</a></p>
+
+  <p>Please do not hesitate to contact me if you need any further information,</p>
+
+  <p>Sincerely,</p>
+
+  <div class="signature">
+    <p><span class="author">María José Piñeiros</span></p>
+    <p>Academic Secretary</p>
+    <p>Institute for Advanced Architecture of Catalonia</p>
+    <p>Pujades 102, Barcelona 08005</p>
+    <p>T: +34 933 209 520</p>
+    <p><a href="mailto:secretary@iaac.net">secretary@iaac.net</a></p>
+    <p><a href="mailto:applications@iaac.net">applications@iaac.net</a></p>
+    <p><a href="http://www.iaac.net">www.iaac.net</a></p>
+  </div>
+
+</div>
+<footer>
+  <p>Institut d'Arquitectura Avançada de Catalunya, Fundació Privada, IaaC - CIF: G 63322614</p>
+  <p>Pujades 102 baixos, Poble Nou, 08005 Barcelona, tel. (+34) 93 320 95 20 - fax (+34) 93 300 43 33</p>
+  <p>Valldaura Self Sufficient Labs - Carretera d’Horta a Cerdanyola km 7, 08290 Cerdanyola del Vallès</p>
+</footer>
+</body>
+</html>

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'password_resets/new'
 
+  resources :students
   get 'report_card', to: 'students#report_card'
   
   resources :courses
