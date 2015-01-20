@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
   http_basic_authenticate_with name: "john", password: "test", except: :report_card
 
   def report_card
@@ -10,6 +10,7 @@ class StudentsController < ApplicationController
 
   def index
     @students = User.all.order(:first_name)
+    render :index, layout: false
   end
 
   def show
@@ -18,7 +19,7 @@ class StudentsController < ApplicationController
       template: 'students/show.html.erb',
       disposition: 'inline',
       show_as_html: params[:debug].present?,
-      # page_size: 'A4',
+      page_size: 'A4',
       disable_javascript: true,
       grayscale: false,
       header: {

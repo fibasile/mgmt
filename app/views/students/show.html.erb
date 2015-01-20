@@ -7,13 +7,13 @@
 
   <p>To whom it may concern,</p>
 
-  <p>IAAC Institut d’Arquitectura Avançada de Catalunya in Barcelona certifies that the student <%= @student %>, has successfully finished the first term of MAA01 Master in Advanced Architecture program, that takes place from October 2014 to June 2015, and accomplished the following grades:</p>
+  <p>IAAC Institut d’Arquitectura Avançada de Catalunya in Barcelona certifies that the student <%= @student %> has successfully finished the first term of MAA01 Master in Advanced Architecture program, which is accredited by Fundació Politécnica de Catalunya with 75 credits, and takes place from October 2014 to June 2015. The grades that <%= @student.first_name %> obtained are as follows:</p>
 
   <h2>TERM 1</h2>
 
   <table class="results">
     <tbody>
-      <% current_user.courses_with_grades.each do |course| %>
+      <% @student.courses_with_grades.each do |course| %>
         <tr>
           <th><%= course %> - <%= course.subtitle %></th>
           <td><%= Grade.formatted_value course.grade %></td>
@@ -23,7 +23,7 @@
     <tfoot>
       <tr>  
         <th>Weighted Average</th>
-        <th>-</th>
+        <th><%= @student.weighted_average( @student.courses_with_grades ) %></th>
       </tr>
     </tfoot>
   </table>

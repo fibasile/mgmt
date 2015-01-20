@@ -42,6 +42,10 @@ class User < ActiveRecord::Base
       .order('name')
   end
 
+  def weighted_average cwg
+    Grade.formatted_value cwg.map(&:grade).instance_eval { reduce(:+) / size.to_f }
+  end
+
   def to_s
     name
   end
