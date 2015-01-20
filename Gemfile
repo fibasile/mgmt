@@ -46,7 +46,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'wkhtmltopdf-binary', '0.9.9'
+  gem 'wkhtmltopdf-binary', github: 'zakird/wkhtmltopdf_binary_gem'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'

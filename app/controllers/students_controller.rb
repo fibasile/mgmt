@@ -16,7 +16,22 @@ class StudentsController < ApplicationController
     @student = User.find(params[:id])
     render pdf: "#{@student.name}",
       template: 'students/show.html.erb',
-      disposition: 'attachment'
+      disposition: 'inline',
+      show_as_html: params[:debug].present?,
+      # page_size: 'A4',
+      disable_javascript: true,
+      grayscale: false,
+      header: {
+        html: {
+          template: 'students/_pdf_header.html.erb'
+        }
+      },
+      footer: {
+        html: {
+          template: 'students/_pdf_footer.html.erb'
+        }
+      }
+
   end
 
 end
