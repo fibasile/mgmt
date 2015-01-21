@@ -1,5 +1,12 @@
 class User < ActiveRecord::Base
 
+  COURSE_TYPES = [
+    'MAA01 Master in Advanced Architecture program, which is accredited by Fundació
+Politécnica de Catalunya with 75 credits, and takes place from October 2014 to June 2015',
+    'MAA02 Master in Advanced Architecture program, which is accredited by Fundació
+Politécnica de Catalunya with 130 credits, and takes place from October 2014 to June 2016',
+    'MAA01 + OTF']
+
   has_secure_password
   validates_uniqueness_of :email
 
@@ -25,6 +32,11 @@ class User < ActiveRecord::Base
   validates_format_of :email, :with => /\A\w+@iaac\.net\z/, :message => "must be your @iaac.net email address"
 
   before_validation :clean_email
+
+
+  def course_description
+    COURSE_TYPES[course_type || 0]
+  end
 
   def clean_email
     self.email = email.downcase.strip

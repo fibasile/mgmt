@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113111741) do
+ActiveRecord::Schema.define(version: 20150121111250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20150113111741) do
     t.string   "invitation_code"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.integer  "course_type"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
