@@ -13,7 +13,7 @@
 
   <table class="results">
     <tbody>
-      <% @student.courses_with_grades.each do |course| %>
+      <% @courses.each do |course| %>
         <tr>
           <th><%= course %> - <%= course.subtitle %></th>
           <td><%= Grade.formatted_value course.grade %></td>
@@ -21,9 +21,9 @@
       <% end %>
     </tbody>
     <tfoot>
-      <tr>  
+      <tr>
         <th>Weighted Average</th>
-        <th><%= @student.weighted_average( @student.courses_with_grades ) %></th>
+        <th><%= @weighted_average %></th>
       </tr>
     </tfoot>
   </table>

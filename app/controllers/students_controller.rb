@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  
+
   before_action :authenticate_user!, except: [:index, :show]
   http_basic_authenticate_with name: "john", password: "test", except: :report_card
 
@@ -15,6 +15,12 @@ class StudentsController < ApplicationController
 
   def show
     @student = User.find(params[:id])
+    @courses = @student.courses_with_grades
+    @weighted_average = 0
+    @courses.each do |course|
+      @weighted_average += course.grade * ((course.credits || 0)/22)
+    end
+
     render pdf: "#{@student.name}",
       template: 'students/show.html.erb',
       disposition: 'inline',
