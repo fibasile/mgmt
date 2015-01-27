@@ -388,7 +388,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
-  launchy
   letter_opener
   mailgun_rails
   normalize-rails

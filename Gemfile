@@ -34,7 +34,6 @@ group :test do
   gem 'ffaker'
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'launchy'
   gem 'simplecov', require: false
   gem 'zonebie'
 end

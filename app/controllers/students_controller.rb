@@ -18,8 +18,9 @@ class StudentsController < ApplicationController
     @courses = @student.courses_with_grades
     @weighted_average = 0
     @courses.each do |course|
-      @weighted_average += course.grade * ((course.credits || 0)/22)
+      @weighted_average += course.grade * ((course.credits || 0)/23)
     end
+    @weighted_average += (9.0 / 23)
 
     render pdf: "#{@student.name}",
       template: 'students/show.html.erb',

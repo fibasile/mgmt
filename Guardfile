@@ -75,5 +75,5 @@ guard :rspec, cmd: "bin/rspec" do
     Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
   end
 
-  callback(:start_begin) { system("spring stop") } 
+  callback(:start_begin) { system("spring stop") }
 end
