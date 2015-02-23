@@ -11,13 +11,13 @@ namespace :google_sheets do
   auth.redirect_uri = "urn:ietf:wg:oauth:2.0:oob"
 
   desc "Get credentials"
-  task :get_credentials => :environment do    
+  task :get_credentials => :environment do
     print("1. Open this page:\n%s\n\n" % auth.authorization_uri)
   end
-  
+
   desc "Exports to Sheets"
   task :export => :environment do
-    
+
     if ENV['AUTH_CODE'].present?
       auth.code = ENV['AUTH_CODE']
       auth.fetch_access_token!
@@ -28,7 +28,7 @@ namespace :google_sheets do
     p access_token
     session = GoogleDrive.login_with_oauth(access_token)
     ws = session.spreadsheet_by_key(ENV['google_drive_spreadsheet_key']).worksheets[0]
-    
+
     ws[1,1] = "id"
     ws[1,2] = "photo"
     ws[1,3] = "first name"
@@ -56,7 +56,7 @@ namespace :google_sheets do
         index = index + 9
         ws[i,index] = [user.seminar_1, user.seminar_2].include?(key) ? "TRUE" : nil
       end
-      
+
     end
 
     ws.save()

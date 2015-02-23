@@ -1,7 +1,7 @@
 require 'csv'
 
 namespace :import do
-  
+
   desc "Imports CSV"
   task :csv => :environment do
     csvs = CSV.foreach("grades.csv").to_a

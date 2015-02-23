@@ -16,11 +16,10 @@ class StudentsController < ApplicationController
   def show
     @student = User.find(params[:id])
     @courses = @student.courses_with_grades
-    @weighted_average = 0
+    @weighted_average = 0#(9.0 / 22.0) # transversal workshop
     @courses.each do |course|
-      @weighted_average += course.grade * ((course.credits || 0)/23)
+      @weighted_average += course.grade * ((course.credits || 0.0)/22.0)
     end
-    @weighted_average += (9.0 / 23)
 
     render pdf: "#{@student.name}",
       template: 'students/show.html.erb',
