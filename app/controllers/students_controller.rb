@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
-  http_basic_authenticate_with name: "john", password: "test", except: :report_card
+  http_basic_authenticate_with name: "office", password: "fablab+house", except: :report_card
 
   def report_card
     @courses = current_user.courses_with_grades
@@ -16,7 +16,7 @@ class StudentsController < ApplicationController
   def show
     @student = User.find(params[:id])
     @courses = @student.courses_with_grades
-    @weighted_average = 0#(9.0 / 22.0) # transversal workshop
+    @weighted_average = (9.0 / 22.0) # transversal workshop
     @courses.each do |course|
       @weighted_average += course.grade * ((course.credits || 0.0)/22.0)
     end

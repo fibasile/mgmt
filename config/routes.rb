@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :students
   get 'report_card', to: 'students#report_card'
-  
+
   resources :courses
   resources :password_resets
   # get 'signup', to: 'users#new', as: 'signup'

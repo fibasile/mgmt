@@ -2,10 +2,11 @@ class User < ActiveRecord::Base
 
   COURSE_TYPES = [
     'MAA01 Master in Advanced Architecture program, which is accredited by Fundació
-Politécnica de Catalunya with 75 credits, and takes place from October 2014 to June 2015',
+Politécnica de Catalunya with 75 ECTS credits, and takes place from October 2014 to June 2015',
     'MAA02 Master in Advanced Architecture program, which is accredited by Fundació
-Politécnica de Catalunya with 130 credits, and takes place from October 2014 to June 2016',
-    'MAA01 + OTF']
+Politécnica de Catalunya with 130 ECTS credits, and takes place from October 2014 to June 2016',
+    'MAA01 Master in Advanced Architecture program and Open Thesis Fabrication program, which is accredited by Fundació
+Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from October 2014 to January 2016']
 
   has_secure_password
   validates_uniqueness_of :email

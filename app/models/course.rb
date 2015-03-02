@@ -18,7 +18,7 @@ class Course < ActiveRecord::Base
     "RS5" => "RS V - Design with Nature",
     "N/A" => "-"
   }
-  
+
   validates :name, presence: true, uniqueness: true
 
   has_many :course_tutors
