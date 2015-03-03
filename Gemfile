@@ -49,7 +49,7 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
-  gem 'brakeman', github: 'presidentbeef/brakeman', require: false
+  # gem 'brakeman', github: 'presidentbeef/brakeman', require: false
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers', require: false
