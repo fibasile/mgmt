@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title = raw(content_for?(:title) ? "#{yield(:title)}  | IAAC Office" : "IAAC Office")
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    meta content="width=device-width, initial-scale=1" name="viewport"
+  body#office
+    .container
+      header
+        = link_to "Users", office_users_path
+        = link_to "Courses", office_courses_path
+      #main
+        - flash.each do |key, msg|
+          = content_tag :div, msg, id: key
+        == yield
+      footer

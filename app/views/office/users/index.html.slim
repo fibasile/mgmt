@@ -1,0 +1,11 @@
+= title "All Users"
+
+/ - Course.all.each do |course|
+/   = link_to course, course
+
+table
+  tbody
+    - @users.all.each do |user|
+      tr
+        td= image_tag user.photo, height: 30
+        td= link_to user, office_user_path(user)

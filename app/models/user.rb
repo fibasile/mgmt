@@ -43,6 +43,11 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
     self.email = email.downcase.strip
   end
 
+  def age
+    now = Time.now.utc.to_date
+    now.year - dob.year - (dob.to_date.change(:year => now.year) > now ? 1 : 0)
+  end
+
   def country
     country_code.present? ? Country[country_code].to_s : ""
   end

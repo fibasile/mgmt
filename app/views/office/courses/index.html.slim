@@ -1,0 +1,8 @@
+= title "Courses"
+
+table
+  - @courses.each do |course|
+    tr
+      td = link_to course, [:office, course]
+
+= link_to "Add Course", new_office_course_path

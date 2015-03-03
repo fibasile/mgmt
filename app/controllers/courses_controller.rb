@@ -9,5 +9,5 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @students = @course.students.order('first_name')
   end
-  
+
 end

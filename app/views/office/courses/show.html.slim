@@ -1,0 +1,20 @@
+= title @course
+
+= simple_format @course.description
+
+h3 Tutors
+table
+  - @course.tutors.order(:first_name).each do |user|
+    tr
+      td= link_to user, office_user_path(user)
+
+= link_to "Add Tutor", new_office_course_course_tutor_path(@course)
+
+h3 Students
+table
+  - @course.students.order(:first_name).each do |user|
+    tr
+      td= link_to user, office_user_path(user)
+= link_to "Add Student", "#"
+
+= link_to "Edit Course", edit_office_course_path(@course)

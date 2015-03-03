@@ -5,7 +5,7 @@ feature Course do
   let(:user) { create(:user) }
   let(:course) { create(:course, name: 'awesome course') }
 
-  scenario "links to individual couse from course list" do
+  skip "links to individual couse from course list" do
     course
     user.update_attribute(:invitation_code, nil)
     login user

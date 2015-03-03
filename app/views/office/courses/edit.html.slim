@@ -1,0 +1,9 @@
+= title "Edit Course"
+
+= simple_form_for [:office,@course] do |f|
+  -# = f.association :parent
+  = f.input :name
+  = f.input :description
+  = f.submit
+
+= button_to "Delete Course", [:office, @course], method: :delete
