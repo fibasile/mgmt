@@ -1,20 +1,32 @@
-= title @course
+#main-links
+  = link_to "Edit Course", edit_office_course_path(@course)
 
-= simple_format @course.description
+= crumbs link_to("Courses", office_courses_path), @course
 
-h3 Tutors
-table
-  - @course.tutors.order(:first_name).each do |user|
-    tr
-      td= link_to user, office_user_path(user)
+h2 = simple_format @course.description
 
-= link_to "Add Tutor", new_office_course_course_tutor_path(@course)
+.tutors
+  h3
+    | Tutors
+    = link_to "Add Tutor", new_office_course_course_tutor_path(@course)
+  table
+    thead
+      tr
+        th Name
+        th Role
+        th Can Grade?
+    - @course.course_tutors.includes(:user).each do |tutor|
+      tr
+        td= link_to tutor, edit_office_course_course_tutor_path(@course, tutor)
+        td.fade= tutor.role
+        td
 
-h3 Students
-table
-  - @course.students.order(:first_name).each do |user|
-    tr
-      td= link_to user, office_user_path(user)
-= link_to "Add Student", "#"
 
-= link_to "Edit Course", edit_office_course_path(@course)
+.students
+  h3
+    | Students
+    = link_to "Add Student", '#'
+  ul
+    - @course.students.order('users.first_name asc').each do |user|
+      li.student
+        = link_to user, '#'

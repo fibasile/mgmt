@@ -1,0 +1,5 @@
+ul
+  - courses.each do |course, children|
+    li
+      = link_to_unless_current course, [:office, course]
+      = render 'courses_tree', courses: children if children.present?

@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :course_tutor do
-    user nil
-course nil
-role "MyString"
-role_description "MyText"
+    association :user
+    association :course
+    role "Assistant"
+    role_description "To help"
   end
 
 end

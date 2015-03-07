@@ -1,6 +1,2 @@
 = title "Add Tutor to #{@course}"
-
-= simple_form_for [:office,@course,CourseTutor.new] do |f|
-  = f.association :course, default: @course
-  = f.association :user
-  = f.submit
+= render "form"

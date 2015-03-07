@@ -1,0 +1,5 @@
+= simple_form_for [:office,@course,@course_tutor] do |f|
+  fieldset
+    = f.association :user, disabled: !@course_tutor.new_record?, collection: @users
+    = f.input :role, as: :string
+  = f.submit

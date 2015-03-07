@@ -1,9 +1,5 @@
+#main-links
+  = link_to "Delete Course", [:office, @course], method: :delete, class: 'delete', 'data-confirm': "Are you sure you want to delete this course?"
 = title "Edit Course"
+= render "form"
 
-= simple_form_for [:office,@course] do |f|
-  -# = f.association :parent
-  = f.input :name
-  = f.input :description
-  = f.submit
-
-= button_to "Delete Course", [:office, @course], method: :delete

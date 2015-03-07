@@ -1,8 +1,15 @@
-= title "Courses"
+#main-links
+  = link_to "Create a new Course", new_office_course_path
+= crumbs "Courses"
 
 table
+  thead
+    tr
+      th Name
+      th Programs
   - @courses.each do |course|
     tr
       td = link_to course, [:office, course]
+      td
 
-= link_to "Add Course", new_office_course_path
+/ = render 'courses_tree', courses: Course.arrange

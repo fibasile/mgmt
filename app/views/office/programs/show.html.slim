@@ -1,0 +1,33 @@
+#main-links
+  = link_to "Edit Program", edit_office_program_path(@program)
+= crumbs link_to("Programs", office_programs_path), @program
+
+h2
+  = @program.starts_on.stamp("September 2015")
+  | &nbsp;→&nbsp;
+  = @program.ends_on.stamp("January 2016")
+
+h3
+  | Syllabus
+  = link_to "Add a Course", new_office_program_program_course_path(@program)
+table
+  thead
+    tr
+      th Course Name
+      th ECTS Credits / Weighting
+  - @program.courses.each do |course|
+    tr
+      td = link_to course, edit_office_course_path(course)
+      td.fade = course.credits
+
+.students
+  h3
+    | Students
+    = link_to "Add a Student", new_office_program_program_student_path(@program)
+  ul
+    - @program.program_students.includes(:user).order('users.first_name asc').each do |user|
+      li.student
+        = link_to user, edit_office_program_program_student_path(@program, user)
+
+
+

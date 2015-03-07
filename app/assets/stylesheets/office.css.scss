@@ -1,13 +1,176 @@
 body#office {
   background: white;
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  table {
+    width: 100%;
+    td {
+      padding: 8px;
+    }
+  }
+  a.delete {
+    background: #DA4C44 !important;
+    color: lighten(#DA4C44, 50%) !important;
+  }
+  #main-links {
+    display: block;
+
+    input {
+      display: inline-block;
+      width: auto;
+      text-transform: none;
+    }
+
+    // float: right;
+    a {
+      margin-top: 5px;
+      border-radius: 2px;
+      float: right;
+      font-weight: bold;
+      padding: 10px 15px;
+      background: #4589EC;
+      color: #FFF;
+    }
+  }
+  label {
+    font-weight: bold;
+  }
+  h1 {
+    margin-top: 20px;
+    // border-bottom: 3px solid black;
+  }
+  h2 {
+    margin-top: -1em;
+    color: #AAA;
+    font-size: 1.7em;
+    font-weight: normal;
+    margin-bottom: 1em;
+  }
+  h3{
+    border-bottom: 1px solid #AAA;
+   a {
+    float: right;
+    color: #4589EC;
+    background: #FFF;
+    padding: 5px 8px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  }
+
+  .fade {
+    color: #888;
+  }
+
+  th {
+    cursor: pointer;
+  }
+
+  ul {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    li.student {
+      background: #DDD;
+      display: block;
+      width: 99px;
+      border-radius: 2px;
+      height: 100px;
+      float: left;
+      margin: 9px;
+    }
+  }
+
+  header {
+    background: #f3ff37;
+    height: auto;
+    margin: 0;
+    padding: 10px 0;
+    .container {
+      margin-bottom: 0;
+    }
+
+    a#logo {
+      display: inline-block;
+      height: 25px;
+      margin-right: 30px;
+      img {
+        margin-bottom: -5px;
+        height: 100%;
+      }
+    }
+
+  }
+  header a {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-right: 30px;
+    // border-bottom: 2px solid #000;
+  }
+
+  h1 {
+    font-size: 2.3em;
+    margin-bottom: 1.2em;
+  }
 
   .num {
     text-align: right;
+  }
+
+  .pagination li {
+    display:inline-block;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+    line-height: 30px;
+    margin-right: 5px;
+    cursor: pointer;
+    font-weight: bold !important;
+    &.active {
+    background: #f3ff37;
+    }
+    &:only-child {
+      display: none;
+    }
   }
 
   textarea {
     width: 100%;
     display: block;
     padding: 5px;
+  }
+
+  #filters {
+    padding: 20px;
+    background: #eee;
+    border-radius: 4px;
+  }
+
+  // h3 {
+  //   padding: 4px 8px;
+  //   color: #FFF;
+  // }
+  // .tutors {
+  //   h3 {
+  //     background: #DC4638;
+  //   }
+  //   background: lighten(#DC4638, 30%);
+  //   border-radius: 10px;
+  // }
+  // .students {
+  //   h3 {
+  //     background: #109D59;
+  //   }
+  //   background: lighten(#109D59, 30%);
+  //   border-radius: 10px;
+  // }
+
+  tr td {
+    background: none;
+    &:nth-child(odd) {
+      background: rgba(#FFF, 0.1);
+    }
   }
 }

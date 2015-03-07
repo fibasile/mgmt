@@ -1,11 +1,26 @@
-= title "All Users"
+#main-links
+= crumbs "People"
 
 / - Course.all.each do |course|
 /   = link_to course, course
+#users
+  #filters
+    = text_field_tag :search, nil, placeholder: "Search by Name, Email...", class: 'search', autofocus: true
 
-table
-  tbody
-    - @users.all.each do |user|
+  table
+    thead
       tr
-        td= image_tag user.photo, height: 30
-        td= link_to user, office_user_path(user)
+        th.sort(data-sort="name") Name
+        th.sort(data-sort="country") Country
+        th.sort(data-sort="email") Email
+    tbody.list
+      - @users.all.each do |user|
+        tr
+          / td= image_tag user.photo, height: 30
+          td
+            = link_to office_user_path(user) do
+              span.name = user
+          td.country.fade = user.country
+          td.email.fade = user.email
+
+  ul.pagination

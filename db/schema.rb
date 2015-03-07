@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121111250) do
+ActiveRecord::Schema.define(version: 20150306151959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,7 +45,10 @@ ActiveRecord::Schema.define(version: 20150121111250) do
     t.boolean  "published",   default: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "ancestry"
   end
+
+  add_index "courses", ["ancestry"], name: "index_courses_on_ancestry", using: :btree
 
   create_table "grades", force: :cascade do |t|
     t.integer  "course_id",                             null: false
@@ -62,6 +65,35 @@ ActiveRecord::Schema.define(version: 20150121111250) do
 
   add_index "grades", ["course_id", "gradee_id"], name: "index_grades_on_course_id_and_gradee_id", unique: true, using: :btree
   add_index "grades", ["grader_id"], name: "index_grades_on_grader_id", using: :btree
+
+  create_table "program_courses", force: :cascade do |t|
+    t.integer  "program_id"
+    t.integer  "course_id"
+    t.integer  "credits"
+    t.boolean  "published",  default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "program_courses", ["program_id", "course_id"], name: "index_program_courses_on_program_id_and_course_id", unique: true, using: :btree
+  add_index "program_courses", ["published"], name: "index_program_courses_on_published", using: :btree
+
+  create_table "program_students", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "program_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "program_students", ["user_id", "program_id"], name: "index_program_students_on_user_id_and_program_id", unique: true, using: :btree
+
+  create_table "programs", force: :cascade do |t|
+    t.string   "name"
+    t.date     "starts_on"
+    t.date     "ends_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -94,4 +126,8 @@ ActiveRecord::Schema.define(version: 20150121111250) do
   add_foreign_key "grades", "courses"
   add_foreign_key "grades", "users", column: "gradee_id"
   add_foreign_key "grades", "users", column: "grader_id"
+  add_foreign_key "program_courses", "courses"
+  add_foreign_key "program_courses", "programs"
+  add_foreign_key "program_students", "programs"
+  add_foreign_key "program_students", "users"
 end

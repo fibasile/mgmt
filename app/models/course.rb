@@ -1,5 +1,7 @@
 class Course < ActiveRecord::Base
 
+  has_ancestry
+
   SEMINARS = {
     "DAT" => "Data Informed Structures",
     "ENC" => "Encrypted Rome",
@@ -21,8 +23,11 @@ class Course < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
-  has_many :course_tutors
-  has_many :course_students
+  has_many :course_tutors, dependent: :destroy
+  has_many :course_students, dependent: :destroy
+
+  has_many :program_courses
+  has_many :programs, through: :program_courses
 
   has_many :tutors, class_name: "User", through: :course_tutors, source: :user
   has_many :students, class_name: "User", through: :course_students, source: :user

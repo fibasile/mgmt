@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 gem 'pg'
 gem 'rails', '4.2.0'
-
+gem 'nprogress-rails'
 gem 'autoprefixer-rails'
 gem 'bcrypt', '~> 3.1.7'
 gem 'coffee-rails', '~> 4.1.0'
@@ -29,6 +29,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
 gem 'stamp'
 gem 'wicked_pdf'
+gem 'ancestry'
+gem 'listjs-rails'
 
 group :test do
   gem 'ffaker'

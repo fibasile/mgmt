@@ -1,0 +1,4 @@
+#main-links
+  = link_to "Remove Tutor", [:office,@course,@course_tutor], method: :delete, class: 'delete', 'data-confirm': "Are you sure you want to remove this tutor?"
+= title "Edit Tutor to #{@course}"
+= render "form"

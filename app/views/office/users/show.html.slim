@@ -1,4 +1,4 @@
-= title @user
+= crumbs link_to("People", office_users_path), @user
 = image_tag @user.photo, width: 100
 / li= @user.description
 
@@ -14,7 +14,9 @@ table
     td= @user.gender
   tr
     td Age
-    td #{@user.age} (#{@user.dob.stamp("31/03/1987")})
+    td
+      - if @user.age
+        | #{@user.age} (#{@user.dob.stamp("31/03/1987")})
   tr
     td Last Login
     - if @user.last_sign_in_at
@@ -26,20 +28,25 @@ table
     td = @user.created_at.to_s(:short)
 
 
-h3 Student
-table
-  thead
-    tr
-      th Course
-      th.num Weighting
-      th.num Grade
-  - @user.courses_studied.each do |course|
-    tr
-      td= link_to course, [:office, course]
-      td.num= course.credits
-      td.num= Grade.find_by(gradee: @user, course: course)
+h3 Studying
 
-h3 Tutor
+= @user.course_type
+- @user.programs.each do |program|
+  h4 = program
+  table
+    thead
+      tr
+        th Course
+        th.num Weighting
+        th.num Grade
+    - @user.courses_studied.each do |course|
+      tr
+        td= link_to course, [:office, course]
+        td.num= course.credits
+        td.num= Grade.find_by(gradee: @user, course: course)
+
+h3 Teaching
+
 table
   - @user.courses_taught.each do |course|
     tr

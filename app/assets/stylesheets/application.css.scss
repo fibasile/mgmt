@@ -15,8 +15,20 @@
  *= require_self
  */
 
+$nprogress-color: #111;
+$nprogress-height: 1px;
+@import 'nprogress';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
 
 body {
+  height: 100%;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #222;
   -webkit-font-smoothing: antialiased;
@@ -95,10 +107,6 @@ a {
   font-weight: 400;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 .container {
   max-width: 960px;
   margin: 0 auto 50px;
@@ -113,16 +121,10 @@ a {
   .user-nav { display: none; }
 }
 
-p { 
-    line-height: 1.2em;
-    font-size: 0.9em;
+p {
+  line-height: 1.2em;
+  font-size: 0.9em;
 }
 
 
-html {
-  min-height: 100%;
-}
 
-body {
-  height: 100%;
-}

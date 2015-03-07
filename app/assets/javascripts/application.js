@@ -14,4 +14,8 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require nprogress
+//= require nprogress-turbolinks
+//= require list
+//= require list.pagination
 //= require_tree .

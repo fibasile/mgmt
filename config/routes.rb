@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :courses
   resources :password_resets
-  resources :users
+  resources :users, path: 'people'
   resources :sessions
 
   get 'login', to: 'sessions#new', as: 'login'
@@ -15,9 +15,13 @@ Rails.application.routes.draw do
   # get 'signup', to: 'users#new', as: 'signup'
 
   namespace :office do
-    resources :users
+    resources :users, path: 'people'
+    resources :programs do
+      resources :program_students, path: 'students'
+      resources :program_courses, path: 'courses'
+    end
     resources :courses do
-      resources :course_tutors
+      resources :course_tutors, path: 'tutors'
     end
     root to: 'users#index'
   end

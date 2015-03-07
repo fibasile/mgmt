@@ -19,6 +19,9 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
   has_many :courses_studied, class_name: "Course", through: :course_students, source: :course
   has_many :courses_taught, class_name: "Course", through: :course_tutors, source: :course
 
+  has_many :program_students
+  has_many :programs, through: :program_students#, foreign_key: :user_id
+
   before_create { generate_token(:invitation_code) }
 
   store_accessor :temp_data,
@@ -44,6 +47,7 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
   end
 
   def age
+    return if dob.blank?
     now = Time.now.utc.to_date
     now.year - dob.year - (dob.to_date.change(:year => now.year) > now ? 1 : 0)
   end

@@ -1,0 +1,5 @@
+= crumbs "Edit Program Student"
+= simple_form_for [:office,@program,@program_student] do |f|
+  fieldset
+    = f.association :user, disabled: !@program_student.new_record?
+  = f.submit

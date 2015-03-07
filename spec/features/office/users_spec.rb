@@ -11,8 +11,10 @@ feature User do
 
   it "lists users" do
     login admin
-    visit office_users_path
-    expect(page).to have_title("Users")
+    visit office_root_path
+    click_link("People")
+    expect(current_path).to eq(office_users_path)
+    expect(page).to have_title("People")
     expect(page).to have_link("homer simpson")
   end
 

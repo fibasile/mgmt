@@ -1,0 +1,6 @@
+= simple_form_for [:office, @program] do |f|
+  fieldset
+    = f.input :name, label: "Program Name"
+    = f.input :starts_on
+    = f.input :ends_on
+  = f.submit
