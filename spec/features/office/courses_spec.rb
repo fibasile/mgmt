@@ -21,7 +21,7 @@ feature Course do
   it "can add course" do
     login admin
     visit office_courses_path
-    click_link "Create a new Course"
+    click_link "Add a new Course"
     fill_in "Name", with: "New Name"
     click_button "Create Course"
     expect(page).to have_title("New Name")

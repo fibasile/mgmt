@@ -1,6 +1,8 @@
 ruby '2.2.0'
 source 'https://rubygems.org'
 
+gem "select2-rails"
+gem "font-awesome-rails"
 gem 'pg'
 gem 'rails', '4.2.0'
 gem 'nprogress-rails'
@@ -31,6 +33,7 @@ gem 'stamp'
 gem 'wicked_pdf'
 gem 'ancestry'
 gem 'listjs-rails'
+gem 'pundit', github: 'elabs/pundit'
 
 group :test do
   gem 'ffaker'

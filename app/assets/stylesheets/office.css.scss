@@ -1,8 +1,58 @@
 body#office {
-  background: white;
+  background: #fcfcfc;
   margin: 0;
   padding: 0;
   font-size: 15px;
+
+  .student-name {
+    background: #000;
+    background: linear-gradient(transparent, rgba(0, 0, 0, .7));
+    bottom: 0;
+    color: #fff;
+    display: block;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    word-wrap: break-word;
+
+      color: #FFF;
+      padding: 5px;
+      display: block;
+      font-weight: bold;
+      font-size: 11px;
+      -webkit-font-smoothing: antialiased;
+      text-shadow: 1px 1px 1px #444;
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  tr.other-tutor {
+    color: #AAA;
+  }
+  .select2-container {
+    width: 100%;
+  }
+
+  &.admin .info-panel {
+    display: none;
+  }
+
+  .info-panel {
+    background: #EEEEEE;
+    padding: 1px 10px;
+    border-radius: 4px;
+    margin-bottom: 2em;
+    margin-top: -1em;
+    color: #999;
+  }
+
+  .current-user {
+    float: right;
+    margin: 0 0 0 8px;
+  }
+
   table {
     width: 100%;
     td {
@@ -24,6 +74,7 @@ body#office {
 
     // float: right;
     a {
+      margin-left: 5px;
       margin-top: 5px;
       border-radius: 2px;
       float: right;
@@ -71,18 +122,24 @@ body#office {
     overflow: hidden;
     margin: 0;
     padding: 0;
-    li.student {
-      background: #DDD;
-      display: block;
-      width: 99px;
-      border-radius: 2px;
-      height: 100px;
-      float: left;
-      margin: 9px;
-    }
+
+  }
+a.student {
+    position: relative;
+    overflow: hidden;
+    background: #DDD;
+    display: block;
+    width: 99px;
+    border-radius: 4px;
+    height: 100px;
+    float: left;
+    margin: 9px;
+    padding: 4px;
+    font-size: 0.85em;
   }
 
   header {
+    // #FB39FB
     background: #f3ff37;
     height: auto;
     margin: 0;

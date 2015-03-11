@@ -1,15 +1,22 @@
 #main-links
-  = link_to "Create a new Course", new_office_course_path
+  - if policy(Course.new).create?
+    = link_to "Add a new Course", new_office_course_path
+
 = crumbs "Courses"
+
+.info-panel
+  p These are the courses that you are involved with. Courses are included in programs.
 
 table
   thead
     tr
       th Name
       th Programs
+      th.num Grading Status
   - @courses.each do |course|
     tr
       td = link_to course, [:office, course]
-      td
+      td.fade = course.programs.map{|p| link_to_if(policy(p).show?, p, [:office, p]) }.join(' / ').html_safe
+      td.fade.num = link_to course.grading_status, office_course_grades_path(course)
 
 / = render 'courses_tree', courses: Course.arrange

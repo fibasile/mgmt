@@ -5,22 +5,25 @@
 /   = link_to course, course
 #users
   #filters
-    = text_field_tag :search, nil, placeholder: "Search by Name, Email...", class: 'search', autofocus: true
+    = text_field_tag :search, nil, placeholder: "Search by Name, Email, Programs...", class: 'search', autofocus: true
 
   table
     thead
       tr
+        th
         th.sort(data-sort="name") Name
         th.sort(data-sort="country") Country
         th.sort(data-sort="email") Email
+        th.sort(data-sort="programs") Program(s)
     tbody.list
       - @users.all.each do |user|
         tr
-          / td= image_tag user.photo, height: 30
+          td= image_tag "#{user.photo_url}/convert?w=40&h=40&fit=crop", width: 40, height: 40
           td
             = link_to office_user_path(user) do
               span.name = user
           td.country.fade = user.country
           td.email.fade = user.email
+          td.right.programs.fade = user.programs.to_sentence
 
   ul.pagination

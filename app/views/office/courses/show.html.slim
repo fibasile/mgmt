@@ -1,5 +1,11 @@
 #main-links
-  = link_to "Edit Course", edit_office_course_path(@course)
+  - if policy(@course).can_grade?
+    = link_to "Manage Grades", office_course_grades_path(@course)
+  - elsif policy(@course).update?
+    = link_to "View Grades", office_course_grades_path(@course)
+
+  - if policy(@course).update?
+    = link_to "Edit Course", edit_office_course_path(@course)
 
 = crumbs link_to("Courses", office_courses_path), @course
 
@@ -8,25 +14,30 @@ h2 = simple_format @course.description
 .tutors
   h3
     | Tutors
-    = link_to "Add Tutor", new_office_course_course_tutor_path(@course)
+    - if policy(@course).update?
+      = link_to "Add a Tutor", new_office_course_course_tutor_path(@course)
   table
-    thead
+    - @tutors.each do |tutor|
       tr
-        th Name
-        th Role
-        th Can Grade?
-    - @course.course_tutors.includes(:user).each do |tutor|
-      tr
-        td= link_to tutor, edit_office_course_course_tutor_path(@course, tutor)
-        td.fade= tutor.role
         td
+          = link_to tutor, [:office, tutor.user]
+        td.fade= tutor.role
+        - if policy(@course).update?
+          td.right = link_to fa_icon('pencil'), edit_office_course_course_tutor_path(@course, tutor)
 
+
+h3
+  | Programs that include this course
+  / - if policy(@course).update?
+  /   = link_to "Add to a Program", '#'
+table
+  - @course.programs.each do |program|
+    tr
+      td= link_to program, [:office, program]
 
 .students
   h3
     | Students
-    = link_to "Add Student", '#'
-  ul
-    - @course.students.order('users.first_name asc').each do |user|
-      li.student
-        = link_to user, '#'
+    - if policy(@course).update?
+      = link_to "Add a Student", new_office_course_course_student_path(@course)
+  = render @students

@@ -1,6 +1,10 @@
 #main-links
-  = link_to "Create a new Program", new_office_program_path
+  - if policy(Program.new).create?
+    = link_to "Create a new Program", new_office_program_path
 = crumbs "Programs"
+
+.info-panel
+  p These are the programs that you are involved with. If you work with a course it may include students from different programs.
 
 table
   thead
@@ -8,9 +12,10 @@ table
       th Name
       th Starts
       th Ends
-  - @programs.each do |program|
-    tr
-      td = link_to program, [:office, program]
-      td.fade = program.starts_on.stamp("Sep 2014")
-      td.fade = program.ends_on.stamp("Sep 2014")
+  tbody
+    - @programs.each do |program|
+      tr
+        td = link_to program, [:office, program]
+        td.fade = program.starts_on.stamp("Sep 2014")
+        td.fade = program.ends_on.stamp("Sep 2014")
 

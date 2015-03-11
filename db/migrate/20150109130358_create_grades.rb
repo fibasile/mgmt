@@ -15,7 +15,6 @@ class CreateGrades < ActiveRecord::Migration
 
     add_index :grades, [:course_id, :gradee_id], unique: true
     add_index :grades, :grader_id
-    
     add_foreign_key :grades, :courses
     add_foreign_key :grades, :users, column: :grader_id
     add_foreign_key :grades, :users, column: :gradee_id

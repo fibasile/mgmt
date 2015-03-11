@@ -1,0 +1,4 @@
+= simple_form_for [:office,@course,@course_student] do |f|
+  fieldset
+    .select2= f.association :user, disabled: !@course_student.new_record?, collection: @users
+  = f.submit

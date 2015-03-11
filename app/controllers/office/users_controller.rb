@@ -1,9 +1,11 @@
 class Office::UsersController < Office::OfficeController
   def index
-    @users = User.order(:first_name)
+    @users = policy_scope(User).includes(:programs).order(:first_name)
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.includes(:received_grades).find(params[:id])
+    @grades = @user.received_grades
+    authorize @user
   end
 end

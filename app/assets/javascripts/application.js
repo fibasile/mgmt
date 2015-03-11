@@ -18,4 +18,5 @@
 //= require nprogress-turbolinks
 //= require list
 //= require list.pagination
+//= require select2
 //= require_tree .

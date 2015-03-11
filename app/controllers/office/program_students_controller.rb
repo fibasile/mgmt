@@ -4,25 +4,30 @@ class Office::ProgramStudentsController < Office::OfficeController
 
   def new
     @program_student = @program.program_students.build
+    authorize @program_student
   end
 
   def edit
     @program_student = @program.program_students.find(params[:id])
+    authorize @program_student
   end
 
   def update
     @program_student = @program.program_students.find(params[:id])
     @program_student.update_attributes(program_student_params)
+    authorize @program_student
     respond_with @program_student, location: -> { [:office,@program] }
   end
 
   def create
     @program_student = @program.program_students.create(program_student_params)
+    authorize @program_student
     respond_with @program_student, location: -> { [:office,@program] }
   end
 
   def destroy
     @program_student = @program.program_students.find(params[:id])
+    authorize @program_student
     @program_student.destroy
     respond_with @program_student, location: -> { [:office,@program] }
   end

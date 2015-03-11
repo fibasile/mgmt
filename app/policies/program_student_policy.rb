@@ -1,0 +1,2 @@
+class ProgramStudentPolicy < AdminPolicy
+end

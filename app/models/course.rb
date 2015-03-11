@@ -34,8 +34,22 @@ class Course < ActiveRecord::Base
 
   has_many :grades
 
+  def grading_status
+    if grades_remaining == students.count
+      "Complete"
+    else
+      # "#{grades_remaining} need finishing"
+      "Incomplete - #{grades_remaining}/#{students.count}"
+    end
+  end
+
   def to_s
     name
+  end
+
+  def grades_remaining
+    # students.count -
+    (Grade.where('course_id = ? AND value > 0 AND value <= 10 AND value IS NOT NULL', id).pluck(:gradee_id).uniq.count)
   end
 
 end

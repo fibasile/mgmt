@@ -7,14 +7,14 @@ class Grade < ActiveRecord::Base
   belongs_to :gradee, class_name: "User"
 
   validates_presence_of :course, :gradee
-  validates_uniqueness_of :gradee, scope: :course
+  # validates_uniqueness_of :gradee, scope: [:course, :grader]
 
   def human_grade
     Grade.human_grade_for value
   end
 
   def self.human_grade_for val
-    val ? HUMAN_GRADE[val.floor] : "NOT GRADED"    
+    val ? HUMAN_GRADE[val.floor] : "NOT GRADED"
   end
 
   def to_s

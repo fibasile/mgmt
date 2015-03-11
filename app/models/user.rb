@@ -11,6 +11,7 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
   has_secure_password
   validates_uniqueness_of :email
 
+  has_many :grades
   has_many :given_grades, foreign_key: :grader_id, class_name: "Grade"
   has_many :received_grades, foreign_key: :gradee_id, class_name: "Grade"
 
@@ -33,10 +34,17 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
   validates_presence_of :first_name, :last_name, :email
   validates :password, :password_confirmation, presence: true, length: {minimum: 6}, if: :invitation_code?
 
-  validates_format_of :email, :with => /\A\w+@iaac\.net\z/, :message => "must be your @iaac.net email address"
+  validates_format_of :email, :with => /\A[\w\+\.]+@iaac\.net\z/, :message => "must be your @iaac.net email address"
 
   before_validation :clean_email
 
+  def photo_url
+    if photo.present?
+      photo.gsub('www.filepicker.io', 'iaac-cdn.johnre.es')
+    else
+      'https://i.imgur.com/gedfDdD.png'
+    end
+  end
 
   def course_description
     COURSE_TYPES[course_type || 0]
@@ -88,6 +96,24 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
     generate_token(:invitation_code)
     save(validate: false)
     StudentMailer.invitation(id).deliver_now
+  end
+
+  def admin?
+    email == 'john@iaac.net'
+    # true
+    # false
+  end
+
+  def grades_remaining_for course
+    course.students.count - given_grades.where(course: course).count
+  end
+
+  def is_studying?
+    courses_studied.any?
+  end
+
+  def is_teaching?
+    courses_taught.any?
   end
 
 private

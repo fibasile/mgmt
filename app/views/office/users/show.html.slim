@@ -1,53 +1,75 @@
 = crumbs link_to("People", office_users_path), @user
-= image_tag @user.photo, width: 100
+
 / li= @user.description
 
 table
   tr
-    td Email
-    td= mail_to @user.email, @user.email
-  tr
-    td Country
-    td= @user.country
-  tr
-    td Gender
-    td= @user.gender
-  tr
-    td Age
+    td= image_tag @user.photo_url, width: 200
     td
-      - if @user.age
-        | #{@user.age} (#{@user.dob.stamp("31/03/1987")})
-  tr
-    td Last Login
-    - if @user.last_sign_in_at
-      td #{time_ago_in_words(@user.last_sign_in_at)} ago, #{@user.last_sign_in_at.to_s(:short)}
-    - else
-      td -
-  tr
-    td Joined
-    td = @user.created_at.to_s(:short)
+      table
+        tr
+          td.fade Email
+          td= mail_to @user.email, @user.email
+        tr
+          td.fade Country
+          td= @user.country
+        tr
+          td.fade Gender
+          td= @user.gender
+        tr
+          td.fade Age
+          td
+            - if @user.age
+              | #{@user.age} (#{@user.dob.stamp("31/03/1987")})
 
+        - if policy(@user).update?
+          tr
+            td Last Login
+            - if @user.last_sign_in_at
+              td #{time_ago_in_words(@user.last_sign_in_at)} ago, #{@user.last_sign_in_at.to_s(:short)}
+            - else
+              td -
+          tr
+            td Joined
+            td = @user.created_at.to_s(:short)
 
-h3 Studying
+- if @user.is_teaching?
+  h3 Teaching
 
-= @user.course_type
-- @user.programs.each do |program|
-  h4 = program
   table
     thead
       tr
         th Course
-        th.num Weighting
-        th.num Grade
-    - @user.courses_studied.each do |course|
-      tr
-        td= link_to course, [:office, course]
-        td.num= course.credits
-        td.num= Grade.find_by(gradee: @user, course: course)
+        th.num Grading Status
+    tbody
+      - @user.courses_taught.each do |course|
+        tr
+          td = link_to_if policy(course).show?, course, [:office, course]
+          td.num
+            - if policy(course).show?
+              = link_to office_course_grades_path(course) do
+                = course.grading_status
+            - else
+              |-
 
-h3 Teaching
 
-table
-  - @user.courses_taught.each do |course|
-    tr
-      td= course
+- if @user.is_studying?
+  h3 Studying
+
+  - @user.programs.each do |program|
+    h4 = program
+    table
+      thead
+        tr
+          th Course
+          / th.num Weighting
+          th.num Grade
+      - @user.courses_studied.each do |course|
+        tr
+          td= link_to_if policy(course).show?, course, [:office, course]
+          / td.num= course.credits
+          td.num
+            - if policy(course).show?
+              = @grades.find{|g| g.course_id == course.id }.try(:value)
+            - else
+              | -
