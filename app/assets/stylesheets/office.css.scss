@@ -4,6 +4,10 @@ body#office {
   padding: 0;
   font-size: 15px;
 
+  td.bold a {
+    font-weight: bold;
+  }
+
   .student-name {
     background: #000;
     background: linear-gradient(transparent, rgba(0, 0, 0, .7));

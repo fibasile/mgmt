@@ -15,7 +15,7 @@ table
   tbody
     - @programs.each do |program|
       tr
-        td = link_to program, [:office, program]
+        td.bold = link_to program, [:office, program]
         td.fade = program.starts_on.stamp("Sep 2014")
         td.fade = program.ends_on.stamp("Sep 2014")
 

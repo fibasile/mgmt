@@ -19,7 +19,7 @@
       - @users.all.each do |user|
         tr
           td= image_tag "#{user.photo_url}/convert?w=40&h=40&fit=crop", width: 40, height: 40
-          td
+          td.bold
             = link_to office_user_path(user) do
               span.name = user
           td.country.fade = user.country
