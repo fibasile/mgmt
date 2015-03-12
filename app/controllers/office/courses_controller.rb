@@ -1,7 +1,7 @@
 class Office::CoursesController < Office::OfficeController
 
   def index
-    @courses = policy_scope(Course).order(:name).includes(:programs)
+    @courses = policy_scope(Course).order(:name).includes(:programs, :tutors).order('users.first_name')
   end
 
   def show
