@@ -1,3 +1,7 @@
+#main-links
+  - if policy(@user).update?
+    = link_to (@user == current_user ? "Update My Details" : "Update Details"), edit_office_user_path(@user)
+
 = crumbs link_to("People", office_users_path), @user
 
 / li= @user.description
@@ -23,13 +27,13 @@ table
               | #{@user.age} (#{@user.dob.stamp("31/03/1987")})
 
         - if policy(@user).update?
-          tr
+          tr.fade
             td Last Login
             - if @user.last_sign_in_at
               td #{time_ago_in_words(@user.last_sign_in_at)} ago, #{@user.last_sign_in_at.to_s(:short)}
             - else
               td -
-          tr
+          tr.fade
             td Joined
             td = @user.created_at.to_s(:short)
 

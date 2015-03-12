@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature Program do
 
-  let!(:admin) { create(:user, email: 'john@iaac.net') }
+  let!(:admin) { create(:user, email: 'john@iaac.net', clearance: 5) }
   let!(:program) { create(:program, name: 'maa04') }
 
   before(:each) do

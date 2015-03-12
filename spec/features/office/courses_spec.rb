@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature Course do
 
-  let!(:admin) { create(:user, email: 'john@iaac.net') }
+  let!(:admin) { create(:user, email: 'john@iaac.net', clearance: 5) }
   let!(:course) { create(:course, name: 'awesome course') }
 
   before(:each) do

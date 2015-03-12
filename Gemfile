@@ -1,6 +1,7 @@
 ruby '2.2.0'
 source 'https://rubygems.org'
 
+gem 'email_validator'
 gem "select2-rails"
 gem "font-awesome-rails"
 gem 'pg'

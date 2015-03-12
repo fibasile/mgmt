@@ -4,4 +4,8 @@ class UserPolicy < AdminPolicy
     user.admin?
   end
 
+  def update?
+    user.admin? or record == user
+  end
+
 end

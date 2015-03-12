@@ -8,10 +8,19 @@ class Office::OfficeController < ApplicationController
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, :only => :index
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
 private
 
   def authenticate_admin!
-    redirect_to login_url, alert: "Please sign in" if current_user.nil? or !current_user.admin?
+    if current_user.nil? or (!current_user.admin? and !current_user.courses_taught.any?)
+      redirect_to login_url, alert: "Please sign in"
+    end
+  end
+
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to do this."
+    redirect_to(request.referrer || office_root_path)
   end
 
 end

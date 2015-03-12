@@ -115,7 +115,9 @@ body#office {
   }
 
   .fade {
-    color: #888;
+    &, a {
+      color: #888;
+    }
   }
 
   th {

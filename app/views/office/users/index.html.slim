@@ -1,4 +1,7 @@
 #main-links
+  - if policy(User.new).create?
+    = link_to "Add a new Person", new_office_user_path
+
 = crumbs "People"
 
 / - Course.all.each do |course|

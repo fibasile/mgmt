@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature User do
 
-  let!(:admin) { create(:user, email: 'john@iaac.net') }
+  let!(:admin) { create(:user, email: 'john@iaac.net', clearance: 5) }
   let!(:user) { create(:user, first_name: 'homer', last_name: 'simpson') }
 
   before(:each) do
