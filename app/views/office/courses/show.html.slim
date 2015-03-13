@@ -9,7 +9,9 @@
 
 = crumbs link_to("Courses", office_courses_path), @course
 
-h2 = simple_format @course.description
+h2
+  = @course.starts_on.stamp('January 2015') if @course.starts_on
+  = simple_format @course.description
 
 .tutors
   h3

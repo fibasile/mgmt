@@ -9,13 +9,13 @@
 table
   thead
     tr
-      th Name
       th Starts
+      th Name
       th Ends
   tbody
     - @programs.each do |program|
       tr
+        td.fade = program.starts_on.stamp("Sep 99") if program.starts_on
         td.bold = link_to program, [:office, program]
-        td.fade = program.starts_on.stamp("Sep 2014")
-        td.fade = program.ends_on.stamp("Sep 2014")
+        td.fade = program.ends_on.stamp("Sep 99") if program.ends_on
 

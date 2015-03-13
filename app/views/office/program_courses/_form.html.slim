@@ -1,6 +1,6 @@
 = simple_form_for [:office,@program,@program_course] do |f|
   fieldset
-    = f.association :course, collection: @courses
-    = f.input :credits
-    = f.input :published
+    .select2 = f.association :course, collection: @courses
+    / = f.input :credits
+    / = f.input :published
   = f.submit "Add Course"

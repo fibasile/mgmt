@@ -15,11 +15,13 @@ h3
 table
   thead
     tr
+      th Starts
       th Course Name
       th ECTS Credits / Weighting
       th
   - @program.program_courses.each do |program_course|
     tr
+      td.fade = program_course.course.starts_on.stamp('Jan 99') if program_course.course.starts_on
       td
         - if policy(program_course.course).show?
           = link_to program_course.course, [:office, program_course.course]

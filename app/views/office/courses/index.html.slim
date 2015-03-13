@@ -10,12 +10,14 @@
 table
   thead
     tr
+      th Starts
       th Name
       th Tutors
       th Programs
       th.num Grading Status
   - @courses.each do |course|
     tr
+      td.fade = course.starts_on.stamp("Jan 99") if course.starts_on
       td.bold = link_to course, [:office, course]
       td.fade = course.tutors.map{|t| link_to(t.first_name, [:office, t]) }.join(', ').html_safe
       td.fade = course.programs.map{|p| link_to_if(policy(p).show?, p, [:office, p]) }.join(', ').html_safe
