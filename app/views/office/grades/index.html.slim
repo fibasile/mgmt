@@ -26,7 +26,7 @@
                 tr
                   td.name(style= 'width: 180px')
                     = image_tag "#{student.photo_url}/convert?w=60&h=60&fit=crop", width: 60, height: 60
-                    .student-name = student
+                    .name = student
                   td
                     = text_field :grade, :value, style: 'width: 60px', value: grade.try(:value)
                   td

@@ -7,6 +7,7 @@ class Grade < ActiveRecord::Base
   belongs_to :gradee, class_name: "User"
 
   validates_presence_of :course, :gradee
+  validates_numericality_of :value, greater_than: 0, less_than_or_equal_to: 10, allow_nil: true
   # validates_uniqueness_of :gradee, scope: [:course, :grader]
 
   def human_grade

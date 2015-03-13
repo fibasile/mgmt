@@ -1,2 +1,6 @@
 window.onbeforeunload=function(e){};
-alert('saved');
+<% if @grade.errors.any? %>
+alert("ERROR - <%= @grade.errors.full_messages.to_sentence %>");
+<% else %>
+// alert('saved');
+<% end %>

@@ -26,7 +26,7 @@
             = link_to office_user_path(user) do
               span.name = user
           td.country.fade = user.country
-          td.email.fade = user.email
-          td.right.programs.fade = user.programs.to_sentence
+          td.email.fade = mail_to user.email, user.email
+          td.right.programs.fade = user.programs.join(', ')
 
   ul.pagination
