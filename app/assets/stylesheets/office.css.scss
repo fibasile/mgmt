@@ -4,6 +4,12 @@ body#office {
   padding: 0;
   font-size: 15px;
 
+  table tbody  {
+    th, td {
+      background: #FFF !important;
+    }
+  }
+
   .peity {
     margin-left: 5px;
   }

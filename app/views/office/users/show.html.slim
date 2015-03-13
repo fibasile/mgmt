@@ -52,7 +52,8 @@ table
           td.num
             - if policy(course).show?
               = link_to office_course_grades_path(course) do
-                = course.grading_status
+                = course.grading_status[0]
+                span.pie = course.grading_status[1]
             - else
               |-
 
@@ -74,6 +75,6 @@ table
           / td.num= course.credits
           td.num
             - if policy(course).show?
-              = @grades.find{|g| g.course_id == course.id }.try(:value)
+              = Grade.formatted_value(@grades.find{|g| g.course_id == course.id }.try(:value))
             - else
               | -

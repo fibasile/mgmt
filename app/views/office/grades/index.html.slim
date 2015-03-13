@@ -37,7 +37,7 @@
                 - (grades-[grade]).each do |grade|
                   tr.other-tutor
                     td = grade.grader
-                    td = grade.value
+                    td = Grade.formatted_value(grade.value)
                     td = grade.public_notes
 
     - else
@@ -54,5 +54,5 @@
                 - grades.each do |grade|
                   tr
                     td = grade.grader
-                    td = grade.value
+                    td = Grade.formatted_value(grade.value)
                     td = grade.public_notes
