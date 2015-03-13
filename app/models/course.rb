@@ -48,12 +48,19 @@ class Course < ActiveRecord::Base
   before_create :copy_students
 
   def grading_status
-    if grades_remaining == students.count
-      "Complete"
+    a = []
+    if grades_remaining == (s = students.count)
+      if s > 0
+        a << "Complete"
+      else
+        a << "No Students"
+      end
     else
       # "#{grades_remaining} need finishing"
-      "Incomplete - #{grades_remaining}/#{students.count}"
+      a << "Incomplete"
     end
+    a << "#{grades_remaining}/#{students.count}"
+    return a
   end
 
   def to_s

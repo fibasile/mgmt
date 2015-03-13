@@ -23,6 +23,8 @@ table
       td.fade = course.programs.map{|p| link_to_if(policy(p).show?, p, [:office, p]) }.join(', ').html_safe
       td.num
         / = course.workflow_state
-        = link_to course.grading_status, office_course_grades_path(course)
+        = link_to office_course_grades_path(course)
+          = course.grading_status[0]
+          span.pie = course.grading_status[1]
 
 / = render 'courses_tree', courses: Course.arrange

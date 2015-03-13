@@ -17,6 +17,7 @@
 //= require nprogress
 //= require nprogress-turbolinks
 //= require list
+//= require jquery.peity.js
 //= require list.pagination
 //= require select2
 //= require_tree .
