@@ -19,6 +19,8 @@ table
       td.bold = link_to course, [:office, course]
       td.fade = course.tutors.map{|t| link_to(t.first_name, [:office, t]) }.join(', ').html_safe
       td.fade = course.programs.map{|p| link_to_if(policy(p).show?, p, [:office, p]) }.join(', ').html_safe
-      td.num = link_to course.grading_status, office_course_grades_path(course)
+      td.num
+        / = course.workflow_state
+        = link_to course.grading_status, office_course_grades_path(course)
 
 / = render 'courses_tree', courses: Course.arrange

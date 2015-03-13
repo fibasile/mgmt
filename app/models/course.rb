@@ -2,6 +2,16 @@ class Course < ActiveRecord::Base
 
   has_ancestry
 
+  include Workflow
+  workflow do
+    state :draft do
+    end
+    state :published
+    state :being_graded
+    state :graded
+    state :archived
+  end
+
   SEMINARS = {
     "DAT" => "Data Informed Structures",
     "ENC" => "Encrypted Rome",
@@ -34,6 +44,9 @@ class Course < ActiveRecord::Base
 
   has_many :grades
 
+  attr_accessor :copy_students_from_course_id
+  before_create :copy_students
+
   def grading_status
     if grades_remaining == students.count
       "Complete"
@@ -50,6 +63,14 @@ class Course < ActiveRecord::Base
   def grades_remaining
     # students.count -
     (Grade.where('course_id = ? AND value > 0 AND value <= 10 AND value IS NOT NULL', id).pluck(:gradee_id).uniq.count)
+  end
+
+private
+
+  def copy_students
+    if copy_students_from_course_id.present?
+      students << Course.find(copy_students_from_course_id).students
+    end
   end
 
 end

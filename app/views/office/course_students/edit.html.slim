@@ -1,4 +1,5 @@
 #main-links
   = link_to "Remove Student", [:office,@course,@course_student], method: :delete, class: 'delete', 'data-confirm': "Are you sure you want to remove this student?"
-= title "Edit Student to #{@course}"
+
+= crumbs link_to("Courses", office_courses_path), link_to(@course, [:office, @course]), "Edit Student"
 = render "form"

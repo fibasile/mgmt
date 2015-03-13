@@ -360,6 +360,7 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
     wicked_pdf (0.11.0)
       rails
+    workflow (1.2.0)
     xpath (2.0.0)
       nokogiri (~> 1.3)
     zonebie (0.5.1)
@@ -417,4 +418,5 @@ DEPENDENCIES
   web-console (~> 2.0)
   wicked_pdf
   wkhtmltopdf-binary!
+  workflow
   zonebie

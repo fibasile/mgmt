@@ -4,6 +4,19 @@ body#office {
   padding: 0;
   font-size: 15px;
 
+  #main img {
+    display: block;
+  }
+
+  td,th,tr {
+    vertical-align: top;
+  }
+
+  table table {
+    margin: 0;
+    padding: 0;
+  }
+
   td.bold a {
     font-weight: bold;
   }

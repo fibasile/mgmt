@@ -5,5 +5,10 @@
     = f.input :subtitle
     = f.input :description
     = f.input :credits
-    / = f.input :published
+
+  - if @course.new_record?
+    fieldset
+      p Pick a course to copy students from
+      .select2 = f.input :copy_students_from_course_id, label: "Use Students from...", as: :select, collection: Course.order(:name)
+      / = f.input :published
   = f.submit
