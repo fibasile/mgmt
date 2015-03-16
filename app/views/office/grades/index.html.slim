@@ -15,17 +15,22 @@
       - @students.each_with_index do |student, i|
         - grades = @grades.to_a.select{ |g| g.gradee_id == student.id }.uniq(&:grader_id)
         - grade = grades.find{ |a| a.grader_id == current_user.id } || Grade.new
+        - other_tutors = (grades-[grade])
         tr.grade
-          td= image_tag "#{student.photo_url}/convert?w=30&h=30&fit=crop", width: 30, height: 30
-          td= link_to student, [:office, student], class: 'grade-name'
-          td= best_in_place grade, :group, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-group', id: "group-#{i}"
-          td= best_in_place grade, :value, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-grade', id: "grade-#{i}", display_as: :to_s
-          / , ok_button: 'ok'
-          td= best_in_place grade, :public_notes, url: office_course_grades_path(@course, {gradee_id: student.id}), html_attrs: {placeholder: 'These notes will be VISIBLE TO THE STUDENT'}, as: 'textarea', class: 'grade-comments', id: "notes-#{i}"
-        - (grades-[grade]).each do |grade|
-          tr.other-tutor
-            td.right(colspan=3) = grade.grader
-            / = grade.group
-            td = Grade.formatted_value(grade.value)
-            td = grade.public_notes
+          td= image_tag "#{student.photo_url}/convert?w=40&h=40&fit=crop", width: 40, height: 40
+          td
+            = link_to student, [:office, student], class: 'grade-name'
+            - other_tutors.each do |grade|
+              .other-tutor= grade.grader
+          td
+            = best_in_place grade, :group, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-group', id: "group-#{i}"
+          td
+            = best_in_place grade, :value, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-grade', id: "grade-#{i}", display_as: :to_s
+            - other_tutors.each do |grade|
+              .other-tutor= Grade.formatted_value(grade.value)
+          td
+            = best_in_place grade, :public_notes, url: office_course_grades_path(@course, {gradee_id: student.id}), html_attrs: {placeholder: 'These notes will be VISIBLE TO THE STUDENT'}, as: 'textarea', class: 'grade-comments', id: "notes-#{i}"
+            - other_tutors.each do |grade|
+              .other-tutor= grade.public_notes
+
 
