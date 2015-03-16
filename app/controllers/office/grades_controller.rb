@@ -35,14 +35,16 @@ class Office::GradesController < Office::OfficeController
     # Grade.create( grade_params.merge(old_grade.attributes.select{|g| grade_params.keys.include? g }) )
     # current_user.given_grades
     authorize @grade
+
+    # Rails.logger.info respond_with_bip(@grade)
     # respond_with @grade, location: -> { office_course_grades_path(@course) }
     respond_to do |format|
       if @grade.save
         # format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
-        format.json { respond_with_bip(@grade) }
+        format.json { return respond_with_bip(@grade) }
       else
         # format.html { render :action => "edit" }
-        format.json { respond_with_bip(@grade) }
+        format.json { return respond_with_bip(@grade) }
       end
     end
   end

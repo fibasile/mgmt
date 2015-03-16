@@ -8,4 +8,8 @@ module ApplicationHelper
     content_for(:title, args.last.to_s)
     return content_tag(:h1, args.join(' / ').html_safe)
   end
+
+  def full_grade(value)
+    value ? sprintf('%.2f', value) : "-"
+  end
 end

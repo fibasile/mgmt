@@ -19,7 +19,7 @@
           td= image_tag "#{student.photo_url}/convert?w=30&h=30&fit=crop", width: 30, height: 30
           td= link_to student, [:office, student], class: 'grade-name'
           td= best_in_place grade, :group, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-group', id: "group-#{i}"
-          td= best_in_place grade, :value, url: office_course_grades_path(@course, {gradee_id: student.id}), display_as: :to_s, class: 'grade-grade', id: "grade-#{i}"
+          td= best_in_place grade, :value, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-grade', id: "grade-#{i}", display_with: lambda { |v| full_grade(v) }
           / , ok_button: 'ok'
           td= best_in_place grade, :public_notes, url: office_course_grades_path(@course, {gradee_id: student.id}), html_attrs: {placeholder: 'These notes will be VISIBLE TO THE STUDENT'}, as: 'textarea', class: 'grade-comments', id: "notes-#{i}"
         - (grades-[grade]).each do |grade|
