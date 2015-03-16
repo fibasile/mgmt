@@ -7,6 +7,7 @@ class Office::GradesController < Office::OfficeController
   def index
     @students = User.joins(:course_students)
       .where('course_students.course_id = ?', @course.id)
+      .order('first_name')
 
     @grades = Grade.where('grades.course_id = ?', @course.id)
       .includes(:grader)

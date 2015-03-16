@@ -15,7 +15,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require nprogress
-//= require naturalSort
+//= require best_in_place
 //= require nprogress-turbolinks
 //= require list
 //= require jquery.peity.js

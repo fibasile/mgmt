@@ -6,6 +6,7 @@ gem "select2-rails"
 gem "font-awesome-rails"
 gem 'pg'
 gem 'workflow'
+gem 'best_in_place', '~> 3.0.1'
 gem 'rails', '4.2.0'
 gem 'nprogress-rails'
 gem 'autoprefixer-rails'

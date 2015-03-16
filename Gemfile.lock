@@ -61,6 +61,9 @@ GEM
       execjs
       json
     bcrypt (3.1.10)
+    best_in_place (3.0.3)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
@@ -372,6 +375,7 @@ DEPENDENCIES
   ancestry
   autoprefixer-rails
   bcrypt (~> 3.1.7)
+  best_in_place (~> 3.0.1)
   byebug
   capybara
   coffee-rails (~> 4.1.0)
