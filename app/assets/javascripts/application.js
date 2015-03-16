@@ -16,6 +16,8 @@
 //= require turbolinks
 //= require nprogress
 //= require best_in_place
+//= require jquery.purr
+//= require best_in_place.purr
 //= require nprogress-turbolinks
 //= require list
 //= require jquery.peity.js

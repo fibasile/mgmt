@@ -2,7 +2,7 @@ class Office::GradesController < Office::OfficeController
 
   before_action :load_course, except: :create
   skip_after_action :verify_policy_scoped
-  respond_to :html, :js
+  respond_to :html, :js, :json
 
   def index
     @students = User.joins(:course_students)
@@ -41,7 +41,7 @@ class Office::GradesController < Office::OfficeController
         format.json { respond_with_bip(@grade) }
       else
         # format.html { render :action => "edit" }
-        format.json { render js: 'alert("FAIL")' }
+        format.json { respond_with_bip(@grade) }
       end
     end
   end
