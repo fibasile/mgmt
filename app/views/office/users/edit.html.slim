@@ -1,5 +1,6 @@
 = crumbs link_to("People", office_users_path), link_to(@user, [:office, @user]), "Edit User"
 = simple_form_for [:office, @user] do |f|
+  = render 'application/error_messages', object: f.object
   fieldset
     = f.input :first_name
     = f.input :last_name

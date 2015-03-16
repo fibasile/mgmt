@@ -30,7 +30,7 @@ class Office::UsersController < Office::OfficeController
     @user = User.find(params[:id])
     authorize @user
     @user.update_attributes(user_params)
-    respond_with @user, location: -> { [:office,@user] }
+    respond_with @user, location: -> { office_users_url }
   end
 
 private
