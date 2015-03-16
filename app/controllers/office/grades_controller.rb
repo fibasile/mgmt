@@ -1,6 +1,6 @@
 class Office::GradesController < Office::OfficeController
 
-  before_action :load_course
+  before_action :load_course, except: :create
   skip_after_action :verify_policy_scoped
   respond_to :html, :js
 
@@ -26,9 +26,24 @@ class Office::GradesController < Office::OfficeController
   end
 
   def create
-    @grade = current_user.given_grades.create(grade_params)
+    course = Course.find(params[:id])
+    gradee = User.find(params[:gradee_id])
+    old_grade = Grade.find_or_initialize_by(course: course, gradee: gradee, grader: current_user)
+    @grade = Grade.new(old_grade.dup.attributes.merge(grade_params))
+
+    # Grade.create( grade_params.merge(old_grade.attributes.select{|g| grade_params.keys.include? g }) )
+    # current_user.given_grades
     authorize @grade
-    respond_with @grade, location: -> { office_course_grades_path(@course) }
+    # respond_with @grade, location: -> { office_course_grades_path(@course) }
+    respond_to do |format|
+      if @grade.save
+        # format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+        format.json { respond_with_bip(@grade) }
+      else
+        # format.html { render :action => "edit" }
+        format.json { render js: 'alert("FAIL")' }
+      end
+    end
   end
 
   def edit

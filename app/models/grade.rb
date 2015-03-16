@@ -10,6 +10,10 @@ class Grade < ActiveRecord::Base
   validates_numericality_of :value, greater_than: 0, less_than_or_equal_to: 10, allow_nil: true
   # validates_uniqueness_of :gradee, scope: [:course, :grader]
 
+  def formatted_grade
+    Grade.formatted_value(self.value)
+  end
+
   def human_grade
     Grade.human_grade_for value
   end

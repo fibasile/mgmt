@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :program_courses, path: 'courses'
     end
     resources :courses do
+      put 'grades' => 'grades#create', on: :member
       resources :grades
       resources :course_tutors, path: 'tutors'
       resources :course_students, path: 'students'
