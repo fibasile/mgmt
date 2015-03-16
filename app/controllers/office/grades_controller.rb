@@ -10,6 +10,7 @@ class Office::GradesController < Office::OfficeController
       .order('first_name')
 
     @grades = Grade.where('grades.course_id = ?', @course.id)
+      .where('grades.value IS NOT NULL OR grades.public_notes IS NOT NULL')
       .includes(:grader)
       .order('users.first_name')
       .order('grades.id DESC')

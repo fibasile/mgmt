@@ -7,17 +7,25 @@
       tr
         th(width=30)
         th.sort(data-sort="grade-name", width="200") Student
-        th.sort(data-sort="grade-group", width="200") Group
-        th.sort.right(data-sort="grade-grade", width="200") Grade
-        th.sort(data-sort="grade-comments") Comments
+        th.sort(data-sort="grade-group", width="100") Group
+        th.sort(data-sort="grade-grade", width="100") Grade
+        th.sort(data-sort="grade-comments") Comments for the student
+
     tbody.list
       - @students.each_with_index do |student, i|
         - grades = @grades.to_a.select{ |g| g.gradee_id == student.id }.uniq(&:grader_id)
         - grade = grades.find{ |a| a.grader_id == current_user.id } || Grade.new
-        tr
+        tr.grade
           td= image_tag "#{student.photo_url}/convert?w=30&h=30&fit=crop", width: 30, height: 30
           td= link_to student, [:office, student], class: 'grade-name'
-          td.fade= best_in_place grade, :group, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-group', id: "group-#{i}"
-          td.right= best_in_place grade, :value, url: office_course_grades_path(@course, {gradee_id: student.id}), display_as: :to_s, class: 'grade-grade', id: "grade-#{i}"
+          td= best_in_place grade, :group, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-group', id: "group-#{i}"
+          td= best_in_place grade, :value, url: office_course_grades_path(@course, {gradee_id: student.id}), display_as: :to_s, class: 'grade-grade', id: "grade-#{i}"
           / , ok_button: 'ok'
           td= best_in_place grade, :public_notes, url: office_course_grades_path(@course, {gradee_id: student.id}), html_attrs: {placeholder: 'These notes will be VISIBLE TO THE STUDENT'}, as: 'textarea', class: 'grade-comments', id: "notes-#{i}"
+        - (grades-[grade]).each do |grade|
+          tr.other-tutor
+            td.right(colspan=3) = grade.grader
+            / = grade.group
+            td = Grade.formatted_value(grade.value)
+            td = grade.public_notes
+

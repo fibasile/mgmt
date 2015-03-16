@@ -16,6 +16,10 @@ body#office {
   padding: 0;
   font-size: 15px;
 
+  tr.grade {
+    border-top: 1px solid #DDD;
+  }
+
   span.best_in_place {
     display: block;
     width: 100%;
@@ -27,7 +31,7 @@ body#office {
   span.grade-grade {
     font-size: 1.1em;
   }
-  table tbody tr:nth-child(odd) {
+  table tbody tr.odd {
     background: #eee !important;
     td {
       background: #eee !important;
@@ -87,6 +91,7 @@ body#office {
 
   tr.other-tutor {
     color: #AAA;
+    font-size: 0.9em;
   }
   .select2-container {
     width: 100%;
