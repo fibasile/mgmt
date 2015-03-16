@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       resources :course_tutors, path: 'tutors'
       resources :course_students, path: 'students'
     end
-    root to: 'users#index'
+    root to: 'courses#index'
   end
 
   root to: 'students#report_card'
