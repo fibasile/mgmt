@@ -11,9 +11,22 @@ jQuery ->
   $('form.grade-form input, form.grade-form textarea').change ->
     $(this).parents('form').submit()
 
-  $('select#order').change ->
-    $('#search').val('')
-    options = {
-      valueNames: [ 'name' ]
-    }
-    gradeList = new List('grades', options)
+  # $('select#order').change ->
+  # $('#search').val('')
+  options = {
+    valueNames: [ 'name' ]
+  }
+  window.gradeList = new List('users', options)
+
+  $('th.sorter').click ->
+    window.gradeList.sort($(this).data('sorter'))
+
+  window.gradeList.sort('group', {
+    sortFunction: (a, b) -> [$(a.elm).find('.group').val(), $(b.elm).find('.group').val()].sort(naturalSort)
+  })
+  window.gradeList.sort('grade', {
+    sortFunction: (a, b) -> [$(a.elm).find('.grade').val(), $(b.elm).find('.grade').val()].sort(naturalSort)
+  })
+  window.gradeList.sort('student', {
+    sortFunction: (a, b) -> [$(a.elm).find('.student').val(), $(b.elm).find('.student').val()].sort(naturalSort)
+  })

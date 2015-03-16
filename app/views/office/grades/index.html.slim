@@ -1,58 +1,76 @@
 = crumbs link_to("Courses", office_courses_path), link_to(@course, [:office, @course]), 'Grades'
 
-/ table
-/   thead
-/     tr
-/       th Name
-/       th Grade
-/       th Public Comments
-/       / th Private Comments
-/       th
+#users.grades(style="margin-top: -20px")
 
-#users
-  / #filters
-  /   = text_field_tag :search, nil, placeholder: "Search by Name, Email, Programs...", class: 'search', autofocus: true
-  /   = select_tag :order, options_for_select([['first name', 'first_name'], ['last name', 'last_name'], ['grade', 'grade'], ['public notes', 'public_notes'], ['grouping', 'grouping']])
+  fieldset
+    table
+      thead
+        tr
+          th Student
+          th Grade
+          th Comments
+          th Group
+      - @students.each_with_index do |student, i|
+        - grades = @grades.to_a.select{ |g| g.gradee_id == student.id }.uniq(&:grader_id)
+        - grade = grades.find{ |a| a.grader_id == current_user.id }
+        tbody
+          tr
+            td= student
+            td= grade.try(:value)
+            td= grade.try(:public_notes)
+            td= grade.try(:group)
 
-  .list
-    - if policy(@course).can_grade?
-      fieldset
-        - @students.each do |student|
+  - if policy(@course).can_grade?
+    fieldset
+      table
+        thead
+          tr
+            th.sorter(data-sorter="name") Student
+            th.sorter(data-sorter="grade") Grade
+            th.sorter(data-sorter="comments") Comments
+            th.sorter(data-sorter="group") Group
+      .list
+        - @students.each_with_index do |student, i|
           - grades = @grades.to_a.select{ |g| g.gradee_id == student.id }.uniq(&:grader_id)
           - grade = grades.find{ |a| a.grader_id == current_user.id }
           = form_tag [:office, @course, Grade.new], method: :post, class: "grade-form student-#{student.id}", remote: true do
             table
               tbody
                 tr
+                  td(colspan=10) = link_to student, [:office, student], target: '_blank', class: 'student-name-link name'
+                tr
                   td.name(style= 'width: 180px')
                     = image_tag "#{student.photo_url}/convert?w=60&h=60&fit=crop", width: 60, height: 60
-                    .name = student
                   td
-                    = text_field :grade, :value, style: 'width: 60px', value: grade.try(:value)
-                  td
+                    = text_field :grade, :value, style: 'width: 80px; font-weight: bold; font-size: 1.3em', value: grade.try(:value), class: 'grade'
+                  td.comments
                     / td = f.text_area :private_notes
                     = text_area :grade, :public_notes, placeholder: 'Comments for the student', value: grade.try(:public_notes)
                     = hidden_field :grade, :course_id, value: @course.id
                     = hidden_field :grade, :gradee_id, value: student.id
+                  td
+                    = text_field :grade, :group, value: grade.try(:group), placeholder: 'Group', class: 'group'
+
                 - (grades-[grade]).each do |grade|
                   tr.other-tutor
                     td = grade.grader
                     td = Grade.formatted_value(grade.value)
                     td = grade.public_notes
+                    td = grade.group
 
-    - else
+  - else
 
-      table
-        - @students.each do |student|
-          - grades = @grades.to_a.select{ |g| g.gradee_id == student.id }.uniq(&:grader_id)
-          tr
-            td
-              = image_tag "#{student.photo_url}/convert?w=60&h=60&fit=crop", width: 60, height: 60
-              = student
-            td
-              table
-                - grades.each do |grade|
-                  tr
-                    td = grade.grader
-                    td = Grade.formatted_value(grade.value)
-                    td = grade.public_notes
+    table
+      - @students.each do |student|
+        - grades = @grades.to_a.select{ |g| g.gradee_id == student.id }.uniq(&:grader_id)
+        tr
+          td
+            = image_tag "#{student.photo_url}/convert?w=60&h=60&fit=crop", width: 60, height: 60
+            = student
+          td
+            table
+              - grades.each do |grade|
+                tr
+                  td.fade = grade.grader
+                  td.fade = Grade.formatted_value(grade.value)
+                  td.fade.comments = grade.public_notes

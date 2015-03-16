@@ -1,4 +1,8 @@
 body#office {
+
+  #users.grades table {
+    margin: 0;
+  }
   background: #fcfcfc;
   margin: 0;
   padding: 0;
@@ -114,6 +118,9 @@ body#office {
   label {
     font-weight: bold;
   }
+  a.student-name-link {
+    font-weight: bold;
+  }
   h1 {
     margin-top: 20px;
     // border-bottom: 3px solid black;
@@ -168,6 +175,10 @@ a.student {
   }
   .container {
     overflow: hidden;
+  }
+
+  td.comments {
+    width: 400px;
   }
 
   header {

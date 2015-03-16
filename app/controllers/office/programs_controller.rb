@@ -5,7 +5,7 @@ class Office::ProgramsController < Office::OfficeController
   end
 
   def show
-    @program = Program.includes(program_students: :user).order('users.first_name').find(params[:id])
+    @program = Program.includes(program_students: :user).includes(program_courses: :course).order('courses.starts_on, courses.name').order('users.first_name').find(params[:id])
     authorize @program
   end
 
