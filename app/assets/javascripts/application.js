@@ -16,11 +16,18 @@
 //= require turbolinks
 //= require nprogress
 //= require best_in_place
-//= require jquery.purr
-//= require best_in_place.purr
 //= require nprogress-turbolinks
 //= require list
 //= require jquery.peity.js
 //= require list.pagination
 //= require select2
 //= require_tree .
+
+jQuery(document).on('best_in_place:error', function (event, request, error) {
+    'use strict';
+    // Display all error messages from server side validation
+    jQuery.each(jQuery.parseJSON(request.responseText), function (index, value) {
+        if (typeof value === "object") {value = index + " " + value.toString(); }
+        alert(value);
+    });
+});
