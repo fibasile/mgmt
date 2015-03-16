@@ -17,14 +17,14 @@ jQuery ->
   window.gradeList = new List('grades', options)
 
   $(".best_in_place").best_in_place();
-  $('.best_in_place').bind "ajax:success", ->
-    window.gradeList = new List('grades', { valueNames: [ 'grade-name', 'grade-grade','grade-group','grade-comments' ] })
+  # $('.best_in_place').bind "ajax:success", ->
+  #   window.gradeList = new List('grades', { valueNames: [ 'grade-name', 'grade-grade','grade-group','grade-comments' ] })
 
-    setTimeout ->
-      window.gradeList = new List('grades', { valueNames: [ 'grade-name', 'grade-grade','grade-group','grade-comments' ] })
-    , 500
+  #   setTimeout ->
+  #     window.gradeList = new List('grades', { valueNames: [ 'grade-name', 'grade-grade','grade-group','grade-comments' ] })
+  #   , 500
 
-    # window.gradeList.update()
+  # window.gradeList.update()
 
   # $('th.sorter').click ->
   #   window.gradeList.sort($(this).data('sorter'))
