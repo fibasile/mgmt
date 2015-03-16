@@ -7,4 +7,6 @@
     = f.input :gender, collection: [['Female', 'F'],['Male', 'M']], as: :radio_buttons
     .select2= f.input :country_code, label: 'Country'
     / = f.input :password
+  fieldset
+    .select2= f.association :programs, label: "Programs that #{@user.first_name} is enrolled in"
   = f.submit 'Update Details'
