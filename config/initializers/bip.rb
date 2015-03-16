@@ -1,10 +1,11 @@
 module BestInPlace
   module ControllerExtensions
     def respond_bip_ok(obj, options = {})
-      param_key = options[:param] ||= BestInPlace::Utils.object_to_key(obj)
-      updating_attr = params[param_key].keys.first
-      renderer = BestInPlace::DisplayMethods.lookup(obj.class, updating_attr)
-      return render json: renderer.render_json(obj)
+      if params[:grade] and params[:grade][:value]
+        render json: {display_as: obj.to_s}.to_json#renderer.render_json(obj)
+      else
+        head :no_content
+      end
     end
   end
 end
