@@ -1,7 +1,7 @@
 class Office::ProgramsController < Office::OfficeController
 
   def index
-    @programs = policy_scope(Program)
+    @programs = policy_scope(Program).uniq
   end
 
   def show
