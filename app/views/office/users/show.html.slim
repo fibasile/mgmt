@@ -44,16 +44,18 @@ table
     thead
       tr
         th Course
+        th Role
         th.num Grading Status
     tbody
-      - @user.courses_taught.each do |course|
+      - @user.course_tutors.each do |tutor|
         tr
-          td = link_to_if policy(course).show?, course, [:office, course]
-          td.num
-            - if policy(course).show?
-              = link_to office_course_grades_path(course) do
-                = course.grading_status[0]
-                span.pie = course.grading_status[1]
+          td = link_to_if policy(tutor.course).show?, tutor.course, [:office, tutor.course]
+          td.fade = tutor.role
+          td.num.fade
+            - if policy(tutor.course).show?
+              = link_to office_course_grades_path(tutor.course) do
+                = tutor.course.grading_status[0]
+                span.pie = tutor.course.grading_status[1]
             - else
               |-
 

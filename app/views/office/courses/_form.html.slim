@@ -1,6 +1,7 @@
 = simple_form_for [:office,@course] do |f|
   fieldset
     / = f.input :parent_id, collection: Course.all, as: :select, include_blank: true
+    .select2= f.association :programs
     = f.input :starts_on, include_blank: true
     = f.input :name, label: "Course Name"
     = f.input :subtitle

@@ -21,7 +21,7 @@ table
       td.bold = link_to course, [:office, course]
       td.fade = course.tutors.map{|t| link_to(t.unique_name, [:office, t]) }.join(', ').html_safe
       td.fade = course.programs.map{|p| link_to_if(policy(p).show?, p, [:office, p]) }.join(', ').html_safe
-      td.num
+      td.num.fade
         / = course.workflow_state
         = link_to office_course_grades_path(course)
           = course.grading_status[0]
