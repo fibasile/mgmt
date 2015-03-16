@@ -14,10 +14,8 @@ html
           = image_tag "logo.png"
 
         = link_to "Courses", office_courses_path
-        = link_to "People", office_users_path
-
         = link_to "Programs", office_programs_path
-
+        = link_to "People", office_users_path
 
         = link_to fa_icon('power-off'), logout_path, title: 'Logout', class: 'current-user'
         = link_to current_user, [:office, current_user], class: 'current-user'
