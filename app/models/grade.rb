@@ -38,7 +38,7 @@ class Grade < ActiveRecord::Base
   end
 
   def self.formatted_value val=nil
-    val ? sprintf('%.2f', val) : "-"
+    val ? sprintf('%.2f', val) : ""
   end
 
 end

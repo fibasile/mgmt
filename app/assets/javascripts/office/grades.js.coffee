@@ -10,6 +10,9 @@ jQuery ->
 
   # window.gradeList = new List('grades', valueNames: [ 'grade-name', 'grade-grade','grade-group','grade-comments' ])
 
+  $('.best_in_place').bind "ajax:success", ->
+    $(this).parents('tr').find('td.grader').html('You')
+
   $(".best_in_place").best_in_place();
   # $('.best_in_place').bind "ajax:success", ->
   #   window.gradeList = new List('grades', { valueNames: [ 'grade-name', 'grade-grade','grade-group','grade-comments' ] })

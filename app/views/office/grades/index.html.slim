@@ -1,5 +1,9 @@
 = crumbs link_to("Courses", submit_office_course_grades_path(@course)), link_to(@course, [:office, @course]), 'Grades'
 
+.info-panel(style="background: #397AF2; color: #FFF; padding: 10px; font-weight: bold;")
+  p If you <u>edit anything</u> on this page, you will become responsible for the final grade of that student.
+  p Other tutors will not be able to edit the group, grade or comments for that student.
+
 #grades
 
   table#xtable
@@ -8,7 +12,7 @@
         th(width=30)
         th.sort(width="250") Student
         th.sort(width="110") Group
-        th.sort.right(width="60") Grade
+        th.sort.right(width="90") Grade
         th.sort(width="110") Grader
         th.sort Comments for the student
 
@@ -31,12 +35,13 @@
               = grade.group
           td.right
             - if policy(grade).update?
-              = best_in_place grade, :value, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-grade', id: "grade-#{i}", display_as: :to_s, place_holder: '-', ok_button: 'save', cancel_button: 'cancel'
+              = best_in_place grade, :value, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-grade', id: "grade-#{i}", display_as: :to_s, place_holder: '-'
+              / , ok_button: 'save', cancel_button: 'cancel'
             - else
               = grade.to_s
             - other_tutors.each do |grade|
               .other-tutor= Grade.formatted_value(grade.value)
-          td.fade
+          td.fade.grader
             = you?(grade.try(:grader), current_user)
           td
             - if policy(grade).update?

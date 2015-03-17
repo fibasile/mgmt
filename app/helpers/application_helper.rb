@@ -9,8 +9,8 @@ module ApplicationHelper
     return content_tag(:h1, args.join(' / ').html_safe)
   end
 
-  def you?(a, b)
-    a == b ? "You" : a
+  def you?(a, b, you="You")
+    a == b ? you : a
   end
 
 end
