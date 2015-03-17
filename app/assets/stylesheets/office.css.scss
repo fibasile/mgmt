@@ -1,5 +1,10 @@
 body#office {
 
+  .form_in_place {
+    input {
+      margin-bottom: 5px;
+    }
+  }
   span form, span input {
     margin: 0;
     width: 80px;

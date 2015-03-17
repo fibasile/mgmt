@@ -18,15 +18,21 @@ class GradePolicy < AdminPolicy
   end
 
   def create?
-    if tutor = user.course_tutors.find_by(course: record.course)
-      tutor.grades_submitted_at.blank?
+    if tutor = CourseTutor.find_by(course: record.course, user: user)
+      # tutor.grades_submitted_at.blank?
+      true
     else
       user.admin?
     end
   end
 
   def update?
-    create?
+
+    if record.new_record?
+      create?
+    else
+      user == record.grader
+    end
   end
 
 end

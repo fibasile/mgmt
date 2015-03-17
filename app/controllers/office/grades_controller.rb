@@ -42,21 +42,20 @@ class Office::GradesController < Office::OfficeController
   def create
     course = Course.find(params[:id])
     gradee = User.find(params[:gradee_id])
-    old_grade = Grade.find_or_initialize_by(course: course, gradee: gradee, grader: current_user)
-    @grade = Grade.new(old_grade.dup.attributes.merge(grade_params))
 
-    # Grade.create( grade_params.merge(old_grade.attributes.select{|g| grade_params.keys.include? g }) )
-    # current_user.given_grades
+    @grade = Grade.find_or_initialize_by(course: course, gradee: gradee)
+    @grade.attributes = @grade.attributes.merge(grade_params)
+    @grade.grader = current_user
+
+    # @grade = old_grade.assign_attributes(old_grade.attributes.merge(grade_params))
     authorize @grade
 
-    # Rails.logger.info respond_with_bip(@grade)
-    # respond_with @grade, location: -> { office_course_grades_path(@course) }
+    # @grade.grader = current_user
+
     respond_to do |format|
       if @grade.save
-        # format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
         format.json { return respond_with_bip(@grade) }
       else
-        # format.html { render :action => "edit" }
         format.json { return respond_with_bip(@grade) }
       end
     end

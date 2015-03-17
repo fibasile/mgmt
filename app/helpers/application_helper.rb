@@ -8,4 +8,9 @@ module ApplicationHelper
     content_for(:title, args.last.to_s)
     return content_tag(:h1, args.join(' / ').html_safe)
   end
+
+  def you?(a, b)
+    a == b ? "You" : a
+  end
+
 end

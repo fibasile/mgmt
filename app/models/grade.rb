@@ -1,6 +1,17 @@
+class MyValidator < ActiveModel::Validator
+  def validate(record)
+    if record.grader_id_was and record.grader_id != record.grader_id_was
+      old_grader = User.find(record.grader_id_was)
+      record.errors[:base] = "#{old_grader} has already graded this student"
+    end
+  end
+end
+
 class Grade < ActiveRecord::Base
 
   HUMAN_GRADE = ['FAIL','FAIL','FAIL','FAIL','INCOMPLETE','LOW PASS', 'LOW PASS', 'PASS', 'PASS', 'HIGH PASS', 'HIGH PASS']
+
+  validates_with MyValidator
 
   belongs_to :course
   belongs_to :grader, class_name: "User"
