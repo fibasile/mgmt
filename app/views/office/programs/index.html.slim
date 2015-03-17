@@ -15,7 +15,7 @@ table#xtable
   tbody
     - @programs.each do |program|
       tr
-        td.fade = program.starts_on.stamp("Sep 99") if program.starts_on
+        td.fade.starts = program.starts_on.stamp("Sep 99") if program.starts_on
         td.bold = link_to program, [:office, program]
         td.fade.right = program.ends_on.stamp("Sep 99") if program.ends_on
 
