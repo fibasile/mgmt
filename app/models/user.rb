@@ -74,6 +74,7 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
       .joins('LEFT OUTER JOIN grades ON grades.course_id = courses.id')
       .select('courses.*, grades.value as grade, grades.public_notes as grade_notes')
       .where('grades.gradee_id': [id, nil])
+      .where('grades.created_at < ?', Date.parse('2015/03/01') )
       .order('name')
   end
 
