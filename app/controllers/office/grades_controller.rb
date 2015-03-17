@@ -9,8 +9,9 @@ class Office::GradesController < Office::OfficeController
       .where('course_students.course_id = ?', @course.id)
       .order('first_name')
 
+    # grades.grader_id IS NOT NULL AND (
     @grades = Grade.where('grades.course_id = ?', @course.id)
-      .where('grades.grader_id IS NOT NULL AND (grades.value IS NOT NULL OR grades.public_notes IS NOT NULL)')
+      .where('grades.value IS NOT NULL OR grades.public_notes IS NOT NULL')
       .includes(:grader)
       .order('users.first_name')
       .order('grades.id DESC')
