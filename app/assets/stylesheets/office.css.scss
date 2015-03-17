@@ -16,6 +16,10 @@ body#office {
   padding: 0;
   font-size: 15px;
 
+  .tutor-name {
+    text-align: right;
+  }
+
   tr.grade {
     border-top: 1px solid #DDD;
   }
@@ -93,6 +97,7 @@ body#office {
   .other-tutor {
     color: #AAA;
     margin-top: 5px;
+    font-size: 0.95em;
   }
   .select2-container {
     width: 100%;

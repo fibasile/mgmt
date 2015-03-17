@@ -5,8 +5,8 @@ class Office::CoursesController < Office::OfficeController
   end
 
   def show
-    @course = Course.includes(:programs, course_students: :user, course_tutors: :user).order('users.first_name').find(params[:id])
-    @tutors = @course.course_tutors
+    @course = Course.includes(:programs, course_students: :user, course_tutors: :user).order('programs.name').order('users.first_name asc').find(params[:id])
+    @tutors = @course.course_tutors.includes(:user).order('users.first_name asc')
     @students = @course.course_students
     authorize @course
   end

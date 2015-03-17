@@ -2,4 +2,5 @@
   fieldset
     .select2 = f.association :user, disabled: !@course_tutor.new_record?, collection: @users
     = f.input :role, as: :string
+    = f.input :can_grade
   = f.submit

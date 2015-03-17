@@ -22,7 +22,7 @@ class CoursePolicy < AdminPolicy
   # end
 
   def can_grade?
-    CourseTutor.exists?(user: user, course: record)
+    record.being_graded? and CourseTutor.exists?(user: user, course: record)
   end
 
 end

@@ -19,11 +19,17 @@ h2
     - if policy(@course).update?
       = link_to "Add a Tutor", new_office_course_course_tutor_path(@course)
   table
+    thead
+      tr
+        th Name
+        th Role
+        th Can grade?
     - @tutors.each do |tutor|
       tr
         td
           = link_to tutor, [:office, tutor.user]
         td.fade= tutor.role
+        td.fade = fa_icon('check') if tutor.can_grade?
         - if policy(@course).update?
           td.right = link_to fa_icon('pencil'), edit_office_course_course_tutor_path(@course, tutor)
 

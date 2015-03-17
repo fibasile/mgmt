@@ -6,8 +6,8 @@
     thead
       tr
         th(width=30)
-        th.sort(data-sort="grade-name", width="200") Student
-        th.sort(data-sort="grade-group", width="100") Group
+        th.sort(data-sort="grade-name", width="250") Student
+        th.sort(data-sort="grade-group", width="110") Group
         th.sort(data-sort="grade-grade", width="100") Grade
         th.sort(data-sort="grade-comments") Comments for the student
 
@@ -21,15 +21,18 @@
           td
             = link_to student, [:office, student], class: 'grade-name'
             - other_tutors.each do |grade|
-              .other-tutor= grade.grader
+              .other-tutor.tutor-name= grade.grader
           td
-            = best_in_place grade, :group, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-group', id: "group-#{i}"
+            - if policy(@course).can_grade?
+              = best_in_place grade, :group, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-group', id: "group-#{i}", place_holder: '_'
           td
-            = best_in_place grade, :value, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-grade', id: "grade-#{i}", display_as: :to_s
+            - if policy(@course).can_grade?
+              = best_in_place grade, :value, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-grade', id: "grade-#{i}", display_as: :to_s, place_holder: '_'
             - other_tutors.each do |grade|
               .other-tutor= Grade.formatted_value(grade.value)
           td
-            = best_in_place grade, :public_notes, url: office_course_grades_path(@course, {gradee_id: student.id}), html_attrs: {placeholder: 'These notes will be VISIBLE TO THE STUDENT'}, as: 'textarea', class: 'grade-comments', id: "notes-#{i}"
+            - if policy(@course).can_grade?
+              = best_in_place grade, :public_notes, url: office_course_grades_path(@course, {gradee_id: student.id}), html_attrs: {placeholder: 'These notes will be VISIBLE TO THE STUDENT'}, as: 'textarea', class: 'grade-comments', id: "notes-#{i}", place_holder: '_'
             - other_tutors.each do |grade|
               .other-tutor= grade.public_notes
 
