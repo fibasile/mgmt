@@ -1,2 +1,2 @@
-git://github.com/rafaelp/heroku-buildpack-wkhtmltopdf#master
+git://github.com/bitsushi/heroku-buildpack-wkhtmltopdf#master
 git://github.com/heroku/heroku-buildpack-ruby.git#master
