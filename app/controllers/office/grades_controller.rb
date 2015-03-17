@@ -5,6 +5,8 @@ class Office::GradesController < Office::OfficeController
   respond_to :html, :js, :json
 
   def index
+    authorize @course, :can_view_grades?
+
     @students = User.joins(:course_students)
       .where('course_students.course_id = ?', @course.id)
       .order('first_name')

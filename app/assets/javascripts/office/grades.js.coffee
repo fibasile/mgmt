@@ -13,6 +13,7 @@ jQuery ->
   $(".best_in_place").best_in_place();
   $('.best_in_place').bind "ajax:success", ->
     window.gradeList = new List('grades', { valueNames: [ 'grade-name', 'grade-grade','grade-group','grade-comments' ] })
-    # setTimeout ->
-    #   window.gradeList = new List('grades', { valueNames: [ 'grade-name', 'grade-grade','grade-group','grade-comments' ] })
-    # , 200
+    window.gradeList.update()
+  #   # setTimeout ->
+  #   #   window.gradeList = new List('grades', { valueNames: [ 'grade-name', 'grade-grade','grade-group','grade-comments' ] })
+  #   # , 200
