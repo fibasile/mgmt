@@ -16,6 +16,7 @@
 //= require nprogress
 //= require nprogress-turbolinks
 //= require list
+//= require tinysort.js
 //= require best_in_place
 //= require jquery.peity.js
 //= require list.pagination

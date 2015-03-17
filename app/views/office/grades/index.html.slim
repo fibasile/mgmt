@@ -2,7 +2,7 @@
 
 #grades
 
-  table
+  table#xtable
     thead
       tr
         th(width=30)
@@ -19,7 +19,7 @@
         tr.grade
           td= image_tag "#{student.photo_url}/convert?w=40&h=40&fit=crop", width: 40, height: 40
           td
-            = link_to student, [:office, student], class: 'grade-name'
+            = link_to student, [:office, student], class: 'grade-name', target: '_blank'
             - other_tutors.each do |grade|
               .other-tutor.tutor-name= grade.grader
           td
