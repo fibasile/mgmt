@@ -1,4 +1,4 @@
-= crumbs link_to("Courses", office_courses_path), link_to(@course, [:office, @course]), 'Grades'
+= crumbs link_to("Courses", submit_office_course_grades_path(@course)), link_to(@course, [:office, @course]), 'Grades'
 
 #grades
 
@@ -6,10 +6,11 @@
     thead
       tr
         th(width=30)
-        th.sort(data-sort="grade-name", width="250") Student
-        th.sort(data-sort="grade-group", width="110") Group
-        th.sort(data-sort="grade-grade", width="100") Grade
-        th.sort(data-sort="grade-comments") Comments for the student
+        th.sort(width="250") Student
+        th.sort(width="110") Group
+        th.sort.right(width="60") Grade
+        th.sort(width="110") Grader
+        th.sort Comments for the student
 
     tbody.list
       - @students.each_with_index do |student, i|
@@ -24,15 +25,19 @@
               .other-tutor.tutor-name= grade.grader
           td
             - if @grading
-              = best_in_place grade, :group, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-group', id: "group-#{i}", place_holder: '_'
-          td
+              = best_in_place grade, :group, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-group', id: "group-#{i}", place_holder: '-'
+          td.right
             - if @grading
-              = best_in_place grade, :value, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-grade', id: "grade-#{i}", display_as: :to_s, place_holder: '_'
+              = best_in_place grade, :value, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-grade', id: "grade-#{i}", display_as: :to_s, place_holder: '-', ok_button: 'save', cancel_button: 'cancel'
             - other_tutors.each do |grade|
               .other-tutor= Grade.formatted_value(grade.value)
           td
+            = grade.try(:grader)
+          td
             - if @grading
-              = best_in_place grade, :public_notes, url: office_course_grades_path(@course, {gradee_id: student.id}), html_attrs: {placeholder: 'These notes will be VISIBLE TO THE STUDENT'}, as: 'textarea', class: 'grade-comments', id: "notes-#{i}", place_holder: '_'
+              = best_in_place grade, :public_notes, url: office_course_grades_path(@course, {gradee_id: student.id}), html_attrs: {placeholder: 'These notes will be VISIBLE TO THE STUDENT'}, as: 'textarea', class: 'grade-comments', id: "notes-#{i}", place_holder: '-'
             - other_tutors.each do |grade|
               .other-tutor= grade.public_notes
 
+
+/ = button_to "Submit these Grades", submit_office_course_grades_path(@course), 'data-confirm': "Are you sure that you have finished grading these students?"

@@ -21,6 +21,14 @@ class Office::GradesController < Office::OfficeController
     @grading = policy(@course).can_grade?
   end
 
+  def submit
+    authorize @course, :can_grade?
+    tutor = @course.course_tutors.find_by(user_id: current_user.id)
+    tutor.update_attribute(:grades_submitted_at, Time.now)
+    flash.now.alert = "Grades submitted. Thank you"
+    redirect_to office_root_path
+  end
+
   def show
     @grade = Grade.find(params[:id])
     authorize @grade

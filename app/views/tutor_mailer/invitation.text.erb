@@ -1,0 +1,11 @@
+Dear <%= @user.first_name %>,
+
+You can now add the grades for your students in our new system.
+
+Please go to the following url -
+
+<%= invite_url(invitation_code: @user.invitation_code) %>
+
+After you check your details, and create a password, you will be able to edit your grades.
+
+Thank you.

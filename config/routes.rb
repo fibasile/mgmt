@@ -22,7 +22,11 @@ Rails.application.routes.draw do
     end
     resources :courses do
       put 'grades' => 'grades#create', on: :member
-      resources :grades
+      resources :grades do
+        collection do
+          post 'submit'
+        end
+      end
       resources :course_tutors, path: 'tutors'
       resources :course_students, path: 'students'
     end

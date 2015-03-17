@@ -4,7 +4,7 @@ h2 Log in
 = form_tag sessions_path do |f|
   .field
     = label_tag :email
-    = email_field_tag :email, params[:email], autofocus: params[:email].blank?, placeholder: 'myname@iaac.net'
+    = email_field_tag :email, params[:email], autofocus: params[:email].blank?, placeholder: 'me@iaac.net'
   .field
     = label_tag :password
     = password_field_tag :password, nil, autocomplete: "off"

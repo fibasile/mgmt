@@ -29,5 +29,6 @@ jQuery(document).on('best_in_place:error', function (event, request, error) {
   jQuery.each(jQuery.parseJSON(request.responseText), function (index, value) {
     if (typeof value === "object") {value = index + " " + value.toString(); }
     alert(value);
+    location.reload();
   });
 });

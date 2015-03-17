@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user.update_attributes user_params
     if @user.save
       @user.update_attribute :invitation_code, nil
-      redirect_to root_path, notice: 'Details updated successfully'
+      redirect_to office_root_path, notice: 'Details updated successfully'
     else
       render @user.invitation_code.blank? ? :edit : :invite
     end

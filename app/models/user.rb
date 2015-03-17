@@ -103,6 +103,14 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
     StudentMailer.invitation(id).deliver_now
   end
 
+  def tutor_invite
+    self.sign_in_count = 0
+    self.last_sign_in_at = nil
+    generate_token(:invitation_code)
+    save(validate: false)
+    TutorMailer.invitation(id).deliver_now
+  end
+
   def admin?
     clearance == 5
   end

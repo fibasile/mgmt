@@ -8,17 +8,17 @@
     = f.input :last_name
   fieldset
     legend Login Information
-    = f.input :email, label: '@iaac.net Email Address'
+    = f.input :email, label: 'Email Address'
 
     = f.input :password
     = f.input :password_confirmation
-  fieldset
-    legend Extra Information
-    = f.input :country_code, label: 'Country'
-    / = f.input :description, placeholder: 'A brief description about yourself...'
-    = f.input :dob, label: 'Date of Birth', as: :date, start_year: 2000, end_year: 1940, include_blank: true, order: [:day, :month, :year]
-    .radio-buttons
-      = f.input :gender, as: :select, collection: [['Female', 'F'], ['Male', 'M']]
+  / fieldset
+  /   legend Extra Information
+  /   = f.input :country_code, label: 'Country'
+  /   / = f.input :description, placeholder: 'A brief description about yourself...'
+  /   = f.input :dob, label: 'Date of Birth', as: :date, start_year: 2000, end_year: 1940, include_blank: true, order: [:day, :month, :year]
+  /   .radio-buttons
+  /     = f.input :gender, as: :select, collection: [['Female', 'F'], ['Male', 'M']]
   / fieldset
   /   legend Photo
   /   = image_tag @user.photo, id: 'photo-preview', style: 'max-height: 100px'

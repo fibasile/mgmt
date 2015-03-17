@@ -23,7 +23,7 @@ class Grade < ActiveRecord::Base
   end
 
   def to_s
-    Grade.formatted_value value
+    Grade.formatted_value(value)
   end
 
   def self.formatted_value val=nil
