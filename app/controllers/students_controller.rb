@@ -4,8 +4,12 @@ class StudentsController < ApplicationController
   http_basic_authenticate_with name: "office", password: "fablab+house", except: :report_card
 
   def report_card
-    @courses = current_user.courses_with_grades
-    @warning = @courses.detect{|c| (c.grade || 0).between?(4,4.999) }
+    if current_user.courses_taught.any?
+      redirect_to office_root_url
+    else
+      @courses = current_user.courses_with_grades
+      @warning = @courses.detect{|c| (c.grade || 0).between?(4,4.999) }
+    end
   end
 
   def index

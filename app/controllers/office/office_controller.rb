@@ -13,7 +13,11 @@ class Office::OfficeController < ApplicationController
 private
 
   def authenticate_admin!
-    if current_user.nil? or (!current_user.admin? and !current_user.courses_taught.any?)
+    if current_user
+      unless current_user.admin? and current_user.courses_taught.any?
+        redirect_to root_url
+      end
+    else
       redirect_to login_url, alert: "Please sign in"
     end
   end

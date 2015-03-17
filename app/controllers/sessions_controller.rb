@@ -11,11 +11,10 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       user.update_attributes(sign_in_count: user.sign_in_count + 1, last_sign_in_at: Time.now)
-      # if User.joins(:course_tutors).where.not(email: 'john@iaac.net').exists?
-      if ['maria.kuptsova@iaac.net', 'john@iaac.net', 'alex@iaac.net'].include? user.email
-        return redirect_to office_root_url
+      if user.courses_taught.any? or user.admin?
+        redirect_to office_root_url
       else
-        return redirect_to root_url#, notice: "Logged in!"
+        redirect_to root_url
       end
     else
       flash.now.alert = "Invalid email or password"
