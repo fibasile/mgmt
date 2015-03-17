@@ -12,7 +12,7 @@ class CoursePolicy < AdminPolicy
       if user.admin?
         scope.all
       else
-        scope.joins(:course_tutors).where('course_tutors.user_id = ?', user.id)
+        scope.with_being_graded_state.joins(:course_tutors).where('course_tutors.user_id = ?', user.id)
       end
     end
   end

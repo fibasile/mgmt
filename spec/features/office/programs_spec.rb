@@ -21,7 +21,7 @@ feature Program do
   it "can add program" do
     login admin
     visit office_programs_path
-    click_link("Create a new Program")
+    click_link("Add a new Program")
     fill_in "Name", with: "New Name"
     click_button "Create Program"
     expect(page).to have_title("New Name")
