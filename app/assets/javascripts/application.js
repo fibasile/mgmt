@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-
 //= require nprogress
 //= require nprogress-turbolinks
 //= require list
@@ -25,10 +24,9 @@
 
 jQuery(document).on('best_in_place:error', function (event, request, error) {
   'use strict';
-  // Display all error messages from server side validation
   jQuery.each(jQuery.parseJSON(request.responseText), function (index, value) {
     if (typeof value === "object") {value = index + " " + value.toString(); }
     alert(value);
-    location.reload();
+    if (value.indexOf("has already graded") > -1) { location.reload(); }
   });
 });
