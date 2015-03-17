@@ -33,7 +33,7 @@ RSpec.describe Grade, :type => :model do
   it "has self.formatted_value" do
     expect(Grade.formatted_value(9.5244)).to eq("9.52")
     expect(Grade.formatted_value(8)).to eq("8.00")
-    expect(Grade.formatted_value(nil)).to eq("-")
+    expect(Grade.formatted_value(nil)).to eq("")
   end
 
 end

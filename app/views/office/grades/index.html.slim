@@ -1,4 +1,4 @@
-= crumbs link_to("Courses", submit_office_course_grades_path(@course)), link_to(@course, [:office, @course]), 'Grades'
+= crumbs link_to("Courses", office_courses_path), link_to(@course, [:office, @course]), 'Grades'
 
 .info-panel(style="background: #397AF2; color: #FFF; padding: 10px; font-weight: bold;")
   p If you <u>edit anything</u> on this page, you will become responsible for the final grade of that student.
@@ -19,37 +19,32 @@
     tbody.list
       - @students.each_with_index do |student, i|
         - grades = @grades.to_a.select{ |g| g.gradee_id == student.id }.uniq(&:grader_id)
-        - grade = grades[0] || Grade.new(course: @course)
-        / grades.find{ |a| a.grader_id == current_user.id }
+        - grade = grades.find{ |a| a.value and a.value > 0 } || Grade.new(course: @course)
         - other_tutors = (grades-[grade])
         tr.grade
           td= image_tag "#{student.photo_url}/convert?w=40&h=40&fit=crop", width: 40, height: 40
+
           td
             = link_to student, [:office, student], class: 'grade-name', target: '_blank'
-            - other_tutors.each do |grade|
-              .other-tutor.tutor-name= grade.grader
           td
             - if policy(grade).update?
               = best_in_place grade, :group, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-group', id: "group-#{i}", place_holder: '-'
             - else
               = grade.group
+
           td.right
             - if policy(grade).update?
               = best_in_place grade, :value, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-grade', id: "grade-#{i}", display_as: :to_s, place_holder: '-'
-              / , ok_button: 'save', cancel_button: 'cancel'
             - else
               = grade.to_s
-            - other_tutors.each do |grade|
-              .other-tutor= Grade.formatted_value(grade.value)
-          td.fade.grader
-            = you?(grade.try(:grader), current_user)
+
+          td.fade.grader= you?(grade.try(:grader), current_user)
+
           td
             - if policy(grade).update?
               = best_in_place grade, :public_notes, url: office_course_grades_path(@course, {gradee_id: student.id}), html_attrs: {placeholder: 'These notes will be VISIBLE TO THE STUDENT'}, as: 'textarea', class: 'grade-comments', id: "notes-#{i}", place_holder: '-'
             - else
               = grade.public_notes
-            / - other_tutors.each do |grade|
-            /   .other-tutor= grade.public_notes
 
 
 / = button_to "Submit these Grades", submit_office_course_grades_path(@course), 'data-confirm': "Are you sure that you have finished grading these students?"

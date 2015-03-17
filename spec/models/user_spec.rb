@@ -51,7 +51,9 @@ RSpec.describe User, :type => :model do
     b = create(:course)
 
     user.courses_studied << a
-    grade = create(:grade, value: 5, public_notes: 'hello', gradee: user, course: a)
+    grade = create(:grade, value: 5, public_notes: 'hello', gradee: user, course: a, created_at: 1.year.ago)
+
+    create(:grade, value: 4, public_notes: 'hello', gradee: user, course: b)
 
     course = user.courses_with_grades.first
     expect(user.courses_with_grades.size).to eq(1)
