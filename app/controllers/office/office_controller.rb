@@ -14,7 +14,7 @@ private
 
   def authenticate_admin!
     if current_user
-      unless current_user.admin? and current_user.courses_taught.any?
+      unless current_user.admin? or current_user.courses_taught.any?
         redirect_to root_url
       end
     else
