@@ -17,6 +17,8 @@ class Office::GradesController < Office::OfficeController
       .includes(:grader)
       .order('users.first_name')
       .order('grades.id DESC')
+
+    @grading = policy(@course).can_grade?
   end
 
   def show

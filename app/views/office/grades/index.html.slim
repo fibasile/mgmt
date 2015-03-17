@@ -23,15 +23,15 @@
             - other_tutors.each do |grade|
               .other-tutor.tutor-name= grade.grader
           td
-            - if policy(@course).can_grade?
+            - if @grading
               = best_in_place grade, :group, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-group', id: "group-#{i}", place_holder: '_'
           td
-            - if policy(@course).can_grade?
+            - if @grading
               = best_in_place grade, :value, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-grade', id: "grade-#{i}", display_as: :to_s, place_holder: '_'
             - other_tutors.each do |grade|
               .other-tutor= Grade.formatted_value(grade.value)
           td
-            - if policy(@course).can_grade?
+            - if @grading
               = best_in_place grade, :public_notes, url: office_course_grades_path(@course, {gradee_id: student.id}), html_attrs: {placeholder: 'These notes will be VISIBLE TO THE STUDENT'}, as: 'textarea', class: 'grade-comments', id: "notes-#{i}", place_holder: '_'
             - other_tutors.each do |grade|
               .other-tutor= grade.public_notes
