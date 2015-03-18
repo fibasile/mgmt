@@ -20,14 +20,8 @@ table#xtable
       td.fade.starts = course.starts_on.stamp("Jan 99") if course.starts_on
       td.bold = link_to course, [:office, course]
       td.fade = course.tutors.map{|t| link_to(t.unique_name, [:office, t]) }.join(', ').html_safe
-      td.fade = course.programs.map{|p| link_to_if(policy(p).show?, p, [:office, p]) }.join(', ').html_safe
+      td.fade = course.programs.map{|p| link_to(p, [:office, p]) }.join(', ').html_safe
       td.num.fade
-        - if submitted = course.course_tutors.find_by(user: current_user).try(:grades_submitted_at)
-          span Submitted
-        - else
-          / = course.workflow_state
-          = link_to office_course_grades_path(course)
-            = course.grading_status[0]
-            span.pie = course.grading_status[1]
-
-/ = render 'courses_tree', courses: Course.arrange
+        = link_to office_course_grades_path(course)
+          = course.grading_status[0]
+          span.pie = course.grading_status[1]

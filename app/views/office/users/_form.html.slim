@@ -1,0 +1,11 @@
+= simple_form_for [:office, @user] do |f|
+  = render 'application/error_messages', object: f.object
+  fieldset
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :email
+    = f.input :gender, collection: [['Female', 'F'],['Male', 'M']], as: :radio_buttons
+    .select2= f.input :country_code, label: 'Country'
+    - if @user.new_record?
+      = f.input :password
+  = f.submit

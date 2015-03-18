@@ -1,13 +1,2 @@
 = crumbs link_to("People", office_users_path), link_to(@user, [:office, @user]), "Edit User"
-= simple_form_for [:office, @user] do |f|
-  = render 'application/error_messages', object: f.object
-  fieldset
-    = f.input :first_name
-    = f.input :last_name
-    = f.input :email
-    = f.input :gender, collection: [['Female', 'F'],['Male', 'M']], as: :radio_buttons
-    .select2= f.input :country_code, label: 'Country'
-    / = f.input :password
-  fieldset
-    .select2= f.association :programs, label: "Programs that #{@user.first_name} is enrolled in (as a STUDENT)"
-  = f.submit 'Update Details'
+= render "form"

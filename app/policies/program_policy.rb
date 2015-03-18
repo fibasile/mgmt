@@ -17,6 +17,10 @@ class ProgramPolicy < AdminPolicy
     end
   end
 
+  def show?
+    user
+  end
+
   def create?
     user.admin?
   end

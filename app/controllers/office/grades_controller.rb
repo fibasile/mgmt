@@ -5,7 +5,9 @@ class Office::GradesController < Office::OfficeController
   respond_to :html, :js, :json
 
   def index
-    authorize @course, :can_view_grades?
+    grade = @course.grades.build
+
+    authorize grade, :show?
 
     @students = User.joins(:course_students)
       .where('course_students.course_id = ?', @course.id)
@@ -18,15 +20,7 @@ class Office::GradesController < Office::OfficeController
       .order('users.first_name')
       .order('grades.id DESC')
 
-    @grading = policy(@course).can_grade?
-  end
-
-  def submit
-    authorize @course, :can_grade?
-    tutor = @course.course_tutors.find_by(user_id: current_user.id)
-    tutor.update_attribute(:grades_submitted_at, Time.now)
-    flash.now.alert = "Grades submitted. Thank you"
-    redirect_to office_root_path
+    @grading = policy(grade).create?
   end
 
   def show
@@ -43,21 +37,19 @@ class Office::GradesController < Office::OfficeController
     course = Course.find(params[:id])
     gradee = User.find(params[:gradee_id])
 
-    @grade = Grade.find_or_initialize_by(course: course, gradee: gradee)
+    if grade_params[:group]
+      @grade = Grade.find_or_initialize_by(course: course, gradee: gradee, grader: current_user)
+    else
+      @grade = Grade.find_or_initialize_by(course: course, gradee: gradee)
+      @grade.grader = current_user
+    end
+
     @grade.attributes = @grade.attributes.merge(grade_params)
-    @grade.grader = current_user
 
-    # @grade = old_grade.assign_attributes(old_grade.attributes.merge(grade_params))
     authorize @grade
-
-    # @grade.grader = current_user
-
     respond_to do |format|
-      if @grade.save
-        format.json { return respond_with_bip(@grade) }
-      else
-        format.json { return respond_with_bip(@grade) }
-      end
+      @grade.save
+      format.json { return respond_with_bip(@grade) }
     end
   end
 

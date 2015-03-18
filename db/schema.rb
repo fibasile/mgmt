@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317102231) do
+ActiveRecord::Schema.define(version: 20150318000104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,12 +44,14 @@ ActiveRecord::Schema.define(version: 20150317102231) do
     t.string   "subtitle"
     t.text     "description"
     t.integer  "credits"
-    t.boolean  "published",      default: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.boolean  "published",              default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "ancestry"
     t.string   "workflow_state"
     t.date     "starts_on"
+    t.integer  "students_counter_cache", default: 0,     null: false
+    t.integer  "grades_counter_cache",   default: 0,     null: false
   end
 
   add_index "courses", ["ancestry"], name: "index_courses_on_ancestry", using: :btree

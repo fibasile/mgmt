@@ -43,12 +43,14 @@ table
   table
     thead
       tr
+        th Starts
         th Course
         th Role
         th.num Grading Status
     tbody
       - @user.course_tutors.each do |tutor|
         tr
+          td.fade.starts = tutor.course.starts_on.stamp("Jan 99") if tutor.course.starts_on
           td = link_to_if policy(tutor.course).show?, tutor.course, [:office, tutor.course]
           td.fade = tutor.role
           td.num.fade
@@ -68,15 +70,18 @@ table
     table
       thead
         tr
+          th Starts
           th Course
-          / th.num Weighting
+          th.num Credits/Weighting
           th.num Grade
-      - @user.courses_studied.each do |course|
+      - @user.courses_studied.includes(:grades).each do |course|
         tr
+          td.fade.starts = course.starts_on.stamp("Jan 99") if course.starts_on
           td= link_to_if policy(course).show?, course, [:office, course]
-          / td.num= course.credits
+          td.fade.num= course.credits
           td.num
-            - if policy(course).show?
-              = Grade.formatted_value(@grades.find{|g| g.course_id == course.id }.try(:value))
-            - else
-              | -
+            - course.grades.where(gradee: @user).each do |g|
+              - if policy(g).show?
+                p = g
+            / - if policy(@user).update?
+            /   = Grade.formatted_value(@grades.find{|g| g.course_id == course.id }.try(:value))

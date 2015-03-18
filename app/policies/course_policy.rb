@@ -17,12 +17,16 @@ class CoursePolicy < AdminPolicy
     end
   end
 
-  def can_grade?
-    record.being_graded? and CourseTutor.exists?(user: user, course: record)
+  def show?
+    user
   end
 
-  def can_view_grades?
-    user.admin? or CourseTutor.exists?(user: user, course: record)
-  end
+  # def can_grade?
+  #   record.being_graded? and CourseTutor.exists?(user: user, course: record)
+  # end
+
+  # def can_view_grades?
+  #   user.admin? or CourseTutor.exists?(user: user, course: record)
+  # end
 
 end

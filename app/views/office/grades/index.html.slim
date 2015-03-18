@@ -6,6 +6,8 @@
 
 #grades
 
+  / = select_tag :users, options_for_select(@course.tutors.map{|c| [c.name, c.id]}, selected: current_user.id)
+
   table#xtable
     thead
       tr
@@ -20,17 +22,19 @@
       - @students.each_with_index do |student, i|
         - grades = @grades.to_a.select{ |g| g.gradee_id == student.id }.uniq(&:grader_id)
         - grade = grades.find{ |a| a.value and a.value > 0 } || Grade.new(course: @course)
+        - my_grade = grades.find{ |a| a.grader_id == current_user.id } || Grade.new(course: @course)
         - other_tutors = (grades-[grade])
+
         tr.grade
           td= image_tag "#{student.photo_url}/convert?w=40&h=40&fit=crop", width: 40, height: 40
 
-          td
-            = link_to student, [:office, student], class: 'grade-name', target: '_blank'
+          td= link_to student, [:office, student], class: 'grade-name', target: '_blank'
+
           td
             - if policy(grade).update?
               = best_in_place grade, :group, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-group', id: "group-#{i}", place_holder: '-'
-            - else
-              = grade.group
+            - elsif policy(@course.grades.build).create?
+              = best_in_place my_grade, :group, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-group', id: "group-#{i}", place_holder: '-'
 
           td.right
             - if policy(grade).update?

@@ -17,6 +17,12 @@ class Grade < ActiveRecord::Base
   belongs_to :grader, class_name: "User"
   belongs_to :gradee, class_name: "User"
 
+  counter_culture :course,
+    column_name: Proc.new {|model| model.value.present? and (model.value > 0 and model.value <= 10) ? 'grades_counter_cache' : nil },
+    column_names: {
+      ["grades.value > ?", 0] => 'grades_counter_cache'
+    }
+
   validates_presence_of :course, :gradee
   validates_numericality_of :value, greater_than: 0, less_than_or_equal_to: 10, allow_nil: true
   # validates_uniqueness_of :gradee, scope: [:course, :grader]

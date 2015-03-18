@@ -34,7 +34,7 @@ class Course < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   has_many :course_tutors, dependent: :destroy
-  has_many :course_students, dependent: :destroy
+  has_many :course_students#, dependent: :destroy
 
   has_many :program_courses
   has_many :programs, through: :program_courses
@@ -49,8 +49,8 @@ class Course < ActiveRecord::Base
 
   def grading_status
     a = []
-    if grades_remaining == (s = students.count)
-      if s > 0
+    if grades_counter_cache == students_counter_cache
+      if students_counter_cache > 0
         a << "Complete"
       else
         a << "No Students"
@@ -59,7 +59,7 @@ class Course < ActiveRecord::Base
       # "#{grades_remaining} need finishing"
       a << "Incomplete"
     end
-    a << "#{grades_remaining}/#{students.count}"
+    a << "#{grades_counter_cache}/#{students_counter_cache}"
     return a
   end
 
@@ -68,8 +68,9 @@ class Course < ActiveRecord::Base
   end
 
   def grades_remaining
+    grades_counter_cache
     # students.count -
-    (Grade.where('course_id = ? AND value > 0 AND value <= 10 AND value IS NOT NULL', id).pluck(:gradee_id).uniq.count)
+    # (Grade.where('course_id = ? AND value > 0 AND value <= 10 AND value IS NOT NULL', id).pluck(:gradee_id).uniq.count)
   end
 
 private

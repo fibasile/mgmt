@@ -11,7 +11,9 @@ jQuery ->
   # window.gradeList = new List('grades', valueNames: [ 'grade-name', 'grade-grade','grade-group','grade-comments' ])
 
   $('.best_in_place').bind "ajax:success", ->
-    $(this).parents('tr').find('td.grader').html('You')
+    td = $(this).parents('tr').find('td.grader:first')
+    console.log(td.text())
+    td.text('You') if td.text().trim().length == 0
 
   $(".best_in_place").best_in_place();
   # $('.best_in_place').bind "ajax:success", ->

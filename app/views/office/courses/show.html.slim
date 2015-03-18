@@ -1,9 +1,8 @@
 #main-links
-  - if policy(@course).can_grade?
+  - if policy(@course.grades.build).create?
     = link_to "Manage Grades", office_course_grades_path(@course)
-  - elsif policy(@course).update?
+  - elsif policy(@course.grades.build).show?
     = link_to "View Grades", office_course_grades_path(@course)
-
   - if policy(@course).update?
     = link_to "Edit Course", edit_office_course_path(@course)
 
@@ -18,21 +17,22 @@ h2
     | Tutors
     - if policy(@course).update?
       = link_to "Add a Tutor", new_office_course_course_tutor_path(@course)
-  table
+  table#xtable
     thead
       tr
         th Name
         th Role
         - if policy(@course).update?
           th Can grade?
-    - @tutors.each do |tutor|
-      tr
-        td
-          = link_to tutor, [:office, tutor.user]
-        td.fade= tutor.role
-        - if policy(@course).update?
-          td.fade = fa_icon('check') if tutor.can_grade?
-          td.right = link_to fa_icon('pencil'), edit_office_course_course_tutor_path(@course, tutor)
+    tbody
+      - @tutors.each do |tutor|
+        tr
+          td
+            = link_to tutor, [:office, tutor.user]
+          td.fade= tutor.role
+          - if policy(@course).update?
+            td.fade = fa_icon('check') if tutor.can_grade?
+            td.right = link_to fa_icon('pencil'), edit_office_course_course_tutor_path(@course, tutor)
 
 
 h3
