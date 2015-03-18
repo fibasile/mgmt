@@ -1,6 +1,6 @@
 ruby '2.2.0'
 source 'https://rubygems.org'
-
+gem 'rails', '4.2.0'
 gem 'email_validator'
 gem "select2-rails"
 gem 'counter_culture'
@@ -8,7 +8,8 @@ gem "font-awesome-rails"
 gem 'pg'
 gem 'workflow'
 gem 'best_in_place', github: 'bernat/best_in_place'
-gem 'rails', '4.2.0'
+
+gem "airbrake", github: 'airbrake/airbrake'
 gem 'nprogress-rails'
 gem 'autoprefixer-rails'
 gem 'bcrypt', '~> 3.1.7'
