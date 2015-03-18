@@ -1,0 +1,28 @@
+<p>Dear <%= @user.first_name %>,</p>
+
+<p>We kindly ask you to grade the students following your seminar/research studio by this <strong>Saturday, 21st of March</strong>.</p>
+
+<p>If there are several tutors in your group, please discuss and decide with them who will be responsible for submitting the final grades into the system. If <i>different tutors wish to grade different students</i> then we recommend that they do the process together, in person, if possible.</p>
+
+<p>To begin grading please take the following steps, as shown in this 2 minute tutorial video -</p>
+
+<p><a href="https://www.youtube.com/watch?v=PQ2ave7BlVo">https://www.youtube.com/watch?v=PQ2ave7BlVo</a></p>
+
+<p>1) Create your account and set a password at this URL -</p>
+
+<p><%= link_to invite_url(invitation_code: @user.invitation_code), invite_url(invitation_code: @user.invitation_code) %></p>
+
+<p>2) Select the course that you are grading</p>
+<p>3) Click the blue <i>Manage Grades</i> button</p>
+<p>4) Add grades</p>
+<p> - <i>Groups are optional</i>, they are to help you organise your students while grading them. The groups that you add will only be visible to you.</p>
+<p> - <i>The final grade is required</i>, but only one tutor can add it. If you add an incorrect grade you can edit it, or remove it (by selecting the value and deleting it). If another tutor has added a grade and you need to change it, please contact them and (a) ask them to edit it for you, or (b) ask them to remove it by selecting it and deleting it.</p>
+<p> - <i>Student comments are optional</i>, they will be accessible by the students and each tutor can write a separate comment.</p>
+
+<p>5) The course grading is completed once we have a final grade for every student.</p>
+
+<p>If you have any questions or problems, please contact us by replying to this email.</p>
+
+
+
+<p>Many thanks</p>
