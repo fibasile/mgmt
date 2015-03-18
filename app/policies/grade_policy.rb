@@ -18,16 +18,11 @@ class GradePolicy < AdminPolicy
   end
 
   def show?
-    user.admin? or CourseTutor.where(course_id: record.course_id, user: user).exists?
+    user.admin? or create?
   end
 
   def create?
-    CourseTutor.where(course_id: record.course_id, user: user).exists?
-    # if
-    #   true
-    # else
-    #   user.admin?
-    # end
+    CourseTutor.where(course_id: record.course_id, user: user, can_grade: true).exists?
   end
 
   def update?
