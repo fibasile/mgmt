@@ -12,7 +12,7 @@ h3
   | Syllabus
   - if policy(@program).update? and policy(Course.new).create?
     = link_to "Add a Course", new_office_program_program_course_path(@program)
-table
+table.responsive
   thead
     tr
       th Starts

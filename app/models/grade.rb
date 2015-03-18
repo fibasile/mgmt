@@ -1,8 +1,12 @@
 class MyValidator < ActiveModel::Validator
   def validate(record)
-    if record.grader_id_was and record.grader_id != record.grader_id_was
-      old_grader = User.find(record.grader_id_was)
-      record.errors[:base] = "#{old_grader} has already graded this student"
+    if record.value.present?
+      if record.value_was.present? and record.grader_id_changed?
+        old_grader = User.find(record.grader_id_was)
+        record.errors[:base] = "#{old_grader} has already graded this student (1)"
+      elsif grade = Grade.where.not(value: nil, grader: record.grader).find_by(course: record.course, gradee: record.gradee)
+        record.errors[:base] = "#{grade.grader} has already graded this student (2)"
+      end
     end
   end
 end
@@ -25,7 +29,7 @@ class Grade < ActiveRecord::Base
 
   validates_presence_of :course, :gradee
   validates_numericality_of :value, greater_than: 0, less_than_or_equal_to: 10, allow_nil: true
-  # validates_uniqueness_of :gradee, scope: [:course, :grader]
+  validates_uniqueness_of :gradee, scope: [:course, :grader]
 
   def formatted_grade
     Grade.formatted_value(self.value)

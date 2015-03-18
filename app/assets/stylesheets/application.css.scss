@@ -29,6 +29,21 @@ html {
   min-height: 100%;
 }
 
+  @media screen and (max-width: 640px) {
+
+      table.responsive thead {
+        display: none;
+      }
+      table.responsive th, table.responsive td {
+        display: block;
+        width: 100% !important;
+      }
+      table.responsive th a {
+        font-weight: bold;
+      }
+
+  }
+
 body {
   height: 100%;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;

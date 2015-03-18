@@ -37,16 +37,19 @@ class Office::GradesController < Office::OfficeController
     course = Course.find(params[:id])
     gradee = User.find(params[:gradee_id])
 
-    if grade_params[:group]
-      @grade = Grade.find_or_initialize_by(course: course, gradee: gradee, grader: current_user)
-    else
-      @grade = Grade.find_or_initialize_by(course: course, gradee: gradee)
-      @grade.grader = current_user
-    end
+    @grade = Grade.find_or_initialize_by(course: course, gradee: gradee, grader: current_user)
+    # if grade_params[:value]
+    #   @grade = Grade.find_or_initialize_by(course: course, gradee: gradee)
+    #   # where.not(value: nil)
+    # else
+    #   @grade = Grade.find_or_initialize_by(course: course, gradee: gradee, grader: current_user)
+    # end
 
+    # @grade.grader = current_user
     @grade.attributes = @grade.attributes.merge(grade_params)
 
-    authorize @grade
+    authorize @grade, :update?
+
     respond_to do |format|
       @grade.save
       format.json { return respond_with_bip(@grade) }

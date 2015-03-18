@@ -22,6 +22,11 @@
 //= require select2
 //= require_tree .
 
+jQuery(document).on('best_in_place:success', function (event, request, error) {
+  'use strict';
+  if (request == '{"display_as":""}') { location.reload(); }
+});
+
 jQuery(document).on('best_in_place:error', function (event, request, error) {
   'use strict';
   jQuery.each(jQuery.parseJSON(request.responseText), function (index, value) {

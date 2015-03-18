@@ -50,7 +50,7 @@ input {
   color: #444;
 }
 
-input[type=submit] {
+input[type=submit], input[type=button] {
   text-transform: uppercase;
   font-size: 16px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -64,7 +64,10 @@ input[type=submit] {
   white-space: normal;
   transition: 0.2s background;
   &:hover {
-    background: darken(#66CC99, 20%); 
+    background: darken(#66CC99, 20%);
+  }
+  &.cancel {
+    background: #888;
   }
 }
 

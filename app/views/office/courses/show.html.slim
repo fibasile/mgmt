@@ -17,7 +17,7 @@ h2
     | Tutors
     - if policy(@course).update?
       = link_to "Add a Tutor", new_office_course_course_tutor_path(@course)
-  table#xtable
+  table.responsive#xtable
     thead
       tr
         th Name
@@ -39,7 +39,7 @@ h3
   | Programs that include this course
   / - if policy(@course).update?
   /   = link_to "Add to a Program", '#'
-table
+table.responsive
   - @course.programs.each do |program|
     tr
       td= link_to program, [:office, program]

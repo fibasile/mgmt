@@ -43,19 +43,6 @@ table {
     padding: 10px 10px;
   }
 
-  @media screen and (max-width: 640px) {
-    thead {
-      display: none;
-    }
-    th, td {
-      display: block;
-      width: 100% !important;
-    }
-    th a {
-      font-weight: bold;
-    }
-  }
-
   p {
     margin: 0.5em 0;
     // font-style: italic;
