@@ -99,6 +99,7 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
   def invite
     self.sign_in_count = 0
     self.last_sign_in_at = nil
+    self.invited_at = Time.now
     generate_token(:invitation_code)
     save(validate: false)
     StudentMailer.invitation(id).deliver_now
@@ -107,6 +108,7 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
   def tutor_invite
     self.sign_in_count = 0
     self.last_sign_in_at = nil
+    self.invited_at = Time.now
     generate_token(:invitation_code)
     save(validate: false)
     TutorMailer.invitation(id).deliver_now
