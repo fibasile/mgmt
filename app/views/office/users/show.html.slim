@@ -31,8 +31,6 @@ table
             td Last Login
             - if @user.last_sign_in_at
               td #{time_ago_in_words(@user.last_sign_in_at)} ago, #{@user.last_sign_in_at.to_s(:short)}
-            - else
-              td -
           tr.fade
             td Joined
             td = @user.created_at.to_s(:short)
@@ -51,15 +49,12 @@ table
       - @user.course_tutors.each do |tutor|
         tr
           td.fade.starts = tutor.course.starts_on.stamp("Jan 99") if tutor.course.starts_on
-          td = link_to_if policy(tutor.course).show?, tutor.course, [:office, tutor.course]
+          td = link_to tutor.course, [:office, tutor.course]
           td.fade = tutor.role
           td.num.fade
-            - if policy(tutor.course).show?
-              = link_to office_course_grades_path(tutor.course) do
-                = tutor.course.grading_status[0]
-                span.pie = tutor.course.grading_status[1]
-            - else
-              |-
+            = link_to office_course_grades_path(tutor.course) do
+              = tutor.course.grading_status[0]
+              span.pie = tutor.course.grading_status[1]
 
 
 - if @user.is_studying?
@@ -74,14 +69,14 @@ table
           th Course
           th.num Credits/Weighting
           th.num Grade
-      - @user.courses_studied.includes(:grades).each do |course|
+      - @user.courses_studied.includes(:grades).where('grades.gradee_id': @user.id).order(:starts_on, :name).each do |course|
         tr
           td.fade.starts = course.starts_on.stamp("Jan 99") if course.starts_on
-          td= link_to_if policy(course).show?, course, [:office, course]
+          td= link_to course, [:office, course]
           td.fade.num= course.credits
           td.num
-            - course.grades.where(gradee: @user).each do |g|
+            - course.grades.each do |g|
               - if policy(g).show?
-                p = g
-            / - if policy(@user).update?
-            /   = Grade.formatted_value(@grades.find{|g| g.course_id == course.id }.try(:value))
+                = g
+              - else
+                span -
