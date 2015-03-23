@@ -73,6 +73,17 @@ class Course < ActiveRecord::Base
     # (Grade.where('course_id = ? AND value > 0 AND value <= 10 AND value IS NOT NULL', id).pluck(:gradee_id).uniq.count)
   end
 
+  def grades_to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << ["ID", "First Name", "Last Name", "Final Grade", "Grader", "Comments"]
+      grades.includes(:grader, :gradee).order('users.first_name ASC, users.last_name ASC').each do |grade|
+        if grade.gradee
+          csv << [grade.gradee.id, grade.gradee.first_name, grade.gradee.last_name, grade.value, grade.grader, grade.public_notes]
+        end
+      end
+    end
+  end
+
 private
 
   def copy_students

@@ -1,3 +1,7 @@
+#main-links
+  - if current_user.admin?
+    = link_to "Download CSV", office_course_grades_path(@course, format: "csv")
+
 = crumbs link_to("Courses", office_courses_path), link_to(@course, [:office, @course]), 'Grades'
 
 css:
@@ -8,6 +12,7 @@ css:
 .info-panel(style="background: #397AF2; color: #FFF; padding: 10px; font-weight: bold;")
   p If you add a grade on this page you will become responsible for the final grade of that student.
   p Only you will be able to edit the grade, other tutors will need to contact you to change it.
+
 
 #grades
 
@@ -34,11 +39,11 @@ css:
           td= image_tag "#{student.photo_url}/convert?w=40&h=40&fit=crop", width: 40, height: 40
 
           td
-            / = my_grade.inspect
             = link_to student, [:office, student], class: 'grade-name', target: '_blank'
 
           td.group
-            = best_in_place my_grade, :group, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-group', id: "group-#{i}", place_holder: '-'
+            - if policy(my_grade).update?
+              = best_in_place my_grade, :group, url: office_course_grades_path(@course, {gradee_id: student.id}), class: 'grade-group', id: "group-#{i}", place_holder: '-'
 
           td.right.final_grade
             - if policy(grade).update?

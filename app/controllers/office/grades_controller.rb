@@ -21,6 +21,11 @@ class Office::GradesController < Office::OfficeController
       .order('grades.id DESC')
 
     @grading = policy(grade).create?
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @course.grades_to_csv }
+    end
   end
 
   def show
