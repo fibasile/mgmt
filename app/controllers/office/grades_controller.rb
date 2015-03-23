@@ -24,7 +24,7 @@ class Office::GradesController < Office::OfficeController
 
     respond_to do |format|
       format.html
-      format.csv { send_data @course.grades_to_csv }
+      format.csv { send_data(@course.grades_to_csv, filename: "#{@course.name.parameterize} grades.csv" ) }
     end
   end
 

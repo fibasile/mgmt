@@ -76,7 +76,7 @@ class Course < ActiveRecord::Base
   def grades_to_csv(options = {})
     CSV.generate(options) do |csv|
       csv << ["ID", "First Name", "Last Name", "Final Grade", "Grader", "Comments"]
-      grades.includes(:grader, :gradee).order('users.first_name ASC, users.last_name ASC').each do |grade|
+      grades.includes(:gradee).order('users.first_name ASC, users.last_name ASC, grades.value DESC').includes(:grader).each do |grade|
         if grade.gradee
           csv << [grade.gradee.id, grade.gradee.first_name, grade.gradee.last_name, grade.value, grade.grader, grade.public_notes]
         end
