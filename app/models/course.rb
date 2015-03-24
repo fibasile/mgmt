@@ -79,10 +79,10 @@ class Course < ActiveRecord::Base
 
   def grades_to_csv(options = {})
     CSV.generate(options) do |csv|
-      csv << ["ID", "First Name", "Last Name", "Final Grade", "Grader", "Comments"]
+      csv << ["ID", "First Name", "Last Name", "Final Grade", "Grader", "Group", "Comments"]
       all_grades.each do |grade|
         if grade.gradee
-          csv << [grade.gradee.id, grade.gradee.first_name, grade.gradee.last_name, grade.value, grade.grader, grade.public_notes]
+          csv << [grade.gradee.id, grade.gradee.first_name, grade.gradee.last_name, grade.value, grade.grader, grade.group, grade.public_notes]
         end
       end
     end
