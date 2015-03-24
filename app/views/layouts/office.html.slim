@@ -6,7 +6,7 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
     meta content="width=device-width, initial-scale=1" name="viewport"
-  body#office(class = ('admin' if current_user.admin?) )
+  body#office(class = [('admin' if current_user.admin?), "c-#{controller_name}", "a-#{action_name}"].join(' ') )
 
     header
       .container
@@ -19,8 +19,6 @@ html
 
         = link_to fa_icon('power-off'), logout_path, title: 'Logout', class: 'current-user'
         = link_to current_user, [:office, current_user], class: 'current-user'
-
-
 
     .container
       #main

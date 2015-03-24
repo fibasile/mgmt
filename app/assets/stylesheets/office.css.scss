@@ -1,5 +1,9 @@
 body#office {
 
+  &.c-grades {
+    min-width: 800px;
+  }
+
   .form_in_place {
     input {
       margin-bottom: 5px;
