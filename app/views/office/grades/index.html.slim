@@ -18,9 +18,9 @@
       - @course.all_grades.each do |grade|
         tr
           td(width=40) = image_tag "#{grade.gradee.photo_url}/convert?w=40&h=40&fit=crop", width: 40, height: 40
-          td = link_to grade.gradee, [:office, grade.gradee]
+          td = link_to grade.gradee, [:office, grade.gradee] if grade.gradee
           td = grade.formatted_grade
-          td = link_to grade.grader, [:office, grade.grader]
+          td = link_to grade.grader, [:office, grade.grader] if grade.grader
           td = grade.public_notes
 
 - else
