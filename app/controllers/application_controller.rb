@@ -15,7 +15,7 @@ private
   def authenticate_user!
     if current_user.nil?
       redirect_to login_url, alert: "Please sign in"
-    elsif current_user.admin? or current_user.courses_taught.any?
+    elsif current_user.admin? or current_user.courses_taught.any? and current_user.invitation_code.blank?
       redirect_to office_root_url
     end
   end
