@@ -25,6 +25,12 @@
           td = grade.group
           td = grade.public_notes
 
+
+  - if @course.grading_status[0] == 'Incomplete'
+    ul
+      - @course.students - User.find(@course.all_grades.map(&:gradee_id)).each do |u|
+        li = link_to u, [:office, u]
+
 - else
 
   .info-panel(style="background: #397AF2; color: #FFF; padding: 10px; font-weight: bold;")
