@@ -13,7 +13,11 @@ private
   helper_method :current_user
 
   def authenticate_user!
-    redirect_to login_url, alert: "Please sign in" if current_user.nil?
+    if current_user.nil?
+      redirect_to login_url, alert: "Please sign in"
+    elsif current_user.admin? or current_user.courses_taught.any?
+      redirect_to office_root_url
+    end
   end
 
   def check_invitation
