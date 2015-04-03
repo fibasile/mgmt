@@ -27,9 +27,14 @@
 
 
   - if @course.grading_status[0] == 'Incomplete'
-    ul
-      - (@course.students - User.find(@course.all_grades.map(&:gradee_id))).each do |u|
-        li = link_to u, [:office, u]
+    hr
+    h4 Ungraded Students
+    table
+      tbody
+        - (@course.students - User.find(@course.all_grades.map(&:gradee_id))).each do |u|
+          tr
+            td(width=40) = image_tag "#{u.photo_url}/convert?w=40&h=40&fit=crop", width: 40, height: 40
+            th = link_to u, [:office, u]
 
 - else
 
