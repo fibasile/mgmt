@@ -8,4 +8,6 @@
     .select2= f.input :country_code, label: 'Country'
     - if @user.new_record?
       = f.input :password
+    - else
+      = f.association :programs
   = f.submit
