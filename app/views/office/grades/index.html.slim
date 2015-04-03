@@ -28,7 +28,7 @@
 
   - if @course.grading_status[0] == 'Incomplete'
     ul
-      - @course.students - User.find(@course.all_grades.map(&:gradee_id)).each do |u|
+      - (@course.students - User.find(@course.all_grades.map(&:gradee_id))).each do |u|
         li = link_to u, [:office, u]
 
 - else
