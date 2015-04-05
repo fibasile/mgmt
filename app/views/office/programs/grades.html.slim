@@ -1,4 +1,4 @@
-table
+table#xtable
   thead
     tr
       th First Name
@@ -7,7 +7,7 @@ table
       - @courses.each do |course|
         th.rotate
           div
-            span = link_to course, [:office, course]
+            span = course
     tr
       th(colspan=3)
       - @courses.each do |course|
@@ -15,8 +15,8 @@ table
   tbody
     - @program.students.includes(:received_grades).order(:first_name).each do |user|
       tr
-        td = user.first_name
-        td = user.last_name
+        td = link_to user.first_name, [:office, user]
+        td = link_to user.last_name, [:office, user]
         td
         - grades = {}
         - @courses.map{|c| grades[c.id] = nil}
