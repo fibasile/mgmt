@@ -17,7 +17,7 @@ table#xtable
       tr
         td = link_to user.first_name, [:office, user]
         td = link_to user.last_name, [:office, user]
-        td
+        td = user.weighted_average
         - grades = {}
         - @courses.map{|c| grades[c.id] = nil}
         - user.received_grades.each do |g|

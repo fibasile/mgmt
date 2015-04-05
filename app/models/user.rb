@@ -130,6 +130,18 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
     courses_taught.any?
   end
 
+  def weighted_average
+    arr = received_grades.where('value > 0').includes(:course)
+    total_credits_count = arr.map{|c| c.course.credits}.inject{|sum,x| sum + x}
+
+    total_grades = 0
+    arr.each do |g|
+      total_grades = total_grades + ( [g.value,4.0].max * g.course.credits/total_credits_count)
+    end
+    Grade.formatted_value(total_grades)
+    # total_credits_count
+  end
+
 private
 
   def generate_token(column)
