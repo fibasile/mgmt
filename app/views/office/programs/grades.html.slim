@@ -21,7 +21,9 @@ table
         - grades = {}
         - @courses.map{|c| grades[c.id] = nil}
         - user.received_grades.each do |g|
-          - grades[g.course_id] = g.formatted_grade
+          - if g.value and g.value > 0
+            - grades[g.course_id] = g.formatted_grade
         - grades.each do |k,v|
-          td = v
+          td
+            = v
 
