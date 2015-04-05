@@ -1,5 +1,46 @@
 body#office {
 
+  &.c-programs.a-grades {
+    .main.container {
+      overflow: inherit;
+      padding: 0;
+      max-width: none;
+      margin: 0;
+    }
+    th, td {
+      font-size: 0.8em;
+    }
+    tbody td {
+      border-right: 1px solid #CCC;
+    }
+
+    // th{
+    //   word-break: break-all;
+    //   width: 100px !important;
+    // }
+  }
+
+  // th.rotate {
+  //   /* Something you can count on */
+  //   height: 80px;
+  //   width: 20px;
+  //   white-space: nowrap;
+  // }
+
+  // th.rotate > div {
+  //   transform:
+  //   /* Magic Numbers */
+  //   translate(25px, 51px)
+  //   /* 45 is really 360 - 45 */
+  //   rotate(270deg);
+  //   width: 20px;
+  // }
+  // th.rotate > div > span {
+  //   border-bottom: 1px solid #ccc;
+  //   padding: 5px 10px;
+  // }
+
+
   &.c-grades {
     min-width: 800px;
   }

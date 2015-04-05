@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   namespace :office do
     resources :users, path: 'people'
     resources :programs do
+      member do
+        get 'grades'
+      end
       resources :program_students, path: 'students'
       resources :program_courses, path: 'courses'
     end

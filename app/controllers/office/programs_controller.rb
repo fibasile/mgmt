@@ -1,5 +1,11 @@
 class Office::ProgramsController < Office::OfficeController
 
+  def grades
+    @program = Program.find(params[:id])
+    @courses = @program.courses.order(:starts_on, :name).where.not(id: 65)
+    authorize @program, :show?
+  end
+
   def index
     @programs = policy_scope(Program).uniq
   end

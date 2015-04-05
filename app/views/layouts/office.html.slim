@@ -20,7 +20,7 @@ html
         = link_to fa_icon('power-off'), logout_path, title: 'Logout', class: 'current-user'
         = link_to current_user, [:office, current_user], class: 'current-user'
 
-    .container
+    .container.main
       #main
         - flash.each do |key, msg|
           = content_tag :div, msg, id: key

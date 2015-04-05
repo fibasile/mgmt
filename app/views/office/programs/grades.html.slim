@@ -1,0 +1,27 @@
+table
+  thead
+    tr
+      th First Name
+      th Last Name
+      th Weighted Grade
+      - @courses.each do |course|
+        th.rotate
+          div
+            span = link_to course, [:office, course]
+    tr
+      th(colspan=3)
+      - @courses.each do |course|
+        th = course.credits
+  tbody
+    - @program.students.includes(:received_grades).order(:first_name).each do |user|
+      tr
+        td = user.first_name
+        td = user.last_name
+        td
+        - grades = {}
+        - @courses.map{|c| grades[c.id] = nil}
+        - user.received_grades.each do |g|
+          - grades[g.course_id] = g.formatted_grade
+        - grades.each do |k,v|
+          td = v
+
