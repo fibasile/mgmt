@@ -6,7 +6,7 @@ namespace :import do
   task :choices => :environment do
     csvs = CSV.foreach("choices.csv").to_a
     csvs.each do |row|
-      u = User.find_by(first_name: row[0], last_name: row[1])
+      u = User.find_by!(first_name: row[0], last_name: row[1])
       c = Course.where('name LIKE ?', "#{row[2]}%").first
       c.students << u
     end
