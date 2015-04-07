@@ -1,8 +1,24 @@
+.tutors, .notes {
+  font-size: 0.9em;
+}
+th.fade, td.fade {
+  color: #666;
+}
+.average {
+  text-align: center;
+  margin: 10px 0;
+  font-weight: bold;
+  font-size: 1.2em;
+}
 table {
   border-collapse: collapse;
   width: 95%;
   margin: 1em auto 2em;
   // border: 1px solid #ddd;
+
+  td {
+    vertical-align: top;
+  }
 
   .subtitle {
     margin-top: 5px;
@@ -22,9 +38,10 @@ table {
     width: 170px;
   }
 
-  td.grade {
-    width: 20px;
+  th.grade, td.grade {
+    width: 80px;
     font-weight: bold;
+    text-align: right;
   }
 
   thead {
@@ -32,9 +49,6 @@ table {
       text-align: left;
       border-bottom: 1px solid #eee;
       font-size: 0.9em;
-    }
-    th.grade {
-      width: 300px;
     }
   }
 

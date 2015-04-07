@@ -15,6 +15,6 @@
 # Ignore application configuration
 /config/application.yml
 *.csv
-
+!choices.csv
 /coverage
 *.todo

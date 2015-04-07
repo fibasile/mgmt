@@ -4,6 +4,7 @@ class Office::ProgramsController < Office::OfficeController
     @program = Program.find(params[:id])
     @courses = @program.courses.order(:starts_on, :name).where.not(id: 65)
     authorize @program, :show?
+    render 'grades', layout: false
   end
 
   def index

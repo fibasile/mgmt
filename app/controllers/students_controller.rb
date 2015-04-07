@@ -7,8 +7,10 @@ class StudentsController < ApplicationController
     if current_user.courses_taught.any?
       redirect_to office_root_url
     else
-      @courses = current_user.courses_with_grades
-      @warning = @courses.detect{|c| (c.grade || 0).between?(4,4.999) }
+      @user = current_user
+      courses = @user.received_grades.includes(course: :tutors).order('courses.starts_on', 'courses.name', 'grades.value ASC')
+      @warning = courses.where('courses.starts_on = ?', Date.parse('2015/01/01')).map{|g| g.value }.reject(&:blank?).detect{|g| g < 5}
+      @courses_with_months = courses.group_by{|g| g.course.starts_on}
     end
   end
 

@@ -86,14 +86,20 @@ header {
   overflow: hidden;
 }
 
-#error_explanation, .warning {
+tr.warning {
+  td {
+    color: #E74D3C;
+  }
+}
+
+#error_explanation, span.warning {
   p {
     margin: 0;
   }
-    padding: 20px;
-    background: #FBE3E4;
-    color: #96151B;
-    font-weight: bold;
+  padding: 20px;
+  background: #E74D3C;
+  color: white;
+  font-weight: bold;
   /*border-radius: 4px;*/
   /*background: #FC575E;*/
   /*color: #FFF;*/

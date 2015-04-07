@@ -31,6 +31,8 @@ class Grade < ActiveRecord::Base
   validates_numericality_of :value, greater_than: 0, less_than_or_equal_to: 10, allow_nil: true
   validates_uniqueness_of :gradee, scope: [:course, :grader]
 
+  has_paper_trail
+
   def formatted_grade
     Grade.formatted_value(self.value)
   end
@@ -45,6 +47,10 @@ class Grade < ActiveRecord::Base
 
   def to_s
     Grade.formatted_value(value)
+  end
+
+  def min_4_grade
+    Grade.formatted_value([4.0,value].max)
   end
 
   def self.formatted_value val=nil
