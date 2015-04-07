@@ -1,5 +1,12 @@
 body#office {
 
+  td.small {
+    font-size: 0.95em;
+    p {
+      margin-top: 0;
+    }
+  }
+
   &.c-programs.a-grades {
     .main.container {
       overflow: inherit;
