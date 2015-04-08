@@ -18,7 +18,7 @@
       - grades.group_by(&:course).each do |course, grades|
         tr(class=(grades.first.value < 5 ? 'warning' : 'ok'))
           td
-            strong = [course, course.subtitle].reject(&:blank?).join(' - ')
+            strong = course.full_name
             .tutors = grades.map(&:grader).to_sentence
             - if semester > 1
               - grades.each do |grade|

@@ -96,6 +96,10 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
     UserMailer.password_reset(self).deliver_now
   end
 
+  def announce_grades
+    StudentMailer.announce_grades(id).deliver_now
+  end
+
   def invite
     self.sign_in_count = 0
     self.last_sign_in_at = nil

@@ -7,6 +7,12 @@ class StudentMailer < ApplicationMailer
   #
   def invitation user_id
     @user = User.find(user_id)
-    mail to: "#{@user.name} <#{@user.email}>", subject: "Your Grades"
+    mail to: "#{@user.name} <#{@user.email}>", subject: "[IAAC] Your Grades"
+  end
+
+
+  def announce_grades user_id
+    @user = User.find(user_id)
+    mail to: "#{@user.name} <#{@user.email}>", subject: "[IAAC] Your Grades"
   end
 end

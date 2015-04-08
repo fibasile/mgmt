@@ -1,0 +1,23 @@
+<p>Dear <%= @tutor.first_name %>,</p>
+
+<% if @grades.size > 1 %>
+<p>We have noticed that the following students still have incomplete grades (less than 5.00).</p>
+<% else %>
+<p>We have noticed that the following student still has an incomplete grade (less than 5.00).</p>
+<% end %>
+
+<% @grades.each do |grade| %>
+  <p><strong><%= grade.to_s %> - <%= grade.gradee.name %> (<%= mail_to grade.gradee.email, grade.gradee.email %>) - <%= grade.course.full_name %></strong>
+  <br/><i><%= grade.public_notes %></i></p>
+<% end %>
+
+<p>Please check that all the grades were changed and updated at <%= link_to root_url, root_url %> after the students resubmitted their assignments.</p>
+
+<p>In case where students have not yet resubmitted their assignments, we would ask you to:</p>
+
+<p>1) inform the IaaC coordination (<%= mail_to "maria.kuptsova@iaac.net", "maria.kuptsova@iaac.net" %>) as soon as possible.</p>
+<p>2) contact the student with the information about the assignment, which should be resubmitted.</p>
+
+<p>After the resubmitting the assignment, the <strong>student should receive a grade of 5.00</strong>.</p>
+
+<p>Thank you.</p>

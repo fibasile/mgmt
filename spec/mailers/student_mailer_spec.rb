@@ -8,7 +8,7 @@ RSpec.describe StudentMailer, :type => :mailer do
 
     it "send user password reset url" do
       user.update_attribute(:invitation_code, "anything")
-      expect(mail.subject).to eq("Your Grades")
+      expect(mail.subject).to eq("[IAAC] Your Grades")
       expect(mail.to).to eq([user.email])
       expect(mail.from).to eq(["notifications@mgmt.iaac.net"])
       expect(mail.body.encoded).to match( "Bart," )

@@ -63,6 +63,10 @@ class Course < ActiveRecord::Base
     return a
   end
 
+  def full_name
+    [name, subtitle].reject(&:blank?).join(' - ')
+  end
+
   def to_s
     name
   end

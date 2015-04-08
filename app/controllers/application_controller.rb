@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
 private
 
   def current_user
+    # if params[:uid]
+    #   @current_user = User.find(params[:uid])
+    # else
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
   helper_method :current_user
