@@ -2,8 +2,9 @@ class PasswordResetsController < ApplicationController
 
   skip_before_filter :check_invitation
   layout 'sessions'
-  
+
   def create
+    Keen.publish("password_reset_request", { :email => params[:email] }) if Rails.env.production?
     if user = User.find_by(email: params[:email])
       user.send_password_reset
       redirect_to login_url, notice: "Email sent with password reset instructions."
@@ -11,7 +12,7 @@ class PasswordResetsController < ApplicationController
       flash.now[:notice] = "User not found"
       render :new
     end
-    
+
   end
 
   def edit

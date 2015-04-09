@@ -8,7 +8,7 @@ gem "font-awesome-rails"
 gem 'pg'
 gem 'workflow'
 gem 'best_in_place', github: 'bernat/best_in_place'
-
+gem 'keen'
 gem 'paper_trail', '~> 4.0.0.beta'
 gem "airbrake", github: 'airbrake/airbrake'
 gem 'nprogress-rails'
