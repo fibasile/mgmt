@@ -97,6 +97,8 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
   end
 
   def announce_grades
+    self.announced_at = Time.now
+    save(validate: false)
     StudentMailer.announce_grades(id).deliver_now
   end
 

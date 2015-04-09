@@ -10,7 +10,6 @@ class StudentMailer < ApplicationMailer
     mail to: "#{@user.name} <#{@user.email}>", subject: "[IAAC] Your Grades"
   end
 
-
   def announce_grades user_id
     @user = User.find(user_id)
     mail to: "#{@user.name} <#{@user.email}>", subject: "[IAAC] Your Grades"
