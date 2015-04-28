@@ -100,6 +100,10 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
     self.announced_at = Time.now
     save(validate: false)
     StudentMailer.announce_grades(id).deliver_now
+    # User.order(:first_name).joins(:course_students).uniq.each do |user|
+    #   user.announce_grades
+    #   sleep(1)
+    # end
   end
 
   def invite

@@ -203,7 +203,11 @@ body#office {
     background: #DA4C44 !important;
     color: lighten(#DA4C44, 50%) !important;
   }
-  #main-links {
+  .main-links {
+    overflow: hidden;
+    // margin-bottom: 1em;
+  }
+  #main-links, .main-links {
     display: block;
 
     input {

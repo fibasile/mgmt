@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   # get 'signup', to: 'users#new', as: 'signup'
 
   namespace :office do
-    resources :users, path: 'people'
+    resources :users, path: 'people' do
+      member do
+        get 'report'
+      end
+    end
     resources :programs do
       member do
         get 'grades'
