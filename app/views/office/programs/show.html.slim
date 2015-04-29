@@ -1,5 +1,6 @@
 #main-links
   - if policy(@program).update?
+    / = link_to "Grade Certificates", '#'
     = link_to "Edit Program", edit_office_program_path(@program)
 = crumbs link_to("Programs", office_programs_path), @program
 

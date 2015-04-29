@@ -60,7 +60,7 @@ table.responsive
 - if @user.is_studying?
   h3 Studying
   .main-links
-    = link_to "Download Certificate", report_office_user_path(@user), target: '_blank'
+    = link_to "Grades Certificate", report_office_user_path(@user), target: '_blank'
 
   - @user.programs.each do |program|
     h4 = program
