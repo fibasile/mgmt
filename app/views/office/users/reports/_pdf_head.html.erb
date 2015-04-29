@@ -8,6 +8,18 @@
     padding: 0;
     -webkit-font-smoothing: antialiased;
   }
+  .explanation {
+    padding-top: 40px;
+  }
+  .grades {
+    margin: 40px 0;
+  }
+  h2 {
+    margin: 1em 0;
+  }
+  .break {
+    page-break-after: always;
+  }
   a {
     text-decoration: none;
   }
@@ -17,7 +29,7 @@
     font-family: Arial;
   }
   body {
-    padding: 0 20px;
+    padding: 0 50px;
     font-size: 12px;
     -webkit-print-color-adjust: exact;
     line-height: 1.5em;
@@ -34,7 +46,7 @@
     text-decoration: underline;
   }
   .signature {
-    padding-top: 70px;
+    padding-top: 100px;
   }
   .signature p, .signature a {
     font-size: 11px;
@@ -75,8 +87,14 @@
   }
   .logo {
     display: inline-block;
-    float: left;
     width: 50%;
+    float: left;
+  }
+  .logo.l img {
+    float: left;
+  }
+  .logo.r img {
+    float: right;
   }
   .logo img {
     max-width: 100%;
@@ -115,7 +133,7 @@
   }
   table.results tfoot th {
     border-top: 1px solid #AAA;
-    padding-top: 4px;
+    padding-top: 10px;
     text-align: right !important;
   }
 </style>

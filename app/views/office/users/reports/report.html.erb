@@ -7,28 +7,33 @@
 
   <p>To whom it may concern,</p>
 
-  <p>IAAC Institut d’Arquitectura Avançada de Catalunya in Barcelona certifies that the student <%= @student %> has successfully finished the first term of <%= @student.course_description %>. The grades that <%= @student.first_name %> obtained are as follows:</p>
-
-  <h2>TERM 1</h2>
-
+  <p>IAAC Institut d’Arquitectura Avançada de Catalunya in Barcelona certifies that the student <%= @student %> has successfully finished the first two terms of <%= @student.course_description %>. The grades that <%= @student.first_name %> obtained are as follows:</p>
+<div class="grades break">
+  <% term = 0 %>
+  <% @courses.group_by(&:starts_on).reverse_each do |starts, courses| %>
+    <h2>TERM <%= term += 1 %></h2>
+    <% courses.each do |course| %>
+      <table class="results">
+        <tbody>
+          <tr>
+            <th><%= course %> - <%= course.subtitle %></th>
+            <td><%= Grade.formatted_value course.grade %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %><br/>
   <table class="results">
-    <tbody>
-      <% @courses.each do |course| %>
-        <tr>
-          <th><%= course %> - <%= course.subtitle %></th>
-          <td><%= Grade.formatted_value course.grade %></td>
-        </tr>
-      <% end %>
-      <tr><th>Transversal Workshop</th><td>9.00</td></tr>
-    </tbody>
     <tfoot>
       <tr>
-        <th>Weighted Average</th>
-        <th><%= Grade.formatted_value @weighted_average %></th>
+        <th>Weighted Average&nbsp;&nbsp;&nbsp;</th>
+        <th><%= Grade.formatted_value @student.weighted_average %></th>
       </tr>
     </tfoot>
   </table>
+</div>
 
+<div class="explanation">
   <p class="underline">The grading system ranges from 1 to 10:</p>
   <table class="info">
     <tr><th>0 – 4.9</th><td>Fail</td></tr>
@@ -46,8 +51,8 @@
     <tr><th>V.</th><td>Blog Posts (depending on seminar’s requirements)</td></tr>
     <tr><th>VI.</th><td>Public Presentation</td></tr>
   </table>
-
-  <p>For more information you can always visit the website   <a href="http://www.iaac.net">www.iaac.net</a>.</p>
+</div>
+  <p style="padding-top: 50px;">For more information you can always visit the website   <a href="http://www.iaac.net">www.iaac.net</a>.</p>
 
   <p>Please do not hesitate to contact me if you need any further information.</p>
 
