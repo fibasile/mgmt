@@ -17,7 +17,7 @@
         <tbody>
           <tr>
             <th><%= course %> - <%= course.subtitle %></th>
-            <td><%= Grade.formatted_value course.grade.min_4_grade %></td>
+            <td><%= Grade.formatted_value [4.0,course.grade].max %></td>
           </tr>
         </tbody>
       </table>
