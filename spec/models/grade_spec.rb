@@ -30,6 +30,19 @@ RSpec.describe Grade, :type => :model do
     expect(Grade.new(value: 10.00).human_grade).to eq("HIGH PASS")
   end
 
+  it "has formatted_grade" do
+    grade = build_stubbed(:grade, value: 9.2839)
+    expect(grade.formatted_grade).to eq("9.28")
+    expect(grade.to_s).to eq("9.28")
+  end
+
+  it "has min_4_grade" do
+    grade = build_stubbed(:grade, value: 2.123)
+    expect(grade.min_4_grade).to eq("4.00")
+    grade = build_stubbed(:grade, value: 8.123)
+    expect(grade.min_4_grade).to eq("8.12")
+  end
+
   it "has self.formatted_value" do
     expect(Grade.formatted_value(9.5244)).to eq("9.52")
     expect(Grade.formatted_value(8)).to eq("8.00")

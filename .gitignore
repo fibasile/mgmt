@@ -16,5 +16,5 @@
 /config/application.yml
 *.csv
 !choices.csv
-/coverage
+coverage
 *.todo
