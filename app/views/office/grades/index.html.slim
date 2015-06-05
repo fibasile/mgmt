@@ -4,39 +4,7 @@
 
 = crumbs link_to("Courses", office_courses_path), link_to(@course, [:office, @course]), 'Grades'
 
-- if current_user.admin?
-
-  table#xtable
-    thead
-      tr
-        th
-        th Student
-        th Grade
-        th Grader
-        th Group
-        th Comments
-    tbody
-      - @course.all_grades.each do |grade|
-        tr
-          td(width=40) = image_tag "#{grade.gradee.photo_url}/convert?w=40&h=40&fit=crop", width: 40, height: 40
-          td = link_to grade.gradee, [:office, grade.gradee] if grade.gradee
-          td = grade.formatted_grade
-          td.small = link_to grade.grader, [:office, grade.grader] if grade.grader
-          td = grade.group
-          td.small = simple_format grade.public_notes
-
-
-  - if @course.grading_status[0] == 'Incomplete'
-    hr
-    h4 Ungraded Students
-    table
-      tbody
-        - (@course.students - User.find(@course.all_grades.map(&:gradee_id))).each do |u|
-          tr
-            td(width=40) = image_tag "#{u.photo_url}/convert?w=40&h=40&fit=crop", width: 40, height: 40
-            th = link_to u, [:office, u]
-
-- else
+- if policy(@course.grades.build).create?
 
   .info-panel(style="background: #397AF2; color: #FFF; padding: 10px; font-weight: bold;")
     p If you add a grade on this page you will become responsible for the final grade of that student.
@@ -83,3 +51,35 @@
             td
               - if policy(my_grade).update?
                 = best_in_place my_grade, :public_notes, url: office_course_grades_path(@course, {gradee_id: student.id}), html_attrs: {placeholder: 'These notes will be VISIBLE TO THE STUDENT'}, as: 'textarea', class: 'grade-comments', id: "notes-#{i}", place_holder: '-'
+
+
+- elsif current_user.admin?
+
+  table#xtable
+    thead
+      tr
+        th
+        th Student
+        th Grade
+        th Grader
+        th Group
+        th Comments
+    tbody
+      - @course.all_grades.each do |grade|
+        tr
+          td(width=40) = image_tag "#{grade.gradee.photo_url}/convert?w=40&h=40&fit=crop", width: 40, height: 40
+          td = link_to grade.gradee, [:office, grade.gradee] if grade.gradee
+          td = grade.formatted_grade
+          td.small = link_to grade.grader, [:office, grade.grader] if grade.grader
+          td = grade.group
+          td.small = simple_format grade.public_notes
+
+  - if @course.grading_status[0] == 'Incomplete'
+    hr
+    h4 Ungraded Students
+    table
+      tbody
+        - (@course.students - User.find(@course.all_grades.map(&:gradee_id))).each do |u|
+          tr
+            td(width=40) = image_tag "#{u.photo_url}/convert?w=40&h=40&fit=crop", width: 40, height: 40
+            th = link_to u, [:office, u]
