@@ -77,8 +77,9 @@ table.responsive
           td= link_to course, [:office, course]
           td.fade.num= course.credits
           td.num
-            - course.grades.each do |g|
-              - if policy(g).show?
-                = g
-              - else
-                span -
+            - if course.starts_on < Date.parse('1 Feb 2015')
+              - course.grades.each do |g|
+                - if policy(g).show?
+                  = g
+                - else
+                  span -

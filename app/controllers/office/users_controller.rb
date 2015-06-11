@@ -3,12 +3,12 @@ class Office::UsersController < Office::OfficeController
   def report
     @student = User.find(params[:id])
     authorize @student, :show?
-    @courses = @student.courses_with_grades
+    @courses = @student.report_courses_with_grades
     # @weighted_average = (9.0 / 22.0) # transversal workshop
     # @courses.each do |course|
     #   @weighted_average += course.grade * ((course.credits || 0.0)/22.0)
     # end
-    @weighted_average = 10
+    # @weighted_average = 10
 
     render pdf: "#{@student.name}",
       template: 'office/users/reports/report.html.erb',

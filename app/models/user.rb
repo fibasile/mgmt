@@ -83,15 +83,15 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
     courses_studied
       .joins('LEFT OUTER JOIN grades ON grades.course_id = courses.id')
       .select('courses.*, grades.value as grade, grades.public_notes as grade_notes')
-      .where('grades.created_at < ?', Date.parse('2015/05/01') )
+      .where('courses.starts_on < ?', Date.parse('1 Feb 2015'))
       .where('grades.gradee_id': [id, nil])
       .where.not('grades.value': nil)
       .order('name')
   end
 
-  def weighted_average cwg
-    Grade.formatted_value cwg.map(&:grade).instance_eval { reduce(:+) / size.to_f }
-  end
+  # def weighted_average cwg
+  #   Grade.formatted_value cwg.map(&:grade).instance_eval { reduce(:+) / size.to_f }
+  # end
 
   def to_s
     name
@@ -152,7 +152,7 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
   end
 
   def weighted_average
-    arr = received_grades.where('grades.created_at < ?', Date.parse('2015/05/01') ).where('value > 0').includes(:course)
+    arr = received_grades.joins(:course).where('courses.starts_on < ?', Date.parse('1 Feb 2015')).where('grades.value > 0')
     total_credits_count = arr.map{|c| c.course.credits}.reduce(:+)
 
     total_grades = 0
