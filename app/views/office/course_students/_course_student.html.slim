@@ -1,3 +1,4 @@
-= link_to [:office,course_student.user], class: 'student', style: ("background: url(#{course_student.user.photo_url}/convert?w=100&h=100&fit=crop)" if course_student.user) do
-  span.student-name
-    = course_student.user
+- if course_student.user
+  = link_to [:office,course_student.user], class: 'student', style: "background: url(#{course_student.user.photo_url}/convert?w=100&h=100&fit=crop)" do
+    span.student-name
+      = course_student.user
