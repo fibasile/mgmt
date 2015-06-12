@@ -71,7 +71,8 @@ table.responsive
           th Course
           th.num Credits/Weighting
           th.num Grade
-      - @user.courses_studied.includes(:grades).where('grades.gradee_id': @user.id).order(:starts_on, :name).each do |course|
+
+      - @user.courses_studied.includes(:grades).where('grades.gradee_id': [@user.id, nil]).order(:starts_on, :name).each do |course|
         tr
           td.fade.starts = course.starts_on.stamp("Jan 99") if course.starts_on
           td= link_to course, [:office, course]
