@@ -43,9 +43,9 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
     [first_name,last_name[0]].join(' ')
   end
 
-  def photo_url
+  def photo_url extra=nil
     if photo.present?
-      photo.gsub('https://www.filepicker.io', 'http://iaac-cdn.johnre.es')
+      [photo.gsub('https://www.filepicker.io', 'http://iaac-cdn.johnre.es'),extra].join('')
     else
       'https://i.imgur.com/gedfDdD.png'
     end

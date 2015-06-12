@@ -1,4 +1,6 @@
 - if course_student.user
-  = link_to [:office,course_student.user], class: 'student', style: "background: url(#{course_student.user.photo_url}/convert?w=100&h=100&fit=crop)" do
+  = link_to [:office,course_student.user], class: 'student', style: "background-size: 100%; background-image: url(#{course_student.user.photo_url '/convert?w=100&h=100&fit=crop'})" do
     span.student-name
       = course_student.user
+- else
+  div= course_student.inspect
