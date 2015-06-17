@@ -34,7 +34,7 @@ class Course < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   has_many :course_tutors, dependent: :destroy
-  has_many :course_students#, dependent: :destroy
+  has_many :course_students, dependent: :destroy
 
   has_many :program_courses
   has_many :programs, through: :program_courses
