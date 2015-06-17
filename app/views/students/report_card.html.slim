@@ -1,50 +1,52 @@
 = title "#{@user}'s Report Card"
 
-- if @warning
-  span.warning
-    p One or more of your grades below is INCOMPLETE. You must urgently contact the course tutor(s) to finalize your submission. Otherwise you will be not accredited.
+h2 Grades are being calculated, please check back later
 
-.average Your current average grade is #{@user.weighted_average}
+/ - if @warning
+/   span.warning
+/     p One or more of your grades below is INCOMPLETE. You must urgently contact the course tutor(s) to finalize your submission. Otherwise you will be not accredited.
 
-- semester = 0
-- @courses_with_months.each do |month, grades|
-  h3 = "Semester #{semester += 1}"
-  table
-    thead
-      th Course
-      th.fade(width=100) Credits
-      th.grade Grade
-    tbody
-      - grades.group_by(&:course).each do |course, grades|
-        tr(class=(grades.first.value < 5 ? 'warning' : 'ok'))
-          td
-            strong = course.full_name
-            .tutors = grades.map(&:grader).to_sentence
-            - if semester > 1
-              - grades.each do |grade|
-                .notes = simple_format grade.public_notes
-          td.fade = course.credits
-          td.grade = grades.first.min_4_grade
+/ .average Your current average grade is #{@user.weighted_average}
 
-h3 Semester 3
-table
-  tbody
-    tr
-      td
-        strong = @user.courses_studied.find_by(starts_on: "2015/04/07")
+/ - semester = 0
+/ - @courses_with_months.each do |month, grades|
+/   h3 = "Semester #{semester += 1}"
+/   table
+/     thead
+/       th Course
+/       th.fade(width=100) Credits
+/       th.grade Grade
+/     tbody
+/       - grades.group_by(&:course).each do |course, grades|
+/         tr(class=(grades.first.value < 5 ? 'warning' : 'ok'))
+/           td
+/             strong = course.full_name
+/             .tutors = grades.map(&:grader).to_sentence
+/             - if semester > 1
+/               - grades.each do |grade|
+/                 .notes = simple_format grade.public_notes
+/           td.fade = course.credits
+/           td.grade = grades.first.min_4_grade
 
-/ table.responsive
-/   thead
-/     tr
-/       th.course Course/Module
-/       th.grade colspan=2 Grade
-/       th
+/ h3 Semester 3
+/ table
 /   tbody
-/     - @courses.each do |course|
-/       tr class=Grade.human_grade_for(course.grade).downcase
-/         th.course
-/           = link_to course, course
-/           .subtitle= course.subtitle
-/         td.grade.grades = Grade.formatted_value(course.grade)
-/         td.human-grade.grades = Grade.human_grade_for(course.grade)
-/         td.notes = simple_format course.grade_notes
+/     tr
+/       td
+/         strong = @user.courses_studied.find_by(starts_on: "2015/04/07")
+
+/ / table.responsive
+/ /   thead
+/ /     tr
+/ /       th.course Course/Module
+/ /       th.grade colspan=2 Grade
+/ /       th
+/ /   tbody
+/ /     - @courses.each do |course|
+/ /       tr class=Grade.human_grade_for(course.grade).downcase
+/ /         th.course
+/ /           = link_to course, course
+/ /           .subtitle= course.subtitle
+/ /         td.grade.grades = Grade.formatted_value(course.grade)
+/ /         td.human-grade.grades = Grade.human_grade_for(course.grade)
+/ /         td.notes = simple_format course.grade_notes
