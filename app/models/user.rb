@@ -152,7 +152,8 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
   end
 
   def weighted_average
-    arr = received_grades.joins(:course).where('courses.starts_on < ?', Date.parse('1 Feb 2015')).where('grades.value > 0')
+    # .where('courses.starts_on < ?', Date.parse('1 Feb 2015'))
+    arr = received_grades.joins(:course).where('grades.value > 0')
     total_credits_count = arr.map{|c| c.course.credits}.reduce(:+)
 
     total_grades = 0
