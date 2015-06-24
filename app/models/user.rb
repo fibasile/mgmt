@@ -75,7 +75,7 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
       .select('courses.*, grades.value as grade, grades.public_notes as grade_notes')
       .where('grades.gradee_id': [id, nil])
       .where.not('grades.value': nil)
-      .order('name')
+      .order('starts_on', 'name')
       # .where('grades.created_at < ?', Date.parse('2015/03/01') )
   end
 
@@ -85,7 +85,7 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
       .select('courses.*, grades.value as grade, grades.public_notes as grade_notes')
       .where('grades.gradee_id': [id, nil])
       .where.not('grades.value': nil)
-      .order('name')
+      .order('starts_on', 'name')
       # .where('courses.starts_on < ?', Date.parse('1 Feb 2015'))
   end
 
