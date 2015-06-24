@@ -58,7 +58,8 @@ class Grade < ActiveRecord::Base
   end
 
   def self.notify_low_grades
-    Grade.includes(:gradee, :course).order('users.first_name').includes(:grader).where.not(value: nil).where('value < 5').where('courses.starts_on = ?', Date.parse('2015/01/01')).group_by(&:grader).each do |tutor, grades|
+    Grade.includes(:gradee, :course).order('users.first_name').includes(:grader).where.not(value: nil).where('value < 5').group_by(&:grader).each do |tutor, grades|
+      # .where('courses.starts_on = ?', Date.parse('2015/01/01'))
       TutorMailer.low_grades(tutor.id, grades.map(&:id)).deliver_now
     end
   end

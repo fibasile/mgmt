@@ -8,8 +8,10 @@ class StudentsController < ApplicationController
       redirect_to office_root_url
     else
       @user = current_user
-      courses = @user.received_grades.includes(course: :tutors).where('courses.starts_on < ?', Date.parse('1 Feb 2015')).where('grades.value > 0').order('courses.starts_on', 'courses.name', 'grades.value ASC')
-      @warning = courses.where('courses.starts_on = ?', Date.parse('2015/01/01')).map{|g| g.value }.reject(&:blank?).detect{|g| g < 5}
+      courses = @user.received_grades.includes(course: :tutors).where('grades.value > 0').order('courses.starts_on', 'courses.name', 'grades.value ASC')
+      # .where('courses.starts_on < ?', Date.parse('1 Feb 2015'))
+      @warning = courses..map{|g| g.value }.reject(&:blank?).detect{|g| g < 5}
+      # where('courses.starts_on = ?', Date.parse('2015/01/01'))
       @courses_with_months = courses.group_by{|g| g.course.starts_on}
     end
   end
