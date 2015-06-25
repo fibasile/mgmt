@@ -6,7 +6,7 @@ Politécnica de Catalunya with 75 ECTS credits, and took place from October 2014
     'MAA02 Master in Advanced Architecture program, which is accredited by Fundació
 Politécnica de Catalunya with 130 ECTS credits, and is taking place from October 2014 to June 2016',
     'MAA01 Master in Advanced Architecture program and Open Thesis Fabrication program, which is accredited by Fundació
-Politécnica de Catalunya with 75 + 25 ECTS credits, and took place from October 2014 to January 2016']
+Politécnica de Catalunya with 75 + 25 ECTS credits, and is taking place from October 2014 to January 2016']
 
   has_secure_password
   validates_uniqueness_of :email
