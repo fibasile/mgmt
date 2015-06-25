@@ -2,6 +2,11 @@
 <html>
 <%= render "office/users/reports/pdf_head" %>
 <body>
+
+<%# Program.find(params[:program]).students.sort_by(&:first_name).each do |user| %>
+<%# @student = user %>
+<%# @courses = @student.courses_with_grades %>
+
 <div id="body">
   <p class="date">Barcelona, <%= Time.now.stamp("January 12, 2019") %></p>
 
@@ -59,7 +64,7 @@
 
   <p>Sincerely,</p>
 
-  <div class="signature">
+  <div class="signature break">
     <p><span class="author">María José Piñeiros</span></p>
     <p>Academic Secretary</p>
     <p>Institute for Advanced Architecture of Catalonia</p>
@@ -70,5 +75,7 @@
   </div>
 
 </div>
+<%#end%>
+
 </body>
 </html>
