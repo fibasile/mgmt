@@ -79,16 +79,6 @@ Politécnica de Catalunya with 75 + 25 ECTS credits, and takes place from Octobe
       # .where('grades.created_at < ?', Date.parse('2015/03/01') )
   end
 
-  def report_courses_with_grades
-    courses_studied
-      .joins('LEFT OUTER JOIN grades ON grades.course_id = courses.id')
-      .select('courses.*, grades.value as grade, grades.public_notes as grade_notes')
-      .where('grades.gradee_id': [id, nil])
-      .where.not('grades.value': nil)
-      .order('starts_on', 'name')
-      # .where('courses.starts_on < ?', Date.parse('1 Feb 2015'))
-  end
-
   # def weighted_average cwg
   #   Grade.formatted_value cwg.map(&:grade).instance_eval { reduce(:+) / size.to_f }
   # end

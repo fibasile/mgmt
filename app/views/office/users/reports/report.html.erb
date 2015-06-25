@@ -10,7 +10,7 @@
   <p>IAAC Institut d’Arquitectura Avançada de Catalunya in Barcelona certifies that the student <%= @student %> has successfully finished the first two terms of <%= @student.course_description %>. The grades that <%= @student.first_name %> obtained are as follows:</p>
 <div class="grades break">
   <% term = 0 %>
-  <% @courses.group_by(&:starts_on).each do |starts, courses| %>
+  <% @courses.group_by{|a| a.starts_on.beginning_of_month }.each do |starts, courses| %>
     <h2>PHASE <%= term += 1 %></h2>
     <% courses.each do |course| %>
       <table class="results">
