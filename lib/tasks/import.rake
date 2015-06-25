@@ -2,6 +2,25 @@ require 'csv'
 
 namespace :import do
 
+  desc "Checks grades"
+  task :grades => :environment do
+    csvs = CSV.foreach("grades.csv").to_a
+    courses = csvs.first.drop(2).map{|c| Course.find_by!(name: c).id }
+
+    csvs.drop(1).each do |row|
+      u = User.find_by!(first_name: row.shift, last_name: row.shift)
+      g = u.received_grades.where(course_id: courses).order(courses.map{|c| "course_id=#{c} DESC"}.join(', '))
+      if g.join(",") != row.reject(&:blank?).join(",")
+        puts ">>>>>>" + u.name
+      end
+
+      # row.each_with_index do |r, i|
+      #   g = u.received_grades.where.not(value: nil).where(id: courses[i]).formatted_grade
+      # end
+    end
+
+  end
+
   desc "Imports choices"
   task :choices => :environment do
     csvs = CSV.foreach("choices.csv").to_a
