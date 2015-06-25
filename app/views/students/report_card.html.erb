@@ -1,0 +1,29 @@
+<%= title "#{@user}'s Report Card" %>
+
+<!-- <h2>Grades are being calculated, we will notify you as soon as they are online.</h2> -->
+<style type="text/css">table { border: none; margin: 0; padding: 0;} th { font-weight: normal;} h2 {margin: 10px 0; }</style>
+
+<div class="grades break">
+  <% term = 0 %>
+  <% @courses.group_by{|a| a.starts_on.beginning_of_month }.each do |starts, courses| %>
+    <h2>PHASE <%= term += 1 %></h2>
+    <% courses.each do |course| %>
+      <table class="results">
+        <tbody>
+          <tr>
+            <th><%= [course,course.subtitle].reject(&:blank?).join(' - ') %></th>
+            <td class="right"><%= Grade.formatted_value [4.0,course.grade].max %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %><br/>
+  <table class="results">
+    <tfoot>
+      <tr>
+        <th>Weighted Average&nbsp;&nbsp;&nbsp;</th>
+        <td class="right"><%= Grade.formatted_value @user.weighted_average %></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

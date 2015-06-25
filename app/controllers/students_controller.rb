@@ -8,6 +8,7 @@ class StudentsController < ApplicationController
       redirect_to office_root_url
     else
       @user = current_user
+      @courses = @user.courses_with_grades
       # courses = @user.received_grades.includes(course: :tutors).where('grades.value > 0').order('courses.starts_on', 'courses.name', 'grades.value ASC')
       # # .where('courses.starts_on < ?', Date.parse('1 Feb 2015'))
       # @warning = courses..map{|g| g.value }.reject(&:blank?).detect{|g| g < 5}
