@@ -1,3 +1,7 @@
+<% User.joins(:course_students).each do |user| %>
+    <% @student = user %>
+    <% @courses = @student.courses_with_grades %>
+
 <!DOCTYPE html>
 <html>
 <%= render "office/users/reports/pdf_head" %>
@@ -7,7 +11,7 @@
 
   <p>To whom it may concern,</p>
 
-  <p>IAAC Institut d’Arquitectura Avançada de Catalunya in Barcelona certifies that <%= @student %> has been enrolled in the <%= @student.course_description %>, has succesfully obtained the following assignement grades:</p>
+  <p>IAAC Institut d’Arquitectura Avançada de Catalunya in Barcelona certifies that <%= @student %> has been enrolled in the <%= @student.course_description %></p>
 
 <div class="grades break">
   <% term = 0 %>
@@ -72,3 +76,4 @@
 </div>
 </body>
 </html>
+<%end%>
