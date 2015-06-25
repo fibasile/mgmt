@@ -1,7 +1,4 @@
-<% User.joins(:course_students).each do |user| %>
-    <% @student = user %>
-    <% @courses = @student.courses_with_grades %>
-
+<% User.joins(:course_students).uniq.sort_by(&:first_name).each do |user| %><% @student = user %><% @courses = @student.courses_with_grades %>
 <!DOCTYPE html>
 <html>
 <%= render "office/users/reports/pdf_head" %>
