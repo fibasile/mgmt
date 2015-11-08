@@ -1,0 +1,5 @@
+= simple_form_for [:office, @lab] do |f|
+  fieldset
+    = f.input :name, label: "Lab Name"
+    = f.input :description
+  = f.submit "Save"

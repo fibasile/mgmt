@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+
+
   resources :students
   get 'report_card', to: 'students#report_card'
 
@@ -15,6 +17,9 @@ Rails.application.routes.draw do
   # get 'signup', to: 'users#new', as: 'signup'
 
   namespace :office do
+    resources :labs, path: 'labs' do
+      resources :lab_programs, path: 'programs'
+    end
     resources :users, path: 'people' do
       member do
         get 'report'

@@ -1,0 +1,17 @@
+#main-links
+  - if policy(Lab.new).create?
+    = link_to "Add a new Lab", new_office_lab_path
+= crumbs "Labs"
+
+
+table.responsive#xtable
+  thead
+    tr
+      th Name
+      th Tutors
+      th Programs
+  - @labs.each do |lab|
+    tr
+      td.bold = link_to lab, [:office, lab]
+      td
+      td

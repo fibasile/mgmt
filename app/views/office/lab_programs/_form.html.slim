@@ -1,0 +1,6 @@
+= crumbs "Edit Lab Course"
+
+= simple_form_for [:office,@lab,@lab_program] do |f|
+  fieldset
+    .select2= f.association :program, disabled: !@lab_program.new_record?
+  = f.submit

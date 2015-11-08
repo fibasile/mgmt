@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409153418) do
+ActiveRecord::Schema.define(version: 20151108142243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,21 @@ ActiveRecord::Schema.define(version: 20150409153418) do
   add_index "grades", ["course_id", "gradee_id", "grader_id"], name: "index_grades_on_course_id_and_gradee_id_and_grader_id", using: :btree
   add_index "grades", ["grader_id"], name: "index_grades_on_grader_id", using: :btree
   add_index "grades", ["group"], name: "index_grades_on_group", using: :btree
+
+  create_table "lab_programs", force: :cascade do |t|
+    t.integer "lab_id"
+    t.integer "program_id"
+  end
+
+  add_index "lab_programs", ["lab_id", "program_id"], name: "index_lab_programs_on_lab_id_and_program_id", unique: true, using: :btree
+
+  create_table "labs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "logo_url"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "program_courses", force: :cascade do |t|
     t.integer  "program_id"
@@ -150,6 +165,8 @@ ActiveRecord::Schema.define(version: 20150409153418) do
   add_foreign_key "grades", "courses"
   add_foreign_key "grades", "users", column: "gradee_id"
   add_foreign_key "grades", "users", column: "grader_id"
+  add_foreign_key "lab_programs", "labs"
+  add_foreign_key "lab_programs", "programs"
   add_foreign_key "program_courses", "courses"
   add_foreign_key "program_courses", "programs"
   add_foreign_key "program_students", "programs"

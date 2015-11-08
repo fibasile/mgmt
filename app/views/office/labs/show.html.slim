@@ -1,0 +1,27 @@
+#main-links
+  - if policy(@lab).update?
+    = link_to "Edit Lab", edit_office_lab_path(@lab)
+= crumbs link_to("Labs", office_labs_path), @lab
+
+h2
+  = simple_format @lab.description
+
+
+.programs
+  h3
+    | Courses
+    - if policy(@lab).update?
+      = link_to "Join a course", new_office_lab_lab_program_path(@lab)
+  table.responsive#xtable
+    thead
+      tr
+        th Starts
+        th Name
+        th.right Ends
+    tbody
+      - @lab.lab_programs.each do |lab_program|
+        tr
+          td.fade.starts = lab_program.program.starts_on.stamp("Sep 99") if lab_program.program.starts_on
+          td.bold = link_to lab_program.program, [:office, lab_program.program]
+          td.fade.right = lab_program.program.ends_on.stamp("Sep 99") if lab_program.program.ends_on
+  

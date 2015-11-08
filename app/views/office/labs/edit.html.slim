@@ -1,0 +1,6 @@
+#main-links
+  = link_to "Remove Lab", [:office, @lab], method: :delete, class: 'delete', 'data-confirm': "Are you sure you want to remove this lab?"
+
+= crumbs link_to("Labs", office_labs_path), link_to(@lab, [:office, @lab]), "Edit"
+
+= render "form"
