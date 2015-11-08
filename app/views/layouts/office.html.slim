@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title = raw(content_for?(:title) ? "#{yield(:title)}  | IAAC Office" : "IAAC Office")
+    title = raw(content_for?(:title) ? "#{yield(:title)}  | Fab Academy Students Mgmt" : "Fab Academy Students Mgmt")
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
@@ -13,8 +13,8 @@ html
         = link_to office_root_path, id: 'logo' do
           = image_tag "logo.png"
 
-        = link_to "Courses", office_courses_path
-        = link_to "Programs", office_programs_path
+        = link_to "Modules", office_courses_path
+        = link_to "Courses", office_programs_path
         = link_to "People", office_users_path
 
         = link_to fa_icon('power-off'), logout_path, title: 'Logout', class: 'current-user'

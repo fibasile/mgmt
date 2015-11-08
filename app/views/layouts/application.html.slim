@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title = raw(content_for?(:title) ? "#{yield(:title)}  | IAAC" : "IAAC")
+    title = raw(content_for?(:title) ? "#{yield(:title)}  | Fab Academy Students Management" : "Fab Academy Students Management")
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
@@ -9,7 +9,7 @@ html
   body
     .container
       header
-        = image_tag "http://i.imgur.com/iCkavn0.png", style: 'height: 35px;'
+        = image_tag "http://fabacademy.org/wp-content/uploads/2014/01/fab-academy2.jpg", style: 'height: 35px;'
         - if current_user
           / = current_user
           .user-nav= link_to 'Logout', logout_path, rel: 'nofollow'

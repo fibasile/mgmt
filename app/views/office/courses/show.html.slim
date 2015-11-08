@@ -4,9 +4,9 @@
   - elsif policy(@course.grades.build).show?
     = link_to "View Grades", office_course_grades_path(@course)
   - if policy(@course).update?
-    = link_to "Edit Course", edit_office_course_path(@course)
+    = link_to "Edit Module", edit_office_course_path(@course)
 
-= crumbs link_to("Courses", office_courses_path), @course
+= crumbs link_to("Modules", office_courses_path), @course
 
 h2
   = @course.starts_on.stamp('January 2015') if @course.starts_on
@@ -36,9 +36,9 @@ h2
 
 
 h3
-  | Programs that include this course
+  | Courses that include this module
   / - if policy(@course).update?
-  /   = link_to "Add to a Program", '#'
+  /   = link_to "Add to a Course", '#'
 table.responsive
   - @course.programs.each do |program|
     tr

@@ -1,8 +1,8 @@
 #main-links
   - if policy(@program).update?
     / = link_to "Grade Certificates", '#'
-    = link_to "Edit Program", edit_office_program_path(@program)
-= crumbs link_to("Programs", office_programs_path), @program
+    = link_to "Edit Course", edit_office_program_path(@program)
+= crumbs link_to("Courses", office_programs_path), @program
 
 h2
   = @program.starts_on.stamp("September 2015")
@@ -12,12 +12,12 @@ h2
 h3
   | Syllabus
   - if policy(@program).update? and policy(Course.new).create?
-    = link_to "Add a Course", new_office_program_program_course_path(@program)
+    = link_to "Add a Module", new_office_program_program_course_path(@program)
 table.responsive
   thead
     tr
       th Starts
-      th Course Name
+      th Module Name
       th ECTS Credits / Weighting
       th
   - @program.program_courses.each do |program_course|

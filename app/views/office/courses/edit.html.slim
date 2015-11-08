@@ -1,5 +1,5 @@
 #main-links
-  = link_to "Delete Course", [:office, @course], method: :delete, class: 'delete', 'data-confirm': "Are you sure you want to delete this course?"
-= crumbs link_to("Courses", office_courses_path), link_to(@course, [:office, @course]), "Edit"
+  = link_to "Delete Module", [:office, @course], method: :delete, class: 'delete', 'data-confirm': "Are you sure you want to delete this module?"
+= crumbs link_to("Modules", office_courses_path), link_to(@course, [:office, @course]), "Edit"
 = render "form"
 

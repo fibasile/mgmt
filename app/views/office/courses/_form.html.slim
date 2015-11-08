@@ -3,14 +3,14 @@
     / = f.input :parent_id, collection: Course.all, as: :select, include_blank: true
     .select2= f.association :programs
     = f.input :starts_on, include_blank: true
-    = f.input :name, label: "Course Name"
+    = f.input :name, label: "Module Name"
     = f.input :subtitle
     = f.input :description
     = f.input :credits
 
   - if @course.new_record?
     fieldset
-      p Pick a course to copy students from
+      p Pick a module to copy students from
       .select2 = f.input :copy_students_from_course_id, label: "Use Students from...", as: :select, collection: Course.order(:name)
       / = f.input :published
-  = f.submit
+  = f.submit "Create New Module"

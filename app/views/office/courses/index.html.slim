@@ -1,11 +1,11 @@
 #main-links
   - if policy(Course.new).create?
-    = link_to "Add a new Course", new_office_course_path
+    = link_to "Add a new Module", new_office_course_path
 
-= crumbs "Courses"
+= crumbs "Modules"
 
 .info-panel
-  p These are the courses that you are involved with. Courses are included in programs.
+  p These are the modules that you are involved with. Modules are included in courses.
 
 table.responsive#xtable
   thead
@@ -13,7 +13,7 @@ table.responsive#xtable
       th Starts
       th Name
       th Tutors
-      th Programs
+      th Courses
       th.num Grading Status
   - @courses.each do |course|
     tr

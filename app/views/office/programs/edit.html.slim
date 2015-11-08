@@ -1,6 +1,6 @@
 #main-links
-  = link_to "Remove Program", [:office, @program], method: :delete, class: 'delete', 'data-confirm': "Are you sure you want to remove this program?"
+  = link_to "Remove Course", [:office, @program], method: :delete, class: 'delete', 'data-confirm': "Are you sure you want to remove this course?"
 
-= crumbs link_to("Programs", office_programs_path), link_to(@program, [:office, @program]), "Edit"
+= crumbs link_to("Courses", office_programs_path), link_to(@program, [:office, @program]), "Edit"
 
 = render "form"

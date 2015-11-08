@@ -1,14 +1,15 @@
 doctype html
 html
   head
-    title = raw(content_for?(:title) ? "#{yield(:title)}  | IAAC" : "IAAC MGMT")
+    title = raw(content_for?(:title) ? "#{yield(:title)}  | Fab Academy Students Management" : "Fab Academy Students Management")
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
     meta content="width=device-width, initial-scale=1" name="viewport"
   body#sessions
     #sessions-box
-      = image_tag "http://i.imgur.com/iCkavn0.png", style: 'width: 100%;'
+      = image_tag "http://fabacademy.org/wp-content/uploads/2014/01/fab-academy2.jpg", style: 'width: 100%;'
+      h3 Students Management
       - flash.each do |key, msg|
         = content_tag :div, msg, id: key
       == yield
