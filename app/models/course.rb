@@ -41,6 +41,7 @@ class Course < ActiveRecord::Base
 
   has_many :tutors, class_name: "User", through: :course_tutors, source: :user
   has_many :students, class_name: "User", through: :course_students, source: :user
+  
 
   has_many :grades
 

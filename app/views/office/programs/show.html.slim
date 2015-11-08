@@ -18,16 +18,23 @@ table.responsive
     tr
       th Starts
       th Module Name
-      th ECTS Credits / Weighting
       th
   - @program.program_courses.each do |program_course|
     tr
       td.fade = program_course.course.starts_on.stamp('Jan 99') if program_course.course.starts_on
       td= link_to program_course.course, [:office, program_course.course]
-      td.fade = program_course.course.credits
       td
         - if policy(program_course).destroy?
           = link_to fa_icon("times"), office_program_program_course_path(@program, program_course), method: 'delete', 'data-confirm': "Are you sure you want to remove this course from the program's syllabus?"
+
+.labs
+  h3
+    | Labs
+table.responsive
+  thead
+  - @program.lab_programs.each do |lab_program|
+    td= link_to lab_program.lab, [:office, lab_program.lab]
+
 
 .students
   h3
