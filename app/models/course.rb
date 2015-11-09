@@ -1,3 +1,5 @@
+## This class represents a learning Module in our model
+
 class Course < ActiveRecord::Base
 
   has_ancestry
