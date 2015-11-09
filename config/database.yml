@@ -23,10 +23,12 @@ default: &default
 
 development:
   <<: *default
-  database: iaac_lastlast
+  database: fab_mgmt_dev
+  username: ubuntu
+  password: fabfab
 
   # The specified database role being used to connect to postgres.
-  # To create additional roles in postgres see `$ createuser --help`.
+  # To create additional roles in postsgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
   #username: iaac

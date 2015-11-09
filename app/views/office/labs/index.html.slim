@@ -8,10 +8,10 @@ table.responsive#xtable
   thead
     tr
       th Name
-      th Tutors
-      th Programs
+      th City
+      th Country
   - @labs.each do |lab|
     tr
       td.bold = link_to lab, [:office, lab]
-      td
-      td
+      td= lab.city
+      td= lab.country

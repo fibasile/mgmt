@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       end
       resources :program_students, path: 'students'
       resources :program_courses, path: 'courses'
+      resources :program_evaluators, path: 'evaluators'
     end
     resources :courses do
       put 'grades' => 'grades#create', on: :member

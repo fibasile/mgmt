@@ -45,8 +45,9 @@ table.responsive
 table.responsive
   thead
   - @program.program_evaluators.each do |program_evaluator|
-    td= program_evaluator.user.name
-    td= program_evaluator.user.email
+    tr
+      td.bold= link_to program_evaluator.user, [:office,program_evaluator.user]
+      td= program_evaluator.user.email
 
 
 .students
@@ -54,8 +55,11 @@ table.responsive
     | Students for diploma
     - if policy(@program).update? and policy(User.new).update?
       = link_to "Add a Student", new_office_program_program_student_path(@program)
-
-  - @program.program_students.each do |student|
-    = render 'office/course_students/course_student', course_student: student
+  table.responsive
+    thead
+    - @program.program_students.each do |student|
+      tr
+        td.bold= link_to student.user.name, [:office,student.user]
+        td= student.user.email
 
 
