@@ -3,4 +3,10 @@
 = simple_form_for [:office,@lab,@lab_program] do |f|
   fieldset
     .select2= f.association :program, disabled: !@lab_program.new_record?
+  fieldset
+    label Remote Guru
+    .select2= f.select :guru_id, User.all.map { |r| [r.name, r.id] }, disabled: !@lab_program.new_record?
+  fieldset
+    label Local instructor 
+    .select2= f.select :instructor_id, User.all.map { |r| [r.name, r.id] }, disabled: !@lab_program.new_record?
   = f.submit

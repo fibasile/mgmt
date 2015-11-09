@@ -1,0 +1,6 @@
+= crumbs "Edit Program Evaluator"
+
+= simple_form_for [:office,@program,@program_evaluator] do |f|
+  fieldset
+    .select2= f.association :user, disabled: !@program_evaluator.new_record?
+  = f.submit

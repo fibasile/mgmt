@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108164902) do
+ActiveRecord::Schema.define(version: 20151109115253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 20151108164902) do
   create_table "lab_programs", force: :cascade do |t|
     t.integer "lab_id"
     t.integer "program_id"
+    t.integer "instructor_id"
+    t.integer "guru_id"
   end
 
   add_index "lab_programs", ["lab_id", "program_id"], name: "index_lab_programs_on_lab_id_and_program_id", unique: true, using: :btree
@@ -101,6 +103,13 @@ ActiveRecord::Schema.define(version: 20151108164902) do
 
   add_index "program_courses", ["program_id", "course_id"], name: "index_program_courses_on_program_id_and_course_id", unique: true, using: :btree
   add_index "program_courses", ["published"], name: "index_program_courses_on_published", using: :btree
+
+  create_table "program_evaluators", force: :cascade do |t|
+    t.integer  "program_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "program_students", force: :cascade do |t|
     t.integer  "user_id"

@@ -16,12 +16,19 @@ h2
     thead
       tr
         th Starts
+        th Ends
         th Name
-        th.right Ends
+        th Local Instructor
+        th Guru
+        th Students
+        th
     tbody
       - @lab.lab_programs.each do |lab_program|
         tr
           td.fade.starts = lab_program.program.starts_on.stamp("Sep 99") if lab_program.program.starts_on
+          td.fade = lab_program.program.ends_on.stamp("Sep 99") if lab_program.program.ends_on
           td.bold = link_to lab_program.program, [:office, lab_program.program]
-          td.fade.right = lab_program.program.ends_on.stamp("Sep 99") if lab_program.program.ends_on
-  
+          td.fade = lab_program.instructor 
+          td.fade = lab_program.guru
+          td.bold = link_to lab_program.students_count, office_lab_lab_program_path(@lab, lab_program)  
+          td.bold = link_to "Edit", edit_office_lab_lab_program_path(@lab, lab_program)  

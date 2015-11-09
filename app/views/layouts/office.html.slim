@@ -10,9 +10,7 @@ html
 
     header
       .container
-        = link_to office_root_path, id: 'logo' do
-          = image_tag "logo.png"
-
+        = link_to "FabTeach", office_root_path
         = link_to "Modules", office_courses_path
         = link_to "Courses", office_programs_path
         = link_to "Labs", office_labs_path

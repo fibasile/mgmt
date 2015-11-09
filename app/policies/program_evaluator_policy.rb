@@ -1,0 +1,2 @@
+class ProgramEvaluatorPolicy < AdminPolicy
+end

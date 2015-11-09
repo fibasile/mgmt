@@ -46,7 +46,7 @@ table.responsive
 
 .students
   h3
-    | Certificates only - Students 
+    | Students for certificate  
     - if policy(@course).update?
       = link_to "Add a Student", new_office_course_course_student_path(@course)
   = render @students
